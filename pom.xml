@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.veminal.pdf</groupId>
+    <groupId>com.veminal.pdf</groupId>
     <artifactId>pdf-adj</artifactId>
     <version>1.0</version>
 
@@ -22,6 +22,22 @@
     <packaging>jar</packaging>
 
     <dependencies>
+
+        <!--JUnit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--Mockito-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.7.22</version>
+            <scope>test</scope>
+        </dependency>
 
         <!--SWT WINDOWS-->
         <dependency>
