@@ -8,6 +8,8 @@ import com.veminal.pdf.actions.format.InjectFragmentAction;
 import com.veminal.pdf.actions.format.SearchAction;
 import com.veminal.pdf.actions.format.SelectFragmentAction;
 import com.veminal.pdf.actions.format.SplitPageAction;
+import com.veminal.pdf.settings.read.ReadDataMenu;
+import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 
@@ -25,7 +27,10 @@ public final class FormatMenu implements IMenu {
      */
     @Override
     public MenuManager initial() {
-        MenuManager manager = new MenuManager("Format");
+        final String path = "dictionaries/dictionary.json";
+        ReadSettings<String> readFormatMenu = new ReadDataMenu(path);
+        MenuManager manager = new MenuManager(readFormatMenu.parse(
+                "menu.format"));
         IEvent selectFragmentAction = new SelectFragmentAction();
         IEvent splitPage = new SplitPageAction();
         IEvent extractNumber = new ExtractNumberAction();
@@ -33,15 +38,22 @@ public final class FormatMenu implements IMenu {
         IEvent buildFragment = new BuildFragmentAction();
         IEvent injectFragment = new InjectFragmentAction();
         IEvent assembly = new AssemblyPDFAction();
-        manager.add(selectFragmentAction.initializing());
-        manager.add(splitPage.initializing());
-        manager.add(extractNumber.initializing());
+        ReadSettings<String> readSelect = new ReadDataMenu(path);
+        manager.add(selectFragmentAction.initializing(readSelect));
+        ReadSettings<String> readSplit = new ReadDataMenu(path);
+        manager.add(splitPage.initializing(readSplit));
+        ReadSettings<String> readExtract = new ReadDataMenu(path);
+        manager.add(extractNumber.initializing(readExtract));
         manager.add(new Separator());
-        manager.add(buildFragment.initializing());
-        manager.add(injectFragment.initializing());
-        manager.add(assembly.initializing());
+        ReadSettings<String> readBuild = new ReadDataMenu(path);
+        manager.add(buildFragment.initializing(readBuild));
+        ReadSettings<String> readInject = new ReadDataMenu(path);
+        manager.add(injectFragment.initializing(readInject));
+        ReadSettings<String> readAssembly = new ReadDataMenu(path);
+        manager.add(assembly.initializing(readAssembly));
         manager.add(new Separator());
-        manager.add(search.initializing());
+        ReadSettings<String> readSearch = new ReadDataMenu(path);
+        manager.add(search.initializing(readSearch));
         return manager;
     }
 }

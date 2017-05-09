@@ -1,13 +1,15 @@
 package com.veminal.pdf.ui.menu;
 
-import com.veminal.pdf.actions.file.ExitAction;
-import com.veminal.pdf.actions.file.SaveFileAction;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.file.CreateFileAction;
+import com.veminal.pdf.actions.file.ExitAction;
 import com.veminal.pdf.actions.file.OpenFileAction;
 import com.veminal.pdf.actions.file.SaveAsAction;
+import com.veminal.pdf.actions.file.SaveFileAction;
+import com.veminal.pdf.settings.read.ReadDataMenu;
+import com.veminal.pdf.settings.read.ReadSettings;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 
 /**
  * Create menu item "File".
@@ -23,20 +25,27 @@ public final class FileMenu implements IMenu {
      */
     @Override
     public MenuManager initial() {
-        MenuManager manager = new MenuManager("File");
+        final String path = "dictionaries/dictionary.json";
+        ReadSettings<String> readFileMenu = new ReadDataMenu(path);
+        MenuManager manager = new MenuManager(readFileMenu.parse("menu.file"));
         IEvent eventCreate = new CreateFileAction();
         IEvent eventOpen = new OpenFileAction();
         IEvent eventSave = new SaveFileAction();
         IEvent eventSaveAs = new SaveAsAction();
         IEvent eventExit = new ExitAction();
-        manager.add(eventCreate.initializing());
+        ReadSettings<String> readCreate = new ReadDataMenu(path);
+        manager.add(eventCreate.initializing(readCreate));
         manager.add(new Separator());
-        manager.add(eventOpen.initializing());
+        ReadSettings<String> readOpen = new ReadDataMenu(path);
+        manager.add(eventOpen.initializing(readOpen));
         manager.add(new Separator());
-        manager.add(eventSave.initializing());
-        manager.add(eventSaveAs.initializing());
+        ReadSettings<String> readSave = new ReadDataMenu(path);
+        manager.add(eventSave.initializing(readSave));
+        ReadSettings<String> readSaveAs = new ReadDataMenu(path);
+        manager.add(eventSaveAs.initializing(readSaveAs));
         manager.add(new Separator());
-        manager.add(eventExit.initializing());
+        ReadSettings<String> readExit = new ReadDataMenu(path);
+        manager.add(eventExit.initializing(readExit));
         return manager;
     }
 }

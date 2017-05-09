@@ -18,6 +18,7 @@ final class Main {
 
     /**
      * Application in entry point.
+     *
      * @param args of String[]
      */
     public static void main(final String[] args) {

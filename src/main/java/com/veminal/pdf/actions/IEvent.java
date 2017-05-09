@@ -1,5 +1,6 @@
 package com.veminal.pdf.actions;
 
+import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.Action;
 
 /**
@@ -12,7 +13,8 @@ public interface IEvent {
     /**
      * Action initializing.
      *
+     * @param MenuItemsName of ReadSettings
      * @return Action
      */
-    Action initializing();
+    Action initializing(ReadSettings menuItemsName);
 }

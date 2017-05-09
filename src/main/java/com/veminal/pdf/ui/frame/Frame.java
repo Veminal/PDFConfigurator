@@ -6,6 +6,8 @@ import com.veminal.pdf.ui.menu.FormatMenu;
 import com.veminal.pdf.ui.menu.HelpMenu;
 import com.veminal.pdf.ui.menu.IMenu;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.StatusLineManager;
+import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
@@ -13,10 +15,12 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -33,10 +37,26 @@ public final class Frame extends ApplicationWindow {
      * @param parentShell of Shell
      */
     public Frame(final Shell parentShell) {
-        super(parentShell);
+        super(null);
+        parentShell.forceActive();
         addMenuBar();
-        addToolBar(SWT.NONE);
+        addToolBar(SWT.FLAT | SWT.WRAP);
         addStatusLine();
+    }
+
+    /**
+     * Set the position of the window.
+     *
+     * @param shell of Shell
+     */
+    private void shellLocationCenter(final Shell shell) {
+        Monitor monitor = Display.getCurrent().getPrimaryMonitor();
+        Rectangle boundsM = monitor.getBounds();
+        Rectangle boundsS = shell.getBounds();
+        final int inHalf = 2;
+        final int x = boundsM.x + (boundsM.width - boundsS.width) / inHalf;
+        final int y = boundsM.y + (boundsM.height - boundsS.height) / inHalf;
+        shell.setLocation(x, y);
     }
 
     /**
@@ -48,6 +68,11 @@ public final class Frame extends ApplicationWindow {
         Display.getCurrent().dispose();
     }
 
+    /**
+     * Configure shell.
+     *
+     * @param shell of Shell
+     */
     @Override
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
@@ -78,6 +103,7 @@ public final class Frame extends ApplicationWindow {
         splitter.setWeights(new int[]{treeWeight, textWeight});
         shell.setText("PDF Adjuster");
         shell.setMinimumSize(new Point(height, width));
+        shellLocationCenter(shell);
         shell.pack();
     }
 
@@ -98,5 +124,28 @@ public final class Frame extends ApplicationWindow {
         menu.add(format.initial());
         menu.add(help.initial());
         return menu;
+    }
+
+    /**
+     * Returns a new tool bar manager for the window.
+     * Subclasses may override this method to customize the tool bar manager.
+     *
+     * @param style swt style bits used to create the Toolbar
+     * @return a tool bar manager
+     */
+    @Override
+    protected ToolBarManager createToolBarManager(final int style) {
+        return null;
+    }
+
+    /**
+     * Returns a new status line manager for the window.
+     * Subclasses may override this method to customize the status line manager.
+     *
+     * @return a status line manager
+     */
+    @Override
+    protected StatusLineManager createStatusLineManager() {
+        return super.createStatusLineManager();
     }
 }

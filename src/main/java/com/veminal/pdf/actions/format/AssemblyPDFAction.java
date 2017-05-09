@@ -1,6 +1,8 @@
 package com.veminal.pdf.actions.format;
 
 import com.veminal.pdf.actions.IEvent;
+import com.veminal.pdf.settings.read.ReadDataMenu;
+import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.Action;
 
 /**
@@ -13,15 +15,12 @@ public final class AssemblyPDFAction implements IEvent {
     /**
      * Action initializing.
      *
+     * @param menuItemsName of ReadSettings
      * @return Action
      */
     @Override
-    public Action initializing() {
-        return new Action() {
-            @Override
-            public String getText() {
-                return "Assembly PDF";
-            }
+    public Action initializing(final ReadSettings menuItemsName) {
+        return new Action((String) menuItemsName.parse("assembly.pdf")) {
         };
     }
 }

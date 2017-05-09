@@ -1,7 +1,8 @@
 package com.veminal.pdf.actions.file;
 
-import org.eclipse.jface.action.Action;
 import com.veminal.pdf.actions.IEvent;
+import com.veminal.pdf.settings.read.ReadSettings;
+import org.eclipse.jface.action.Action;
 
 /**
  * Action for menu item "Save As...".
@@ -13,15 +14,12 @@ public final class SaveAsAction implements IEvent {
     /**
      * Action initializing.
      *
+     * @param menuItemsName of ReadSettings
      * @return Action
      */
     @Override
-    public Action initializing() {
-        return new Action() {
-            @Override
-            public String getText() {
-                return "Save As...";
-            }
+    public Action initializing(final ReadSettings menuItemsName) {
+        return new Action((String) menuItemsName.parse("save.as")) {
         };
     }
 }
