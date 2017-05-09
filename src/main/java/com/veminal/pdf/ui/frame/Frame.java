@@ -16,6 +16,7 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -38,10 +39,9 @@ public final class Frame extends ApplicationWindow {
      */
     public Frame(final Shell parentShell) {
         super(null);
-        parentShell.forceActive();
+        parentShell.setLayout(new FillLayout());
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
-        addStatusLine();
     }
 
     /**
@@ -135,17 +135,7 @@ public final class Frame extends ApplicationWindow {
      */
     @Override
     protected ToolBarManager createToolBarManager(final int style) {
-        return null;
-    }
-
-    /**
-     * Returns a new status line manager for the window.
-     * Subclasses may override this method to customize the status line manager.
-     *
-     * @return a status line manager
-     */
-    @Override
-    protected StatusLineManager createStatusLineManager() {
-        return super.createStatusLineManager();
+        ToolBarManager manager = new ToolBarManager();
+        return manager;
     }
 }

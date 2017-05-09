@@ -13,8 +13,17 @@ public interface IEvent {
     /**
      * Action initializing.
      *
-     * @param MenuItemsName of ReadSettings
+     * @param menuItemsName of ReadSettings
      * @return Action
      */
     Action initializing(ReadSettings menuItemsName);
+
+    /**
+     * Action initializing.
+     *
+     * @param objName of ReadSettings
+     * @param path of String
+     * @return Action
+     */
+    Action initializing(ReadSettings objName, String path);
 }

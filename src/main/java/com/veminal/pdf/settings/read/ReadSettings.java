@@ -15,9 +15,4 @@ public interface ReadSettings<T> {
      * @return settings data
      */
     T parse(String key);
-
-    /**
-     * Close stream.
-     */
-    void close();
 }
