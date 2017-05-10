@@ -1,5 +1,5 @@
 /**
- * Contains classes for reading settings from files.
+ * Contains classes for reading settings from file.
  *
  * @author Veminal
  * @version 1.0
