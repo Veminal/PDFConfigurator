@@ -11,5 +11,9 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Eclipse JFace-3.12.0.v20160518-1929.
 <li> Google gson-2.8.0
 
+# Stages of development:
+10.05.2017
+The user interface is developed.
+
 # Versions
 First version in development
