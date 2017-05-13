@@ -4,4 +4,4 @@
  * @author Veminal
  * @version 1.0
  */
-package com.veminal.pdf.annotation;
+package com.veminal.pdf.core.annotation;

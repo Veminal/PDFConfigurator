@@ -4,19 +4,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.veminal.pdf.core.annotation.NotUsed;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.List;
 
 /**
- * Read menu information.
+ * Read menu titles information.
  *
  * @author Veminal
  * @version 1.0
  */
-public final class ReadDataFile implements ReadSettings<String> {
+public final class ReadDataFields implements ReadSettings<String> {
     /**
      * Read JSON file.
      */
@@ -28,7 +30,7 @@ public final class ReadDataFile implements ReadSettings<String> {
      *
      * @param path of String
      */
-    public ReadDataFile(final String path) {
+    public ReadDataFields(final String path) {
         try {
             reader = new JsonReader(new FileReader(path));
         } catch (FileNotFoundException e) {
@@ -37,6 +39,16 @@ public final class ReadDataFile implements ReadSettings<String> {
             final int status = -1;
             System.exit(status);
         }
+    }
+
+    /**
+     * Set descriptor array lines.
+     *
+     * @param descriptor of String type
+     */
+    @Override
+    @NotUsed
+    public void setDescriptor(final String descriptor) {
     }
 
     /**

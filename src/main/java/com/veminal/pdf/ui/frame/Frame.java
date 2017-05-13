@@ -1,21 +1,10 @@
 package com.veminal.pdf.ui.frame;
 
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.actions.toolbar.build.BuildAction;
-import com.veminal.pdf.actions.toolbar.build.InjectAction;
-import com.veminal.pdf.actions.toolbar.edit.CopyAction;
-import com.veminal.pdf.actions.toolbar.edit.CutAction;
-import com.veminal.pdf.actions.toolbar.edit.FontAction;
-import com.veminal.pdf.actions.toolbar.edit.PasteAction;
-import com.veminal.pdf.actions.toolbar.file.CreateAction;
-import com.veminal.pdf.actions.toolbar.file.DeleteAction;
-import com.veminal.pdf.actions.toolbar.file.OpenAction;
-import com.veminal.pdf.actions.toolbar.file.SaveAction;
-import com.veminal.pdf.actions.toolbar.settings.SettingsAction;
-import com.veminal.pdf.actions.toolbar.split.CutNumberAction;
-import com.veminal.pdf.actions.toolbar.split.FragmentAction;
-import com.veminal.pdf.actions.toolbar.split.SplitPageAction;
-import com.veminal.pdf.settings.read.ReadDataFile;
+import com.veminal.pdf.actions.IEventList;
+import com.veminal.pdf.actions.ToolbarActionsList;
+import com.veminal.pdf.settings.read.ReadDataArray;
+import com.veminal.pdf.settings.read.ReadDataFields;
 import com.veminal.pdf.settings.read.ReadSettings;
 import com.veminal.pdf.ui.menu.EditMenu;
 import com.veminal.pdf.ui.menu.FileMenu;
@@ -23,7 +12,6 @@ import com.veminal.pdf.ui.menu.FormatMenu;
 import com.veminal.pdf.ui.menu.HelpMenu;
 import com.veminal.pdf.ui.menu.IMenu;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.ApplicationWindow;
@@ -41,6 +29,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import java.util.List;
 
 /**
  * Template for the user interface.
@@ -152,71 +142,21 @@ public final class Frame extends ApplicationWindow {
      */
     @Override
     protected ToolBarManager createToolBarManager(final int style) {
+        final String path = "dictionary.json";
+        final String pathImages = "images.json";
         ToolBarManager manager = new ToolBarManager();
-        final String path = "dictionaries/dictionary.json";
-        final String createImagePath = "images/new.png";
-        final String openImagePath = "images/open.png";
-        final String saveImagePath = "images/save.png";
-        final String deleteImagePath = "images/del.png";
-        final String cutImagePath = "images/cut.png";
-        final String copyImagePath = "images/copy.png";
-        final String pasteImagePath = "images/paste.png";
-        final String fontImagePath = "images/font.png";
-        final String cutNumberImagePath = "images/cut_number.png";
-        final String fragmentImagePath = "images/fragment_select.png";
-        final String splitImagePath = "images/split_page.png";
-        final String buildImagePath = "images/build.png";
-        final String injectImagePath = "images/inject.png";
-        final String settingsImagePath = "images/settings.png";
-        ReadSettings<String> createButtonName = new ReadDataFile(path);
-        ReadSettings<String> openButtonName = new ReadDataFile(path);
-        ReadSettings<String> saveButtonName = new ReadDataFile(path);
-        ReadSettings<String> delButtonName = new ReadDataFile(path);
-        ReadSettings<String> cutButtonName = new ReadDataFile(path);
-        ReadSettings<String> copyButtonName = new ReadDataFile(path);
-        ReadSettings<String> pasteButtonName = new ReadDataFile(path);
-        ReadSettings<String> fontButtonName = new ReadDataFile(path);
-        ReadSettings<String> cutNumberButtonName = new ReadDataFile(path);
-        ReadSettings<String> fragmentButtonName = new ReadDataFile(path);
-        ReadSettings<String> splitButtonName = new ReadDataFile(path);
-        ReadSettings<String> buildButtonName = new ReadDataFile(path);
-        ReadSettings<String> injectButtonName = new ReadDataFile(path);
-        ReadSettings<String> settingsButtonName = new ReadDataFile(path);
-        IEvent create = new CreateAction();
-        IEvent open = new OpenAction();
-        IEvent save = new SaveAction();
-        IEvent delete = new DeleteAction();
-        IEvent cut = new CutAction();
-        IEvent copy = new CopyAction();
-        IEvent paste = new PasteAction();
-        IEvent font = new FontAction();
-        IEvent cutNumber = new CutNumberAction();
-        IEvent fragment = new FragmentAction();
-        IEvent split = new SplitPageAction();
-        IEvent build = new BuildAction();
-        IEvent inject = new InjectAction();
-        IEvent settings = new SettingsAction();
-        manager.add(create.initializing(createButtonName, createImagePath));
-        manager.add(open.initializing(openButtonName, openImagePath));
-        manager.add(save.initializing(saveButtonName, saveImagePath));
-        manager.add(delete.initializing(delButtonName, deleteImagePath));
-        manager.add(new Separator());
-        manager.add(cut.initializing(cutButtonName, cutImagePath));
-        manager.add(copy.initializing(copyButtonName, copyImagePath));
-        manager.add(paste.initializing(pasteButtonName, pasteImagePath));
-        manager.add(font.initializing(fontButtonName, fontImagePath));
-        manager.add(new Separator());
-        manager.add(cutNumber.initializing(
-                cutNumberButtonName, cutNumberImagePath));
-        manager.add(fragment.initializing(
-                fragmentButtonName, fragmentImagePath));
-        manager.add(split.initializing(splitButtonName, splitImagePath));
-        manager.add(new Separator());
-        manager.add(build.initializing(buildButtonName, buildImagePath));
-        manager.add(inject.initializing(injectButtonName, injectImagePath));
-        manager.add(new Separator());
-        manager.add(settings.initializing(
-                settingsButtonName, settingsImagePath));
+        ReadSettings<List<String>> imagePath = new ReadDataArray(pathImages);
+        List<String> images = imagePath.parse("path");
+        IEventList toolbarActionsList = new ToolbarActionsList();
+        List<IEvent> toolList = toolbarActionsList.getActionList();
+        int i = 0;
+        for (IEvent action: toolList) {
+            ReadSettings<String> reader = new ReadDataFields(path);
+            manager.add(action.initializing(reader, images.get(i)));
+            i++;
+        }
+        toolList.clear();
+        images.clear();
         return manager;
     }
 }

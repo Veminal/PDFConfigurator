@@ -1,4 +1,4 @@
-package com.veminal.pdf.annotation;
+package com.veminal.pdf.core.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

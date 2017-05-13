@@ -1,7 +1,7 @@
 package com.veminal.pdf.actions.menu.file;
 
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.annotation.NotUsed;
+import com.veminal.pdf.core.annotation.NotUsed;
 import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.Action;
 
@@ -21,6 +21,17 @@ public final class ExitAction implements IEvent {
     @Override
     public Action initializing(final ReadSettings menuItemsName) {
         return new Action((String) menuItemsName.parse("exit")) {
+            /**
+             * The default implementation of this <code>IAction</code> method does
+             * nothing. Subclasses should override this method if they do not need
+             * information from the triggering event, or override
+             * <code>runWithEvent(Event)</code> if they do.
+             */
+            @Override
+            public void run() {
+                final int status = -1;
+                System.exit(status);
+            }
         };
     }
 

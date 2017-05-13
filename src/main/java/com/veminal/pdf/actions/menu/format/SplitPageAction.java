@@ -1,7 +1,7 @@
 package com.veminal.pdf.actions.menu.format;
 
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.annotation.NotUsed;
+import com.veminal.pdf.core.annotation.NotUsed;
 import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.Action;
 
