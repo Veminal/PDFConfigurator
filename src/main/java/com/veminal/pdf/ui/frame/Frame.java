@@ -3,7 +3,7 @@ package com.veminal.pdf.ui.frame;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.actions.ToolbarActionsList;
-import com.veminal.pdf.settings.read.ReadDataArray;
+import com.veminal.pdf.settings.read.ReadDataList;
 import com.veminal.pdf.settings.read.ReadDataFields;
 import com.veminal.pdf.settings.read.ReadSettings;
 import com.veminal.pdf.ui.menu.EditMenu;
@@ -56,7 +56,7 @@ public final class Frame extends ApplicationWindow {
      *
      * @param shell of Shell
      */
-    private void shellLocationCenter(final Shell shell) {
+    private void shellLocationFrame(final Shell shell) {
         Monitor monitor = Display.getCurrent().getPrimaryMonitor();
         Rectangle boundsM = monitor.getBounds();
         Rectangle boundsS = shell.getBounds();
@@ -110,7 +110,7 @@ public final class Frame extends ApplicationWindow {
         splitter.setWeights(new int[]{treeWeight, textWeight});
         shell.setText("PDF Adjuster");
         shell.setMinimumSize(new Point(height, width));
-        shellLocationCenter(shell);
+        shellLocationFrame(shell);
         shell.pack();
     }
 
@@ -145,7 +145,7 @@ public final class Frame extends ApplicationWindow {
         final String path = "dictionary.json";
         final String pathImages = "images.json";
         ToolBarManager manager = new ToolBarManager();
-        ReadSettings<List<String>> imagePath = new ReadDataArray(pathImages);
+        ReadSettings<List<String>> imagePath = new ReadDataList(pathImages);
         List<String> images = imagePath.parse("path");
         IEventList toolbarActionsList = new ToolbarActionsList();
         List<IEvent> toolList = toolbarActionsList.getActionList();

@@ -1,0 +1,9 @@
+{
+  "save.format": "*.doc",
+  "open.format": [
+    "*.pdf",
+    "*.doc",
+    "*.docx",
+    "*.txt"
+  ]
+}

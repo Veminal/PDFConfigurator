@@ -21,6 +21,10 @@ public final class OpenFileAction implements IEvent {
     @Override
     public Action initializing(final ReadSettings menuItemsName) {
         return new Action((String) menuItemsName.parse("open")) {
+            @Override
+            public void run() {
+                super.run();
+            }
         };
     }
 

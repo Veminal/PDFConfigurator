@@ -10,7 +10,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.List;
 
 /**
  * Read menu titles information.
@@ -39,16 +38,6 @@ public final class ReadDataFields implements ReadSettings<String> {
             final int status = -1;
             System.exit(status);
         }
-    }
-
-    /**
-     * Set descriptor array lines.
-     *
-     * @param descriptor of String type
-     */
-    @Override
-    @NotUsed
-    public void setDescriptor(final String descriptor) {
     }
 
     /**

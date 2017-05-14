@@ -36,6 +36,10 @@ public final class OpenAction implements IEvent {
     public Action initializing(final ReadSettings objName, final String path) {
         return new Action((String) objName.parse("open"),
                 ImageDescriptor.createFromFile(null, path)) {
+            @Override
+            public void run() {
+                super.run();
+            }
         };
     }
 }
