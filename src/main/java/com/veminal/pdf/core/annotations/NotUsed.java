@@ -1,4 +1,4 @@
-package com.veminal.pdf.core.annotation;
+package com.veminal.pdf.core.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation applies to methods not used in the
+ * This annotations applies to methods not used in the
  * implementation of the interface.
  *
  * @author Veminal

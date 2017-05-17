@@ -83,8 +83,8 @@ public final class Frame extends ApplicationWindow {
     @Override
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
-        final int height = 1200;
-        final int width = 700;
+        final int height = 800;
+        final int width = 600;
         final int column = 3;
         Composite content = new Composite(shell, SWT.NONE);
         GridLayout gridLayout = new GridLayout(column, false);
@@ -106,12 +106,11 @@ public final class Frame extends ApplicationWindow {
         item.setText("Tab");
         item.setControl(pdfText);
         final int treeWeight = 1;
-        final int textWeight = 5;
+        final int textWeight = 4;
         splitter.setWeights(new int[]{treeWeight, textWeight});
         shell.setText("PDF Adjuster");
-        shell.setMinimumSize(new Point(height, width));
+        shell.setSize(new Point(height, width));
         shellLocationFrame(shell);
-        shell.pack();
     }
 
     /**

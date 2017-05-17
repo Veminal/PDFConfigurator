@@ -1,12 +1,10 @@
 package com.veminal.pdf.actions.toolbar.file;
 
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.core.annotation.NotUsed;
+import com.veminal.pdf.core.annotations.NotUsed;
 import com.veminal.pdf.settings.read.ReadSettings;
-import com.veminal.pdf.ui.frame.CreateProjectDialog;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * Action for button "New".
@@ -41,9 +39,6 @@ public final class CreateAction implements IEvent {
             @Override
             public void run() {
                 super.run();
-                CreateProjectDialog create =
-                        new CreateProjectDialog(new Shell());
-                create.open();
             }
         };
     }

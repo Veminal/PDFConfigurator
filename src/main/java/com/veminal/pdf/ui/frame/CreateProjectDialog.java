@@ -1,7 +1,10 @@
 package com.veminal.pdf.ui.frame;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -73,6 +76,11 @@ public final class CreateProjectDialog extends Dialog {
     @Override
     protected Control createDialogArea(final Composite parent) {
         Composite composite = (Composite) super.createDialogArea(parent);
+        Composite container = new Composite(composite, SWT.NONE);
+        container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        final int col = 2;
+        GridLayout layout = new GridLayout(col, true);
+        container.setLayout(layout);
         return composite;
     }
 }
