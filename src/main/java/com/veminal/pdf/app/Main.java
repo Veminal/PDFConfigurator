@@ -22,8 +22,7 @@ final class Main {
      * @param args of String[]
      */
     public static void main(final String[] args) {
-        Shell shell = new Shell();
-        Frame frame = new Frame(shell);
+        Frame frame = new Frame();
         frame.run();
     }
 }

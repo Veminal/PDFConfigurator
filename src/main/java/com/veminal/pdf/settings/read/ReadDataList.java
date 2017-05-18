@@ -20,7 +20,7 @@ import java.util.List;
  * @author Veminal
  * @version 1.0
  */
-public final class ReadDataList implements ReadSettings<List<String>> {
+public final class ReadDataList implements ReadConfig<List<String>> {
     /**
      * Read JSON file.
      */

@@ -1,13 +1,13 @@
 package com.veminal.pdf.settings.read;
 
 /**
- * Interface for reading settings.
+ * Interface for reading configuration.
  *
  * @param <T> of generic type
  * @author Veminal
  * @version 1.0
  */
-public interface ReadSettings<T> {
+public interface ReadConfig<T> {
     /**
      * Reading data by key.
      *

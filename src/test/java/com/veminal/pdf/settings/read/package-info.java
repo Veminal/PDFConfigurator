@@ -1,6 +1,6 @@
 /**
  * Contains tests for classes that implement
- * read-out settings from files.
+ * read configuration from files.
  *
  * @author Veminal
  * @version 1.0

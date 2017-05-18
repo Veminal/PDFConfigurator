@@ -2,9 +2,12 @@ package com.veminal.pdf.actions.toolbar.file;
 
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.core.annotations.NotUsed;
-import com.veminal.pdf.settings.read.ReadSettings;
+import com.veminal.pdf.settings.read.ReadConfig;
+import com.veminal.pdf.ui.dialogs.CreatePDFProjectDialog;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * Action for button "New".
@@ -16,29 +19,33 @@ public final class CreateAction implements IEvent {
     /**
      * Action initializing.
      *
-     * @param menuItemsName of ReadSettings
+     * @param menuItemsName of ReadConfig
      * @return Action
      */
     @Override
     @NotUsed
-    public Action initializing(final ReadSettings menuItemsName) {
+    public Action initializing(final ReadConfig menuItemsName) {
         return null;
     }
 
     /**
      * Action initializing.
      *
-     * @param objName of ReadSettings
+     * @param objName of ReadConfig
      * @param path    of String
      * @return Action
      */
     @Override
-    public Action initializing(final ReadSettings objName, final String path) {
+    public Action initializing(final ReadConfig objName, final String path) {
         return new Action((String) objName.parse("new"),
                 ImageDescriptor.createFromFile(null, path)) {
             @Override
             public void run() {
                 super.run();
+                Shell shell = new Shell(Display.getCurrent());
+                CreatePDFProjectDialog dialog =
+                        new CreatePDFProjectDialog(shell);
+                dialog.open();
             }
         };
     }

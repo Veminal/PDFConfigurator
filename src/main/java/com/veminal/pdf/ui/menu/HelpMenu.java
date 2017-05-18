@@ -3,8 +3,8 @@ package com.veminal.pdf.ui.menu;
 import com.veminal.pdf.actions.HelpActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
+import com.veminal.pdf.settings.read.ReadConfig;
 import com.veminal.pdf.settings.read.ReadDataFields;
-import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.MenuManager;
 
 import java.util.List;
@@ -24,12 +24,12 @@ public final class HelpMenu implements IMenu {
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";
-        ReadSettings<String> readHelpMenu = new ReadDataFields(path);
+        ReadConfig<String> readHelpMenu = new ReadDataFields(path);
         MenuManager manager = new MenuManager(readHelpMenu.parse("menu.help"));
         IEventList helpTitlesList = new HelpActionsList();
         List<IEvent> helpList = helpTitlesList.getActionList();
         for (IEvent action: helpList) {
-            ReadSettings<String> reader = new ReadDataFields(path);
+            ReadConfig<String> reader = new ReadDataFields(path);
             manager.add(action.initializing(reader));
         }
         helpList.clear();

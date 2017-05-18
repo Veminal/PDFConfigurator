@@ -19,7 +19,7 @@ import java.lang.reflect.Type;
  * @author Veminal
  * @version 1.0
  */
-public final class ReadDataArray implements ReadSettings<String[]> {
+public final class ReadDataArray implements ReadConfig<String[]> {
     /**
      * Read JSON file.
      */

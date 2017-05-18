@@ -17,7 +17,7 @@ public class ReadDataFieldsTest {
     @Test
     public void returnString() {
         final String path = "dictionary.json";
-        ReadSettings<String> readString = new ReadDataFields(path);
+        ReadConfig<String> readString = new ReadDataFields(path);
         final String result = readString.parse("menu.file");
         final String wait = "&File";
         assertEquals(wait, result);

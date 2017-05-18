@@ -3,8 +3,8 @@ package com.veminal.pdf.ui.menu;
 import com.veminal.pdf.actions.EditActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
+import com.veminal.pdf.settings.read.ReadConfig;
 import com.veminal.pdf.settings.read.ReadDataFields;
-import com.veminal.pdf.settings.read.ReadSettings;
 import org.eclipse.jface.action.MenuManager;
 
 import java.util.List;
@@ -24,13 +24,13 @@ public final class FormatMenu implements IMenu {
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";
-        ReadSettings<String> readFormatMenu = new ReadDataFields(path);
+        ReadConfig<String> readFormatMenu = new ReadDataFields(path);
         MenuManager manager = new MenuManager(readFormatMenu.parse(
                 "menu.format"));
         IEventList formatTitlesList = new EditActionsList();
         List<IEvent> formatList = formatTitlesList.getActionList();
         for (IEvent action: formatList) {
-            ReadSettings<String> reader = new ReadDataFields(path);
+            ReadConfig<String> reader = new ReadDataFields(path);
             manager.add(action.initializing(reader));
         }
         formatList.clear();

@@ -16,7 +16,7 @@ import java.io.FileReader;
  * @author Veminal
  * @version 1.0
  */
-public final class ReadDataFields implements ReadSettings<String> {
+public final class ReadDataFields implements ReadConfig<String> {
     /**
      * Read JSON file.
      */

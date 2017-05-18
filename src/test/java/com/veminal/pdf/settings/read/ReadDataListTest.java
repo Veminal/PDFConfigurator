@@ -20,7 +20,7 @@ public class ReadDataListTest {
     @Test
     public void resultList() {
         final String path = "filter.json";
-        ReadSettings<List<String>> readList = new ReadDataList(path);
+        ReadConfig<List<String>> readList = new ReadDataList(path);
         final List resultList = readList.parse("open.format");
         List<String> waitList = new ArrayList<>();
         waitList.add("*.pdf");

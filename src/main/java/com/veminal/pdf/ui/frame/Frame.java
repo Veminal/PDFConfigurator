@@ -3,9 +3,9 @@ package com.veminal.pdf.ui.frame;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.actions.ToolbarActionsList;
-import com.veminal.pdf.settings.read.ReadDataList;
+import com.veminal.pdf.settings.read.ReadConfig;
 import com.veminal.pdf.settings.read.ReadDataFields;
-import com.veminal.pdf.settings.read.ReadSettings;
+import com.veminal.pdf.settings.read.ReadDataList;
 import com.veminal.pdf.ui.menu.EditMenu;
 import com.veminal.pdf.ui.menu.FileMenu;
 import com.veminal.pdf.ui.menu.FormatMenu;
@@ -21,7 +21,6 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -41,15 +40,14 @@ import java.util.List;
 public final class Frame extends ApplicationWindow {
     /**
      * Constructor of class.
-     *
-     * @param parentShell of Shell
      */
-    public Frame(final Shell parentShell) {
+    public Frame() {
         super(null);
-        parentShell.setLayout(new FillLayout());
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
+
+
 
     /**
      * Set the position of the window.
@@ -144,13 +142,13 @@ public final class Frame extends ApplicationWindow {
         final String path = "dictionary.json";
         final String pathImages = "images.json";
         ToolBarManager manager = new ToolBarManager();
-        ReadSettings<List<String>> imagePath = new ReadDataList(pathImages);
+        ReadConfig<List<String>> imagePath = new ReadDataList(pathImages);
         List<String> images = imagePath.parse("path");
         IEventList toolbarActionsList = new ToolbarActionsList();
         List<IEvent> toolList = toolbarActionsList.getActionList();
         int i = 0;
         for (IEvent action: toolList) {
-            ReadSettings<String> reader = new ReadDataFields(path);
+            ReadConfig<String> reader = new ReadDataFields(path);
             manager.add(action.initializing(reader, images.get(i)));
             i++;
         }

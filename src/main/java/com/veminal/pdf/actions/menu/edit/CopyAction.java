@@ -1,7 +1,7 @@
 package com.veminal.pdf.actions.menu.edit;
 
 import com.veminal.pdf.core.annotations.NotUsed;
-import com.veminal.pdf.settings.read.ReadSettings;
+import com.veminal.pdf.settings.read.ReadConfig;
 import org.eclipse.jface.action.Action;
 import com.veminal.pdf.actions.IEvent;
 
@@ -15,11 +15,11 @@ public final class CopyAction implements IEvent {
     /**
      * Action initializing.
      *
-     * @param menuItemsName of ReadSettings
+     * @param menuItemsName of ReadConfig
      * @return Action
      */
     @Override
-    public Action initializing(final ReadSettings menuItemsName) {
+    public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("copy")) {
         };
     }
@@ -27,13 +27,13 @@ public final class CopyAction implements IEvent {
     /**
      * Action initializing.
      *
-     * @param objName of ReadSettings
+     * @param objName of ReadConfig
      * @param path    of String
      * @return Action
      */
     @Override
     @NotUsed
-    public Action initializing(final ReadSettings objName, final String path) {
+    public Action initializing(final ReadConfig objName, final String path) {
         return null;
     }
 }
