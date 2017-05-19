@@ -16,10 +16,11 @@ public class ReadDataArrayTest {
      */
     @Test
     public void arrayResult() {
-        final String path = "filter.json";
+        final String path = "filters.json";
         ReadConfig<String[]> readArray = new ReadDataArray(path);
         final String[] arrayResult = readArray.parse("open.format");
-        assertArrayEquals(new String[]{"*.pdf", "*.doc", "*.docx",
-                "*.txt"}, arrayResult);
+        assertArrayEquals(new String[]{"*.pdf", "*.doc", "*.docx", "*.txt",
+                "*.md", "*.html", "*.xml", "*.java", "*.js", "*.c",
+                "*.css", "*.cpp", "*.json"}, arrayResult);
     }
 }

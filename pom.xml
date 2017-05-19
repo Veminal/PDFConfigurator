@@ -95,10 +95,9 @@
 
         <!--Dependency injection-->
         <dependency>
-            <groupId>com.google.dagger</groupId>
-            <artifactId>dagger</artifactId>
-            <version>2.11-rc2</version>
-            <scope>compile</scope>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.1.0</version>
         </dependency>
 
         <!--PDF Box-->

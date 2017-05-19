@@ -7,7 +7,6 @@ import com.veminal.pdf.ui.dialogs.CreatePDFProjectDialog;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * Action for button "New".
@@ -42,9 +41,9 @@ public final class CreateAction implements IEvent {
             @Override
             public void run() {
                 super.run();
-                Shell shell = new Shell(Display.getCurrent());
                 CreatePDFProjectDialog dialog =
-                        new CreatePDFProjectDialog(shell);
+                        new CreatePDFProjectDialog(Display.getCurrent()
+                                .getActiveShell());
                 dialog.open();
             }
         };

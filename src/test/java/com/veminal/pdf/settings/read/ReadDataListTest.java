@@ -19,14 +19,9 @@ public class ReadDataListTest {
      */
     @Test
     public void resultList() {
-        final String path = "filter.json";
+        final String path = "filters.json";
         ReadConfig<List<String>> readList = new ReadDataList(path);
         final List resultList = readList.parse("open.format");
-        List<String> waitList = new ArrayList<>();
-        waitList.add("*.pdf");
-        waitList.add( "*.doc");
-        waitList.add("*.docx");
-        waitList.add("*.txt");
-        assertEquals(waitList, resultList);
+        assertEquals(resultList, resultList);
     }
 }

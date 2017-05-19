@@ -19,6 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
@@ -105,8 +106,10 @@ public final class Frame extends ApplicationWindow {
         item.setControl(pdfText);
         final int treeWeight = 1;
         final int textWeight = 4;
+        Image icon = new Image(Display.getCurrent(), "icon.ico");
         splitter.setWeights(new int[]{treeWeight, textWeight});
         shell.setText("PDF Adjuster");
+        shell.setImage(icon);
         shell.setSize(new Point(height, width));
         shellLocationFrame(shell);
     }

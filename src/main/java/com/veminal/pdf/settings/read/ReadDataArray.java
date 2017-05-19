@@ -37,6 +37,8 @@ public final class ReadDataArray implements ReadConfig<String[]> {
         } catch (FileNotFoundException e) {
             MessageDialog.openError(new Shell(), "File not found",
                     e.getMessage());
+            final int status = -1;
+            System.exit(status);
         }
     }
 

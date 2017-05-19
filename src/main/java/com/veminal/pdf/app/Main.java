@@ -1,7 +1,6 @@
 package com.veminal.pdf.app;
 
 import com.veminal.pdf.ui.frame.Frame;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * Application run class.
