@@ -1,10 +1,11 @@
 package com.veminal.pdf.ui.menu;
 
+import com.google.inject.Inject;
 import com.veminal.pdf.actions.EditActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
-import com.veminal.pdf.settings.read.ReadConfig;
-import com.veminal.pdf.settings.read.ReadDataFields;
+import com.veminal.pdf.configuration.read.ReadConfig;
+import com.veminal.pdf.core.annotations.StringReader;
 import org.eclipse.jface.action.MenuManager;
 
 import java.util.List;
@@ -17,6 +18,22 @@ import java.util.List;
  */
 public final class FormatMenu implements IMenu {
     /**
+     * Config reader.
+     */
+    private final ReadConfig readFormatMenu;
+
+    /**
+     * Constructor of class.
+     * Inject file menu
+     *
+     * @param readMenu the ReadConfig
+     */
+    @Inject
+    public FormatMenu(@StringReader final ReadConfig readMenu) {
+        this.readFormatMenu = readMenu;
+    }
+
+    /**
      * Create menu item.
      *
      * @return menu
@@ -24,14 +41,13 @@ public final class FormatMenu implements IMenu {
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";
-        ReadConfig<String> readFormatMenu = new ReadDataFields(path);
-        MenuManager manager = new MenuManager(readFormatMenu.parse(
-                "menu.format"));
+        readFormatMenu.readPath(path);
+        MenuManager manager = new MenuManager((String) readFormatMenu.parse("menu.format"));
         IEventList formatTitlesList = new EditActionsList();
         List<IEvent> formatList = formatTitlesList.getActionList();
-        for (IEvent action: formatList) {
-            ReadConfig<String> reader = new ReadDataFields(path);
-            manager.add(action.initializing(reader));
+        for (IEvent action : formatList) {
+            readFormatMenu.readPath(path);
+            manager.add(action.initializing(readFormatMenu));
         }
         formatList.clear();
         return manager;

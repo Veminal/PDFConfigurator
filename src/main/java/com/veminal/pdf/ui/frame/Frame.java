@@ -1,11 +1,14 @@
 package com.veminal.pdf.ui.frame;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.actions.ToolbarActionsList;
-import com.veminal.pdf.settings.read.ReadConfig;
-import com.veminal.pdf.settings.read.ReadDataFields;
-import com.veminal.pdf.settings.read.ReadDataList;
+import com.veminal.pdf.configuration.read.ReadConfig;
+import com.veminal.pdf.configuration.read.ReadDataFields;
+import com.veminal.pdf.configuration.read.ReadDataList;
+import com.veminal.pdf.core.modules.ConfigurationModule;
 import com.veminal.pdf.ui.menu.EditMenu;
 import com.veminal.pdf.ui.menu.FileMenu;
 import com.veminal.pdf.ui.menu.FormatMenu;
@@ -47,7 +50,6 @@ public final class Frame extends ApplicationWindow {
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
-
 
 
     /**
@@ -121,10 +123,14 @@ public final class Frame extends ApplicationWindow {
      */
     @Override
     protected MenuManager createMenuManager() {
-        IMenu file = new FileMenu();
-        IMenu edit = new EditMenu();
-        IMenu format = new FormatMenu();
-        IMenu help = new HelpMenu();
+        Injector injectMenu = Guice.createInjector(
+                new ConfigurationModule());
+        ReadConfig readFileMenu =
+                injectMenu.getInstance(ReadDataFields.class);
+        IMenu file = new FileMenu(readFileMenu);
+        IMenu edit = new EditMenu(readFileMenu);
+        IMenu format = new FormatMenu(readFileMenu);
+        IMenu help = new HelpMenu(readFileMenu);
         MenuManager menu = new MenuManager();
         menu.add(file.initial());
         menu.add(edit.initial());
@@ -145,13 +151,15 @@ public final class Frame extends ApplicationWindow {
         final String path = "dictionary.json";
         final String pathImages = "images.json";
         ToolBarManager manager = new ToolBarManager();
-        ReadConfig<List<String>> imagePath = new ReadDataList(pathImages);
+        ReadConfig<List<String>> imagePath = new ReadDataList();
+        ReadConfig<String> reader = new ReadDataFields();
+        imagePath.readPath(pathImages);
         List<String> images = imagePath.parse("path");
         IEventList toolbarActionsList = new ToolbarActionsList();
         List<IEvent> toolList = toolbarActionsList.getActionList();
         int i = 0;
-        for (IEvent action: toolList) {
-            ReadConfig<String> reader = new ReadDataFields(path);
+        for (IEvent action : toolList) {
+            reader.readPath(path);
             manager.add(action.initializing(reader, images.get(i)));
             i++;
         }

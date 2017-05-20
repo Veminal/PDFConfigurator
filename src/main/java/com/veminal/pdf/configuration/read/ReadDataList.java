@@ -1,4 +1,4 @@
-package com.veminal.pdf.settings.read;
+package com.veminal.pdf.configuration.read;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -6,8 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,22 +22,19 @@ public final class ReadDataList implements ReadConfig<List<String>> {
     /**
      * Read JSON file.
      */
-    private JsonReader reader;
+    private JsonReader listReader;
 
     /**
-     * Constructor of class.
-     * Getting the path to the file.
+     * Read path to file.
      *
-     * @param path of String
+     * @param path the String
      */
-    public ReadDataList(final String path) {
+    @Override
+    public void readPath(final String path) {
         try {
-            reader = new JsonReader(new FileReader(path));
+            listReader = new JsonReader(new FileReader(path));
         } catch (FileNotFoundException e) {
-            MessageDialog.openError(new Shell(),
-                    "File not found", e.getMessage());
-            final int status = -1;
-            System.exit(status);
+            e.getMessage();
         }
     }
 
@@ -47,11 +42,11 @@ public final class ReadDataList implements ReadConfig<List<String>> {
      * Reading data by key.
      *
      * @param key of String
-     * @return settings data
+     * @return configuration data
      */
     @Override
     public List<String> parse(final String key) {
-        JsonObject jObject = (JsonObject) new JsonParser().parse(reader);
+        JsonObject jObject = (JsonObject) new JsonParser().parse(listReader);
         JsonArray array = jObject.getAsJsonArray(key);
         Type listType = new TypeToken<List<String>>() {
         }.getType();

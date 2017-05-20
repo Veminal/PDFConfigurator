@@ -31,14 +31,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Mockito-->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.7.22</version>
-            <scope>test</scope>
-        </dependency>
-
         <!--SWT Windows-->
         <dependency>
             <groupId>org.eclipse.swt</groupId>
@@ -98,6 +90,7 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>4.1.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--PDF Box-->

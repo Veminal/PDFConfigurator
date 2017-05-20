@@ -36,7 +36,7 @@ public final class AboutDialog extends Dialog {
 
     /**
      * Returns the initial size to use for the shell. Overridden
-     * to check whether a size has been stored in dialog settings.
+     * to check whether a size has been stored in dialog configuration.
      *
      * @return the initial size of the shell
      */

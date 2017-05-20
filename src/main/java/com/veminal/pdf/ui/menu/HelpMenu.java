@@ -1,10 +1,11 @@
 package com.veminal.pdf.ui.menu;
 
+import com.google.inject.Inject;
 import com.veminal.pdf.actions.HelpActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
-import com.veminal.pdf.settings.read.ReadConfig;
-import com.veminal.pdf.settings.read.ReadDataFields;
+import com.veminal.pdf.configuration.read.ReadConfig;
+import com.veminal.pdf.core.annotations.StringReader;
 import org.eclipse.jface.action.MenuManager;
 
 import java.util.List;
@@ -17,6 +18,22 @@ import java.util.List;
  */
 public final class HelpMenu implements IMenu {
     /**
+     * Config reader.
+     */
+    private final ReadConfig readHelpMenu;
+
+    /**
+     * Constructor of class.
+     * Inject file menu
+     *
+     * @param readMenu the ReadConfig
+     */
+    @Inject
+    public HelpMenu(@StringReader final ReadConfig readMenu) {
+        this.readHelpMenu = readMenu;
+    }
+
+    /**
      * Create menu item.
      *
      * @return menu
@@ -24,13 +41,14 @@ public final class HelpMenu implements IMenu {
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";
-        ReadConfig<String> readHelpMenu = new ReadDataFields(path);
-        MenuManager manager = new MenuManager(readHelpMenu.parse("menu.help"));
+        readHelpMenu.readPath(path);
+        MenuManager manager = new MenuManager(
+                (String) readHelpMenu.parse("menu.help"));
         IEventList helpTitlesList = new HelpActionsList();
         List<IEvent> helpList = helpTitlesList.getActionList();
-        for (IEvent action: helpList) {
-            ReadConfig<String> reader = new ReadDataFields(path);
-            manager.add(action.initializing(reader));
+        for (IEvent action : helpList) {
+            readHelpMenu.readPath(path);
+            manager.add(action.initializing(readHelpMenu));
         }
         helpList.clear();
         return manager;

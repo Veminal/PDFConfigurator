@@ -1,7 +1,7 @@
 package com.veminal.pdf.actions.toolbar.edit;
 
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.settings.read.ReadConfig;
+import com.veminal.pdf.configuration.read.ReadConfig;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 

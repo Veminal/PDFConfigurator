@@ -1,6 +1,6 @@
 package com.veminal.pdf.actions;
 
-import com.veminal.pdf.settings.read.ReadConfig;
+import com.veminal.pdf.configuration.read.ReadConfig;
 import org.eclipse.jface.action.Action;
 
 /**

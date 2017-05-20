@@ -1,4 +1,4 @@
-package com.veminal.pdf.settings.read;
+package com.veminal.pdf.configuration.read;
 
 /**
  * Interface for reading configuration.
@@ -9,10 +9,17 @@ package com.veminal.pdf.settings.read;
  */
 public interface ReadConfig<T> {
     /**
+     * Read path to file.
+     *
+     * @param path the String
+     */
+    void readPath(String path);
+
+    /**
      * Reading data by key.
      *
      * @param key of String
-     * @return settings data
+     * @return configuration data
      */
     T parse(String key);
 }
