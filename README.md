@@ -10,6 +10,7 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Eclipse Standart Widget Toolkit-4.7M3.
 <li> Eclipse JFace-3.12.0.v20160518-1929.
 <li> Google gson-2.8.0
+<li> Google Guice - 4.1.0
 <li> Apache PDFBox - 2.0.5
 
 # Stages of development:
