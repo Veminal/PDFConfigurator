@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Binding annotation for the FileMenu class.
+ * Binding annotation for the menu list "Format".
  *
  * @author Veminal
  * @version 1.0
@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
         ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @BindingAnnotation
-public @interface File {
+public @interface FormatList {
 }

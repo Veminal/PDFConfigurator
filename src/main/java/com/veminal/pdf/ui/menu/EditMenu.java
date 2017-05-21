@@ -1,10 +1,10 @@
 package com.veminal.pdf.ui.menu;
 
 import com.google.inject.Inject;
-import com.veminal.pdf.actions.EditActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.configuration.read.ReadConfig;
+import com.veminal.pdf.core.annotations.EditList;
 import com.veminal.pdf.core.annotations.StringReader;
 import org.eclipse.jface.action.MenuManager;
 
@@ -21,16 +21,22 @@ public final class EditMenu implements IMenu {
      * Config reader.
      */
     private final ReadConfig readEditMenu;
+    /**
+     * Edit menu list.
+     */
+    private final IEventList edit;
 
     /**
      * Constructor of class.
-     * Inject file menu
      *
      * @param readMenu the ReadConfig
+     * @param listEdit the IEventList
      */
     @Inject
-    public EditMenu(@StringReader final ReadConfig readMenu) {
+    public EditMenu(@StringReader final ReadConfig readMenu,
+                    @EditList final IEventList listEdit) {
         this.readEditMenu = readMenu;
+        this.edit = listEdit;
     }
 
     /**
@@ -44,8 +50,7 @@ public final class EditMenu implements IMenu {
         readEditMenu.readPath(path);
         MenuManager manager = new MenuManager(
                 (String) readEditMenu.parse("menu.edit"));
-        IEventList editTitlesList = new EditActionsList();
-        List<IEvent> editList = editTitlesList.getActionList();
+        List<IEvent> editList = edit.getActionList();
         for (IEvent action : editList) {
             readEditMenu.readPath(path);
             manager.add(action.initializing(readEditMenu));

@@ -16,9 +16,6 @@ import com.veminal.pdf.core.annotations.StringReader;
  * @version 1.0
  */
 public final class ConfigurationModule extends AbstractModule {
-    /**
-     * Creating bindings.
-     */
     @Override
     protected void configure() {
         bind(ReadConfig.class).annotatedWith(StringReader.class)

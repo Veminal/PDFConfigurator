@@ -2,12 +2,17 @@ package com.veminal.pdf.ui.frame;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.veminal.pdf.actions.EditActionsList;
+import com.veminal.pdf.actions.FileActionsList;
+import com.veminal.pdf.actions.FormatActionsList;
+import com.veminal.pdf.actions.HelpActionsList;
 import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.actions.ToolbarActionsList;
 import com.veminal.pdf.configuration.read.ReadConfig;
 import com.veminal.pdf.configuration.read.ReadDataFields;
 import com.veminal.pdf.configuration.read.ReadDataList;
+import com.veminal.pdf.core.modules.ActionsListModule;
 import com.veminal.pdf.core.modules.ConfigurationModule;
 import com.veminal.pdf.ui.menu.EditMenu;
 import com.veminal.pdf.ui.menu.FileMenu;
@@ -124,13 +129,22 @@ public final class Frame extends ApplicationWindow {
     @Override
     protected MenuManager createMenuManager() {
         Injector injectMenu = Guice.createInjector(
-                new ConfigurationModule());
+                new ConfigurationModule(),
+                new ActionsListModule());
         ReadConfig readFileMenu =
                 injectMenu.getInstance(ReadDataFields.class);
-        IMenu file = new FileMenu(readFileMenu);
-        IMenu edit = new EditMenu(readFileMenu);
-        IMenu format = new FormatMenu(readFileMenu);
-        IMenu help = new HelpMenu(readFileMenu);
+        IEventList fileMenu =
+                injectMenu.getInstance(FileActionsList.class);
+        IEventList editMenu =
+                injectMenu.getInstance(EditActionsList.class);
+        IEventList formatMenu =
+                injectMenu.getInstance(FormatActionsList.class);
+        IEventList helpMenu =
+                injectMenu.getInstance(HelpActionsList.class);
+        IMenu file = new FileMenu(readFileMenu, fileMenu);
+        IMenu edit = new EditMenu(readFileMenu, editMenu);
+        IMenu format = new FormatMenu(readFileMenu, formatMenu);
+        IMenu help = new HelpMenu(readFileMenu, helpMenu);
         MenuManager menu = new MenuManager();
         menu.add(file.initial());
         menu.add(edit.initial());
