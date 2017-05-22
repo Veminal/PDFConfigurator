@@ -12,25 +12,12 @@ import org.eclipse.jface.action.Action;
  * @version 1.0
  */
 public final class LicenseAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("license")) {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

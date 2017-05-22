@@ -39,11 +39,6 @@ public final class FormatMenu implements IMenu {
         this.format = listFormat;
     }
 
-    /**
-     * Create menu item.
-     *
-     * @return menu
-     */
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";

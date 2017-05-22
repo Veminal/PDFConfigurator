@@ -24,11 +24,6 @@ public final class ReadDataList implements ReadConfig<List<String>> {
      */
     private JsonReader listReader;
 
-    /**
-     * Read path to file.
-     *
-     * @param path the String
-     */
     @Override
     public void readPath(final String path) {
         try {
@@ -38,12 +33,6 @@ public final class ReadDataList implements ReadConfig<List<String>> {
         }
     }
 
-    /**
-     * Reading data by key.
-     *
-     * @param key of String
-     * @return configuration data
-     */
     @Override
     public List<String> parse(final String key) {
         JsonObject jObject = (JsonObject) new JsonParser().parse(listReader);

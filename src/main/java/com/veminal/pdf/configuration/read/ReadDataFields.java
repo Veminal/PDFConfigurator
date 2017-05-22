@@ -19,11 +19,7 @@ public final class ReadDataFields implements ReadConfig<String> {
      * Read JSON file.
      */
     private JsonReader reader;
-    /**
-     * Read path to file.
-     *
-     * @param path the String
-     */
+
     @Override
     public void readPath(final String path) {
         try {
@@ -33,12 +29,6 @@ public final class ReadDataFields implements ReadConfig<String> {
         }
     }
 
-    /**
-     * Reading data by key.
-     *
-     * @param key of String
-     * @return configuration data
-     */
     @Override
     public String parse(final String key) {
         JsonElement element = new JsonParser().parse(reader);

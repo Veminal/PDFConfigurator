@@ -9,25 +9,12 @@ import org.eclipse.jface.action.Action;
  * Action for menu item "Inject fragments".
  */
 public final class InjectFragmentAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("inject.fragments")) {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

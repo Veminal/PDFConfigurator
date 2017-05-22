@@ -12,25 +12,12 @@ import org.eclipse.jface.action.Action;
  * @version 1.0
  */
 public final class SettingsAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("settings")) {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

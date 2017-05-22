@@ -2,12 +2,14 @@ package com.veminal.pdf.ui.dialogs;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -37,22 +39,12 @@ public final class CreatePDFProjectDialog extends Dialog {
         super(parentShell);
     }
 
-    /**
-     * Configures the given shell in preparation for opening this window in it.
-     *
-     * @param newShell the shell
-     */
     @Override
     protected void configureShell(final Shell newShell) {
         super.configureShell(newShell);
         newShell.setText("Create PDF Project(test)");
     }
 
-    /**
-     * Returns the initial size to use for the shell.
-     *
-     * @return the initial size of the shell
-     */
     @Override
     protected Point getInitialSize() {
         final int h = 450;
@@ -60,12 +52,6 @@ public final class CreatePDFProjectDialog extends Dialog {
         return new Point(h, w);
     }
 
-    /**
-     * Creates and returns the contents of the upper part of this dialog.
-     *
-     * @param parent the parent composite to contain the dialog area
-     * @return the dialog area control
-     */
     @Override
     protected Control createDialogArea(final Composite parent) {
         final int columns = 2;
@@ -108,6 +94,7 @@ public final class CreatePDFProjectDialog extends Dialog {
         textProjectPath = new Text(composite, SWT.BORDER);
         textProjectPath.setLayoutData(dataProjectPath);
         Button openPathButton = new Button(composite, SWT.PUSH);
-        openPathButton.setText("...");
+        Image icon = new Image(Display.getCurrent(), "images/open.png");
+        openPathButton.setImage(icon);
     }
 }

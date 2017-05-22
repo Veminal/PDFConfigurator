@@ -40,11 +40,6 @@ public final class HelpMenu implements IMenu {
         this.help = listHelp;
     }
 
-    /**
-     * Create menu item.
-     *
-     * @return menu
-     */
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";

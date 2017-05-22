@@ -14,12 +14,6 @@ import org.eclipse.swt.widgets.Display;
  * @version 1.0
  */
 public final class AboutAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("about")) {
@@ -33,13 +27,6 @@ public final class AboutAction implements IEvent {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

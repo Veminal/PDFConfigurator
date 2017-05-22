@@ -19,11 +19,6 @@ import java.util.List;
  * @version 1.0
  */
 public final class EditActionsList implements IEventList {
-    /**
-     * Returns a list of actions.
-     *
-     * @return action list
-     */
     @Override
     public List<IEvent> getActionList() {
         List<IEvent> editMenuList = new ArrayList<>();

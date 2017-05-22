@@ -12,25 +12,12 @@ import com.veminal.pdf.actions.IEvent;
  * @version 1.0
  */
 public final class CopyAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("copy")) {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

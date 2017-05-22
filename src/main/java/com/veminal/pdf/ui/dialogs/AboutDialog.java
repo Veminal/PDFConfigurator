@@ -22,24 +22,12 @@ public final class AboutDialog extends Dialog {
         super(parentShell);
     }
 
-    /**
-     * Configures the given shell in preparation
-     * for opening this window in it.
-     *
-     * @param newShell the shell
-     */
     @Override
     protected void configureShell(final Shell newShell) {
         super.configureShell(newShell);
         newShell.setText("Test");
     }
 
-    /**
-     * Returns the initial size to use for the shell. Overridden
-     * to check whether a size has been stored in dialog configuration.
-     *
-     * @return the initial size of the shell
-     */
     @Override
     protected Point getInitialSize() {
         final int h = 350;
@@ -47,11 +35,6 @@ public final class AboutDialog extends Dialog {
         return new Point(h, w);
     }
 
-    /**
-     * Creates the buttons for the button bar.
-     *
-     * @param parent the Composite
-     */
     @Override
     protected void createButtonsForButtonBar(final Composite parent) {
         createButton(parent, IDialogConstants.OK_ID,

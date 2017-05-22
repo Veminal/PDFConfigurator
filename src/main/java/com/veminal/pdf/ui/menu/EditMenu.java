@@ -39,11 +39,6 @@ public final class EditMenu implements IMenu {
         this.edit = listEdit;
     }
 
-    /**
-     * Create menu item.
-     *
-     * @return menu
-     */
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";

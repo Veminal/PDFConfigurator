@@ -39,11 +39,6 @@ public final class FileMenu implements IMenu {
         this.files = listFiles;
     }
 
-    /**
-     * Create menu item.
-     *
-     * @return menu
-     */
     @Override
     public MenuManager initial() {
         final String path = "dictionary.json";

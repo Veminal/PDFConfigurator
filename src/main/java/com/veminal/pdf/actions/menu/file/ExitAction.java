@@ -12,21 +12,9 @@ import org.eclipse.jface.action.Action;
  * @version 1.0
  */
 public final class ExitAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("exit")) {
-            /**
-             * The default implementation of this <code>IAction</code> method does
-             * nothing. Subclasses should override this method if they do not need
-             * information from the triggering event, or override
-             * <code>runWithEvent(Event)</code> if they do.
-             */
             @Override
             public void run() {
                 final int status = -1;
@@ -35,13 +23,6 @@ public final class ExitAction implements IEvent {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

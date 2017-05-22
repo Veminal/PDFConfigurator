@@ -12,12 +12,6 @@ import org.eclipse.jface.action.Action;
  * @version 1.0
  */
 public final class OpenFileAction implements IEvent {
-    /**
-     * Action initializing.
-     *
-     * @param menuItemsName of ReadConfig
-     * @return Action
-     */
     @Override
     public Action initializing(final ReadConfig menuItemsName) {
         return new Action((String) menuItemsName.parse("open")) {
@@ -28,13 +22,6 @@ public final class OpenFileAction implements IEvent {
         };
     }
 
-    /**
-     * Action initializing.
-     *
-     * @param objName of ReadConfig
-     * @param path    of String
-     * @return Action
-     */
     @Override
     @NotUsed
     public Action initializing(final ReadConfig objName, final String path) {

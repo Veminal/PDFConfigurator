@@ -6,7 +6,6 @@ import com.veminal.pdf.actions.EditActionsList;
 import com.veminal.pdf.actions.FileActionsList;
 import com.veminal.pdf.actions.FormatActionsList;
 import com.veminal.pdf.actions.HelpActionsList;
-import com.veminal.pdf.actions.IEvent;
 import com.veminal.pdf.actions.IEventList;
 import com.veminal.pdf.actions.ToolbarActionsList;
 import com.veminal.pdf.configuration.read.ReadConfig;
@@ -14,11 +13,14 @@ import com.veminal.pdf.configuration.read.ReadDataFields;
 import com.veminal.pdf.configuration.read.ReadDataList;
 import com.veminal.pdf.core.modules.ActionsListModule;
 import com.veminal.pdf.core.modules.ConfigurationModule;
+import com.veminal.pdf.core.modules.ToolbarModule;
 import com.veminal.pdf.ui.menu.EditMenu;
 import com.veminal.pdf.ui.menu.FileMenu;
 import com.veminal.pdf.ui.menu.FormatMenu;
 import com.veminal.pdf.ui.menu.HelpMenu;
 import com.veminal.pdf.ui.menu.IMenu;
+import com.veminal.pdf.ui.toolbar.ITool;
+import com.veminal.pdf.ui.toolbar.ToolbarBuild;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -38,8 +40,6 @@ import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import java.util.List;
-
 /**
  * Template for the user interface.
  *
@@ -48,10 +48,19 @@ import java.util.List;
  */
 public final class Frame extends ApplicationWindow {
     /**
+     * Injector.
+     */
+    private Injector injectObject;
+
+    /**
      * Constructor of class.
      */
     public Frame() {
         super(null);
+        injectObject = Guice.createInjector(
+                new ConfigurationModule(),
+                new ActionsListModule(),
+                new ToolbarModule());
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -81,11 +90,6 @@ public final class Frame extends ApplicationWindow {
         Display.getCurrent().dispose();
     }
 
-    /**
-     * Configure shell.
-     *
-     * @param shell of Shell
-     */
     @Override
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
@@ -121,26 +125,18 @@ public final class Frame extends ApplicationWindow {
         shellLocationFrame(shell);
     }
 
-    /**
-     * Create menu manager.
-     *
-     * @return Menu
-     */
     @Override
     protected MenuManager createMenuManager() {
-        Injector injectMenu = Guice.createInjector(
-                new ConfigurationModule(),
-                new ActionsListModule());
-        ReadConfig readFileMenu =
-                injectMenu.getInstance(ReadDataFields.class);
-        IEventList fileMenu =
-                injectMenu.getInstance(FileActionsList.class);
-        IEventList editMenu =
-                injectMenu.getInstance(EditActionsList.class);
-        IEventList formatMenu =
-                injectMenu.getInstance(FormatActionsList.class);
-        IEventList helpMenu =
-                injectMenu.getInstance(HelpActionsList.class);
+        ReadConfig readFileMenu = injectObject.getInstance(
+                ReadDataFields.class);
+        IEventList fileMenu = injectObject.getInstance(
+                FileActionsList.class);
+        IEventList editMenu = injectObject.getInstance(
+                EditActionsList.class);
+        IEventList formatMenu = injectObject.getInstance(
+                FormatActionsList.class);
+        IEventList helpMenu = injectObject.getInstance(
+                HelpActionsList.class);
         IMenu file = new FileMenu(readFileMenu, fileMenu);
         IMenu edit = new EditMenu(readFileMenu, editMenu);
         IMenu format = new FormatMenu(readFileMenu, formatMenu);
@@ -153,32 +149,13 @@ public final class Frame extends ApplicationWindow {
         return menu;
     }
 
-    /**
-     * Returns a new tool bar manager for the window.
-     * Subclasses may override this method to customize the tool bar manager.
-     *
-     * @param style swt style bits used to create the Toolbar
-     * @return a tool bar manager
-     */
     @Override
     protected ToolBarManager createToolBarManager(final int style) {
-        final String path = "dictionary.json";
-        final String pathImages = "images.json";
-        ToolBarManager manager = new ToolBarManager();
-        ReadConfig<List<String>> imagePath = new ReadDataList();
-        ReadConfig<String> reader = new ReadDataFields();
-        imagePath.readPath(pathImages);
-        List<String> images = imagePath.parse("path");
-        IEventList toolbarActionsList = new ToolbarActionsList();
-        List<IEvent> toolList = toolbarActionsList.getActionList();
-        int i = 0;
-        for (IEvent action : toolList) {
-            reader.readPath(path);
-            manager.add(action.initializing(reader, images.get(i)));
-            i++;
-        }
-        toolList.clear();
-        images.clear();
-        return manager;
+        ReadConfig readText = injectObject.getInstance(ReadDataFields.class);
+        ReadConfig readImage = injectObject.getInstance(ReadDataList.class);
+        IEventList toolbarAction = injectObject.getInstance(
+                ToolbarActionsList.class);
+        ITool tool = new ToolbarBuild(readText, readImage, toolbarAction);
+        return tool.initial();
     }
 }

@@ -23,11 +23,6 @@ public final class ReadDataArray implements ReadConfig<String[]> {
      */
     private JsonReader reader;
 
-    /**
-     * Read path to file.
-     *
-     * @param path the String
-     */
     @Override
     public void readPath(final String path) {
         try {
@@ -37,12 +32,6 @@ public final class ReadDataArray implements ReadConfig<String[]> {
         }
     }
 
-    /**
-     * Reading data by key.
-     *
-     * @param key of String
-     * @return configuration data
-     */
     @Override
     public String[] parse(final String key) {
         JsonObject jObject = (JsonObject) new JsonParser().parse(reader);
