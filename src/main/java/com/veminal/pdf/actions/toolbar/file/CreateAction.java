@@ -1,8 +1,12 @@
 package com.veminal.pdf.actions.toolbar.file;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.veminal.pdf.actions.IEvent;
-import com.veminal.pdf.core.annotations.NotUsed;
 import com.veminal.pdf.configuration.read.ReadConfig;
+import com.veminal.pdf.configuration.read.ReadDataFields;
+import com.veminal.pdf.core.annotations.NotUsed;
+import com.veminal.pdf.core.modules.ConfigurationModule;
 import com.veminal.pdf.ui.dialogs.CreatePDFProjectDialog;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -28,9 +32,13 @@ public final class CreateAction implements IEvent {
             @Override
             public void run() {
                 super.run();
+                Injector injectObject = Guice.createInjector(
+                        new ConfigurationModule());
+                ReadConfig readTitles = injectObject.getInstance(
+                        ReadDataFields.class);
                 CreatePDFProjectDialog dialog =
                         new CreatePDFProjectDialog(Display.getCurrent()
-                                .getActiveShell());
+                                .getActiveShell(), readTitles);
                 dialog.open();
             }
         };
