@@ -15,14 +15,9 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 public class ReadDataFieldsTest {
-    /**
-     * Read config.
-     */
+
     private ReadConfig readConfig;
 
-    /**
-     * Initializing.
-     */
     @Before
     public void setUp() {
         Injector injectMenu = Guice.createInjector(
@@ -30,9 +25,6 @@ public class ReadDataFieldsTest {
         readConfig = injectMenu.getInstance(ReadDataFields.class);
     }
 
-    /**
-     * Test class.
-     */
     @Test
     public void result() {
         final String path = "dictionary.json";

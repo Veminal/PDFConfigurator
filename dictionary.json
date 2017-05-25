@@ -26,6 +26,7 @@
   "help": "&Help",
   "license": "&License",
   "about": "&About",
+  "frame.title": "PDF Adjuster",
   "create.project.dialog": "Create PDF Project",
   "project.label.name": "&Name:",
   "project.label.path": "&Path:",

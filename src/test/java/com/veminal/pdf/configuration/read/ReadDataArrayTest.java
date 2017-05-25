@@ -15,14 +15,9 @@ import static org.junit.Assert.assertArrayEquals;
  * @version 1.0
  */
 public class ReadDataArrayTest {
-    /**
-     * Read config.
-     */
+
     private ReadConfig readConfig;
 
-    /**
-     * Initializing.
-     */
     @Before
     public void setUp() {
         Injector injectMenu = Guice.createInjector(
@@ -30,9 +25,6 @@ public class ReadDataArrayTest {
         readConfig = injectMenu.getInstance(ReadDataArray.class);
     }
 
-    /**
-     * Test class.
-     */
     @Test
     public void result() {
         final String path = "images.json";

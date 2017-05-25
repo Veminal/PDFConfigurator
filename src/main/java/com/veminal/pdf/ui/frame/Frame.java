@@ -1,6 +1,7 @@
 package com.veminal.pdf.ui.frame;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.veminal.pdf.actions.EditActionsList;
 import com.veminal.pdf.actions.FileActionsList;
@@ -11,6 +12,7 @@ import com.veminal.pdf.actions.ToolbarActionsList;
 import com.veminal.pdf.configuration.read.ReadConfig;
 import com.veminal.pdf.configuration.read.ReadDataFields;
 import com.veminal.pdf.configuration.read.ReadDataList;
+import com.veminal.pdf.core.annotations.StringReader;
 import com.veminal.pdf.core.modules.ActionsListModule;
 import com.veminal.pdf.core.modules.ConfigurationModule;
 import com.veminal.pdf.core.modules.ToolbarModule;
@@ -51,16 +53,24 @@ public final class Frame extends ApplicationWindow {
      * Injector.
      */
     private Injector injectObject;
+    /**
+     * Read config.
+     */
+    private final ReadConfig readConfig;
 
     /**
      * Constructor of class.
+     *
+     * @param read the ReadConfig
      */
-    public Frame() {
+    @Inject
+    public Frame(@StringReader final ReadConfig read) {
         super(null);
         injectObject = Guice.createInjector(
                 new ConfigurationModule(),
                 new ActionsListModule(),
                 new ToolbarModule());
+        readConfig = read;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -119,7 +129,9 @@ public final class Frame extends ApplicationWindow {
         final int textWeight = 4;
         Image icon = new Image(Display.getCurrent(), "icon.ico");
         splitter.setWeights(new int[]{treeWeight, textWeight});
-        shell.setText("PDF Adjuster");
+        final String path = "dictionary.json";
+        readConfig.readPath(path);
+        shell.setText((String) readConfig.parse("frame.title"));
         shell.setImage(icon);
         shell.setSize(new Point(height, width));
         shellLocationFrame(shell);

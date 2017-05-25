@@ -18,14 +18,9 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 public class ReadDataListTest {
-    /**
-     * Read config.
-     */
+
     private ReadConfig readConfig;
 
-    /**
-     * Initializing.
-     */
     @Before
     public void setUp() {
         Injector injectMenu = Guice.createInjector(
@@ -33,9 +28,6 @@ public class ReadDataListTest {
         readConfig = injectMenu.getInstance(ReadDataList.class);
     }
 
-    /**
-     * Test class.
-     */
     @Test
     public void result() {
         final String path = "images.json";
