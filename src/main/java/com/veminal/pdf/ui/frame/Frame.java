@@ -112,7 +112,8 @@ public final class Frame extends ApplicationWindow {
         splitter.setLayoutData(new GridData(
                 SWT.FILL, SWT.FILL, true, true));
         content.setLayout(gridLayout);
-        TreeViewer pdfList = new TreeViewer(splitter, SWT.LEFT | SWT.BORDER);
+        TreeViewer pdfList = new TreeViewer(splitter, SWT.LEFT | SWT.BORDER
+                | SWT.V_SCROLL);
         pdfList.getTree().setLayoutData(new GridData(
                 SWT.FILL, SWT.FILL, true, true));
         CTabFolder textTab = new CTabFolder(splitter, SWT.BORDER);

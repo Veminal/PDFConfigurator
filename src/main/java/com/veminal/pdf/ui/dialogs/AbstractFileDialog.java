@@ -35,7 +35,7 @@ public abstract class AbstractFileDialog {
     public void creating(final int i) {
         if (i == SWT.OPEN) {
             fileDialog = new FileDialog(
-                    Display.getCurrent().getActiveShell(), i);
+                    Display.getCurrent().getActiveShell(), i | SWT.MULTI);
         }
         if (i == SWT.SAVE) {
             fileDialog = new FileDialog(

@@ -30,5 +30,9 @@
   "create.project.dialog": "Create PDF Project",
   "project.label.name": "&Name:",
   "project.label.path": "&Path:",
-  "project.create.button": "&Show Directory"
+  "project.create.button": "&Show Directory",
+  "assembly.dialog.title": "Assembly PDF",
+  "one.page": "&Collect files in one page",
+  "multi.page": "&Each file on a separate page",
+  "list.files": "&File list:"
 }
