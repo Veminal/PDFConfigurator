@@ -27,21 +27,28 @@ public final class EditMenu implements IMenu {
     private final IEventList edit;
 
     /**
+     * Path to file.
+     */
+    private final String path;
+
+    /**
      * Constructor of class.
      *
-     * @param readMenu the ReadConfig
-     * @param listEdit the IEventList
+     * @param readMenu   the ReadConfig
+     * @param listEdit   the IEventList
+     * @param pathToFile the String
      */
     @Inject
     public EditMenu(@StringReader final ReadConfig readMenu,
-                    @EditList final IEventList listEdit) {
+                    @EditList final IEventList listEdit,
+                    final String pathToFile) {
         this.readEditMenu = readMenu;
         this.edit = listEdit;
+        this.path = pathToFile;
     }
 
     @Override
     public MenuManager initial() {
-        final String path = "dictionary.json";
         readEditMenu.readPath(path);
         MenuManager manager = new MenuManager(
                 (String) readEditMenu.parse("menu.edit"));

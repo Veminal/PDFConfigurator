@@ -1,6 +1,5 @@
 package com.veminal.pdf.actions;
 
-import com.veminal.pdf.actions.menu.file.CreateFileAction;
 import com.veminal.pdf.actions.menu.file.ExitAction;
 import com.veminal.pdf.actions.menu.file.OpenFileAction;
 import com.veminal.pdf.actions.menu.file.SaveAsAction;
@@ -19,12 +18,10 @@ public final class FileActionsList implements IEventList {
     @Override
     public List<IEvent> getActionList() {
         List<IEvent> fileMenuList = new ArrayList<>();
-        IEvent create = new CreateFileAction();
         IEvent open = new OpenFileAction();
         IEvent save = new SaveFileAction();
         IEvent saveAs = new SaveAsAction();
         IEvent exit = new ExitAction();
-        fileMenuList.add(create);
         fileMenuList.add(open);
         fileMenuList.add(save);
         fileMenuList.add(saveAs);

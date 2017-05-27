@@ -57,20 +57,33 @@ public final class Frame extends ApplicationWindow {
      * Read config.
      */
     private final ReadConfig readConfig;
+    /**
+     * Path to file.
+     */
+    private final String path;
+    /**
+     * Path to image files.
+     */
+    private final String pathImage;
 
     /**
      * Constructor of class.
      *
-     * @param read the ReadConfig
+     * @param read        the ReadConfig
+     * @param pathToFile  the String
+     * @param pathToImage the String
      */
     @Inject
-    public Frame(@StringReader final ReadConfig read) {
+    public Frame(@StringReader final ReadConfig read,
+                 final String pathToFile, final String pathToImage) {
         super(null);
         injectObject = Guice.createInjector(
                 new ConfigurationModule(),
                 new ActionsListModule(),
                 new ToolbarModule());
-        readConfig = read;
+        this.readConfig = read;
+        this.path = pathToFile;
+        this.pathImage = pathToImage;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -130,7 +143,6 @@ public final class Frame extends ApplicationWindow {
         final int textWeight = 4;
         Image icon = new Image(Display.getCurrent(), "icon.ico");
         splitter.setWeights(new int[]{treeWeight, textWeight});
-        final String path = "dictionary.json";
         readConfig.readPath(path);
         shell.setText((String) readConfig.parse("frame.title"));
         shell.setImage(icon);
@@ -150,10 +162,10 @@ public final class Frame extends ApplicationWindow {
                 FormatActionsList.class);
         IEventList helpMenu = injectObject.getInstance(
                 HelpActionsList.class);
-        IMenu file = new FileMenu(readFileMenu, fileMenu);
-        IMenu edit = new EditMenu(readFileMenu, editMenu);
-        IMenu format = new FormatMenu(readFileMenu, formatMenu);
-        IMenu help = new HelpMenu(readFileMenu, helpMenu);
+        IMenu file = new FileMenu(readFileMenu, fileMenu, path);
+        IMenu edit = new EditMenu(readFileMenu, editMenu, path);
+        IMenu format = new FormatMenu(readFileMenu, formatMenu, path);
+        IMenu help = new HelpMenu(readFileMenu, helpMenu, path);
         MenuManager menu = new MenuManager();
         menu.add(file.initial());
         menu.add(edit.initial());
@@ -168,7 +180,7 @@ public final class Frame extends ApplicationWindow {
         ReadConfig readImage = injectObject.getInstance(ReadDataList.class);
         IEventList toolbarAction = injectObject.getInstance(
                 ToolbarActionsList.class);
-        ITool tool = new ToolbarBuild(readText, readImage, toolbarAction);
+        ITool tool = new ToolbarBuild(readText, readImage, toolbarAction, path, pathImage);
         return tool.initial();
     }
 }

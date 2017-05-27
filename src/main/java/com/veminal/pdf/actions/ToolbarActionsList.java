@@ -6,7 +6,6 @@ import com.veminal.pdf.actions.toolbar.edit.CopyAction;
 import com.veminal.pdf.actions.toolbar.edit.CutAction;
 import com.veminal.pdf.actions.toolbar.edit.FontAction;
 import com.veminal.pdf.actions.toolbar.edit.PasteAction;
-import com.veminal.pdf.actions.toolbar.file.CreateAction;
 import com.veminal.pdf.actions.toolbar.file.DeleteAction;
 import com.veminal.pdf.actions.toolbar.file.OpenAction;
 import com.veminal.pdf.actions.toolbar.file.SaveAction;
@@ -28,7 +27,6 @@ public final class ToolbarActionsList implements IEventList {
     @Override
     public List<IEvent> getActionList() {
         List<IEvent> toolbarList = new ArrayList<>();
-        IEvent create = new CreateAction();
         IEvent open = new OpenAction();
         IEvent save = new SaveAction();
         IEvent delete = new DeleteAction();
@@ -42,7 +40,6 @@ public final class ToolbarActionsList implements IEventList {
         IEvent build = new BuildAction();
         IEvent inject = new InjectAction();
         IEvent settings = new SettingsAction();
-        toolbarList.add(create);
         toolbarList.add(open);
         toolbarList.add(save);
         toolbarList.add(delete);

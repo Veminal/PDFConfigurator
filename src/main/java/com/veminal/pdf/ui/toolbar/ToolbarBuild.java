@@ -32,32 +32,44 @@ public final class ToolbarBuild implements ITool {
     private final IEventList actions;
 
     /**
+     * Path to file.
+     */
+    private final String pathText;
+    /**
+     * Path to image file.
+     */
+    private final String pathImage;
+
+    /**
      * Inject config constructor.
      *
-     * @param text        the ReadConfig
-     * @param image       the ReadConfig
-     * @param actionsList the IEventList
+     * @param text           the ReadConfig
+     * @param image          the ReadConfig
+     * @param actionsList    the IEventList
+     * @param pathToFileText the String
      */
     @Inject
     public ToolbarBuild(@StringReader final ReadConfig text,
                         @ListReader final ReadConfig image,
-                        @Toolbar final IEventList actionsList) {
+                        @Toolbar final IEventList actionsList,
+                        final String pathToFileText,
+                        final String pathToFileImage) {
         this.readText = text;
         this.readImage = image;
         this.actions = actionsList;
+        this.pathText = pathToFileText;
+        this.pathImage = pathToFileImage;
     }
 
     @Override
     public ToolBarManager initial() {
-        final String path = "dictionary.json";
-        final String pathImages = "images.json";
         ToolBarManager manager = new ToolBarManager();
-        readImage.readPath(pathImages);
+        readImage.readPath(pathImage);
         List images = (List) readImage.parse("path");
         List<IEvent> toolList = actions.getActionList();
         int i = 0;
         for (IEvent action : toolList) {
-            readText.readPath(path);
+            readText.readPath(pathText);
             manager.add(action.initializing(readText, (String) images.get(i)));
             i++;
         }

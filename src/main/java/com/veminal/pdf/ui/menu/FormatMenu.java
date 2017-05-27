@@ -27,21 +27,28 @@ public final class FormatMenu implements IMenu {
     private final IEventList format;
 
     /**
+     * Path to file.
+     */
+    private final String path;
+
+    /**
      * Constructor of class.
      *
-     * @param readMenu the ReadConfig
+     * @param readMenu   the ReadConfig
      * @param listFormat the IEventList
+     * @param pathToFile the String
      */
     @Inject
     public FormatMenu(@StringReader final ReadConfig readMenu,
-                      @FormatList final IEventList listFormat) {
+                      @FormatList final IEventList listFormat,
+                      final String pathToFile) {
         this.readFormatMenu = readMenu;
         this.format = listFormat;
+        this.path = pathToFile;
     }
 
     @Override
     public MenuManager initial() {
-        final String path = "dictionary.json";
         readFormatMenu.readPath(path);
         MenuManager manager = new MenuManager((String)
                 readFormatMenu.parse("menu.format"));

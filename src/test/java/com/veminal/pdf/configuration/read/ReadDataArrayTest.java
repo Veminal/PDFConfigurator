@@ -31,7 +31,6 @@ public class ReadDataArrayTest {
         readConfig.readPath(path);
         final String result[] = (String[]) readConfig.parse("path");
         final String[] wait = {
-                "images/new.png",
                 "images/open.png",
                 "images/save.png",
                 "images/del.png",

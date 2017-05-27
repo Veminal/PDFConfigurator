@@ -25,23 +25,29 @@ public final class FileMenu implements IMenu {
      * File menu list.
      */
     private final IEventList files;
+    /**
+     * Path to file.
+     */
+    private final String path;
 
     /**
      * Constructor of class.
      *
-     * @param readMenu the ReadConfig
-     * @param listFiles the IEventList
+     * @param readMenu   the ReadConfig
+     * @param listFiles  the IEventList
+     * @param pathToFile the String
      */
     @Inject
     public FileMenu(@StringReader final ReadConfig readMenu,
-                    @FileList final IEventList listFiles) {
+                    @FileList final IEventList listFiles,
+                    final String pathToFile) {
         this.readFileMenu = readMenu;
         this.files = listFiles;
+        this.path = pathToFile;
     }
 
     @Override
     public MenuManager initial() {
-        final String path = "dictionary.json";
         readFileMenu.readPath(path);
         MenuManager manager = new MenuManager(
                 (String) readFileMenu.parse("menu.file"));

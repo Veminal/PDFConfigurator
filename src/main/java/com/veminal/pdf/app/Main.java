@@ -26,11 +26,13 @@ final class Main {
      * @param args of String[]
      */
     public static void main(final String[] args) {
+        final String path = "dictionary.json";
+        final String pathImages = "images.json";
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule());
         ReadConfig readTitles = injectObject.getInstance(
                 ReadDataFields.class);
-        Frame frame = new Frame(readTitles);
+        Frame frame = new Frame(readTitles, path, pathImages);
         frame.run();
     }
 }

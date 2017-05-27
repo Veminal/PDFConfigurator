@@ -27,22 +27,29 @@ public final class HelpMenu implements IMenu {
     private final IEventList help;
 
     /**
+     * Path to file.
+     */
+    private final String path;
+
+    /**
      * Constructor of class.
      * Inject file menu
      *
-     * @param readMenu the ReadConfig
-     * @param listHelp the IEventList
+     * @param readMenu   the ReadConfig
+     * @param listHelp   the IEventList
+     * @param pathToFile the String
      */
     @Inject
     public HelpMenu(@StringReader final ReadConfig readMenu,
-                    @HelpList final IEventList listHelp) {
+                    @HelpList final IEventList listHelp,
+                    final String pathToFile) {
         this.readHelpMenu = readMenu;
         this.help = listHelp;
+        this.path = pathToFile;
     }
 
     @Override
     public MenuManager initial() {
-        final String path = "dictionary.json";
         readHelpMenu.readPath(path);
         MenuManager manager = new MenuManager(
                 (String) readHelpMenu.parse("menu.help"));
