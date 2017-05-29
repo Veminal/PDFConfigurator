@@ -1,4 +1,4 @@
-# PDFAdjuster
+# PDFConfigurator
 Processing of PDF files
 
 This program is designed to work with PDF files. 
