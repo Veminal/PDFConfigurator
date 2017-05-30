@@ -1,21 +1,15 @@
-package net.veminal.pdf.ui.frame;
+package net.veminal.pdf.ui;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import net.veminal.pdf.actions.EditActionsList;
-import net.veminal.pdf.actions.FileActionsList;
-import net.veminal.pdf.actions.FormatActionsList;
-import net.veminal.pdf.actions.HelpActionsList;
 import net.veminal.pdf.actions.IEventList;
-import net.veminal.pdf.actions.ToolbarActionsList;
 import net.veminal.pdf.configuration.read.ReadConfig;
-import net.veminal.pdf.configuration.read.ReadDataFields;
-import net.veminal.pdf.configuration.read.ReadDataList;
+import net.veminal.pdf.core.annotations.EditList;
+import net.veminal.pdf.core.annotations.FileList;
+import net.veminal.pdf.core.annotations.FormatList;
+import net.veminal.pdf.core.annotations.HelpList;
+import net.veminal.pdf.core.annotations.ListReader;
 import net.veminal.pdf.core.annotations.StringReader;
-import net.veminal.pdf.core.modules.ActionsListModule;
-import net.veminal.pdf.core.modules.ConfigurationModule;
-import net.veminal.pdf.core.modules.ToolbarModule;
+import net.veminal.pdf.core.annotations.Toolbar;
 import net.veminal.pdf.ui.menu.EditMenu;
 import net.veminal.pdf.ui.menu.FileMenu;
 import net.veminal.pdf.ui.menu.FormatMenu;
@@ -50,13 +44,13 @@ import org.eclipse.swt.widgets.Text;
  */
 public final class Frame extends ApplicationWindow {
     /**
-     * Injector.
-     */
-    private Injector injectObject;
-    /**
      * Read config.
      */
     private final ReadConfig readConfig;
+    /**
+     * Read config image.
+     */
+    private final ReadConfig readConfigImage;
     /**
      * Path to file.
      */
@@ -65,25 +59,60 @@ public final class Frame extends ApplicationWindow {
      * Path to image files.
      */
     private final String pathImage;
+    /**
+     * File menu.
+     */
+    private final IEventList fileMenu;
+    /**
+     * Edit menu.
+     */
+    private final IEventList editMenu;
+    /**
+     * Format menu.
+     */
+    private final IEventList formatMenu;
+    /**
+     * Help menu.
+     */
+    private final IEventList helpMenu;
+    /**
+     * Toolbar.
+     */
+    private final IEventList toolbarAction;
 
     /**
      * Constructor of class.
      *
      * @param read        the ReadConfig
+     * @param readImage   the ReadConfig
      * @param pathToFile  the String
      * @param pathToImage the String
+     * @param fMenu       the IEventList
+     * @param eMenu       the IEventList
+     * @param ftMenu      the IEventList
+     * @param hMenu       the IEventList
+     * @param tool        the IEventList
      */
     @Inject
+    @SuppressWarnings("ALL")
     public Frame(@StringReader final ReadConfig read,
-                 final String pathToFile, final String pathToImage) {
+                 @ListReader final ReadConfig readImage,
+                 final String pathToFile, final String pathToImage,
+                 @FileList final IEventList fMenu,
+                 @EditList final IEventList eMenu,
+                 @FormatList final IEventList ftMenu,
+                 @HelpList final IEventList hMenu,
+                 @Toolbar final IEventList tool) {
         super(null);
-        injectObject = Guice.createInjector(
-                new ConfigurationModule(),
-                new ActionsListModule(),
-                new ToolbarModule());
         this.readConfig = read;
         this.path = pathToFile;
         this.pathImage = pathToImage;
+        this.readConfigImage = readImage;
+        this.fileMenu = fMenu;
+        this.editMenu = eMenu;
+        this.formatMenu = ftMenu;
+        this.helpMenu = hMenu;
+        this.toolbarAction = tool;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -152,20 +181,10 @@ public final class Frame extends ApplicationWindow {
 
     @Override
     protected MenuManager createMenuManager() {
-        ReadConfig readFileMenu = injectObject.getInstance(
-                ReadDataFields.class);
-        IEventList fileMenu = injectObject.getInstance(
-                FileActionsList.class);
-        IEventList editMenu = injectObject.getInstance(
-                EditActionsList.class);
-        IEventList formatMenu = injectObject.getInstance(
-                FormatActionsList.class);
-        IEventList helpMenu = injectObject.getInstance(
-                HelpActionsList.class);
-        IMenu file = new FileMenu(readFileMenu, fileMenu, path);
-        IMenu edit = new EditMenu(readFileMenu, editMenu, path);
-        IMenu format = new FormatMenu(readFileMenu, formatMenu, path);
-        IMenu help = new HelpMenu(readFileMenu, helpMenu, path);
+        IMenu file = new FileMenu(readConfig, fileMenu, path);
+        IMenu edit = new EditMenu(readConfig, editMenu, path);
+        IMenu format = new FormatMenu(readConfig, formatMenu, path);
+        IMenu help = new HelpMenu(readConfig, helpMenu, path);
         MenuManager menu = new MenuManager();
         menu.add(file.initial());
         menu.add(edit.initial());
@@ -176,11 +195,7 @@ public final class Frame extends ApplicationWindow {
 
     @Override
     protected ToolBarManager createToolBarManager(final int style) {
-        ReadConfig readText = injectObject.getInstance(ReadDataFields.class);
-        ReadConfig readImage = injectObject.getInstance(ReadDataList.class);
-        IEventList toolbarAction = injectObject.getInstance(
-                ToolbarActionsList.class);
-        ITool tool = new ToolbarBuild(readText, readImage,
+        ITool tool = new ToolbarBuild(readConfig, readConfigImage,
                 toolbarAction, path, pathImage);
         return tool.initial();
     }

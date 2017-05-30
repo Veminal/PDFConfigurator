@@ -2,10 +2,19 @@ package net.veminal.pdf.app;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import net.veminal.pdf.actions.EditActionsList;
+import net.veminal.pdf.actions.FileActionsList;
+import net.veminal.pdf.actions.FormatActionsList;
+import net.veminal.pdf.actions.HelpActionsList;
+import net.veminal.pdf.actions.IEventList;
+import net.veminal.pdf.actions.ToolbarActionsList;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataFields;
+import net.veminal.pdf.configuration.read.ReadDataList;
+import net.veminal.pdf.core.modules.ActionsListModule;
 import net.veminal.pdf.core.modules.ConfigurationModule;
-import net.veminal.pdf.ui.frame.Frame;
+import net.veminal.pdf.core.modules.ToolbarModule;
+import net.veminal.pdf.ui.Frame;
 
 /**
  * Application run class.
@@ -28,11 +37,20 @@ final class Main {
     public static void main(final String[] args) {
         final String path = "dictionary.json";
         final String pathImages = "images.json";
-        Injector injectObject = Guice.createInjector(
-                new ConfigurationModule());
-        ReadConfig readTitles = injectObject.getInstance(
-                ReadDataFields.class);
-        Frame frame = new Frame(readTitles, path, pathImages);
+        Injector injectObject = Guice.createInjector(new ConfigurationModule(),
+                new ActionsListModule(), new ToolbarModule());
+        ReadConfig readTitles = injectObject.getInstance(ReadDataFields.class);
+        ReadConfig readImage = injectObject.getInstance(ReadDataList.class);
+        IEventList fileMenu = injectObject.getInstance(FileActionsList.class);
+        IEventList editMenu = injectObject.getInstance(EditActionsList.class);
+        IEventList formatMenu = injectObject.getInstance(
+                FormatActionsList.class);
+        IEventList toolbarAction = injectObject.getInstance(
+                ToolbarActionsList.class);
+        IEventList helpMenu = injectObject.getInstance(HelpActionsList.class);
+        Frame frame = new Frame(readTitles, readImage, path,
+                pathImages, fileMenu, editMenu,
+                formatMenu, helpMenu, toolbarAction);
         frame.run();
     }
 }

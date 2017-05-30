@@ -3,6 +3,7 @@
     "*.pdf"
   ],
   "open.format": [
+    "*.*",
     "*.pdf",
     "*.doc",
     "*.docx",
@@ -15,6 +16,8 @@
     "*.c",
     "*.css",
     "*.cpp",
-    "*.json"
+    "*.json",
+    "*.jpeg",
+    "*.png"
   ]
 }
