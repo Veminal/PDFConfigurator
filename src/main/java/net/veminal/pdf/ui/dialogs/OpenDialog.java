@@ -38,4 +38,6 @@ public final class OpenDialog extends AbstractFileDialog {
         return (String[]) extensionReader.
                 parse("open.format");
     }
+
+
 }

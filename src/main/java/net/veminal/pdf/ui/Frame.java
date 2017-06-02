@@ -15,15 +15,14 @@ import net.veminal.pdf.ui.menu.FileMenu;
 import net.veminal.pdf.ui.menu.FormatMenu;
 import net.veminal.pdf.ui.menu.HelpMenu;
 import net.veminal.pdf.ui.menu.IMenu;
+import net.veminal.pdf.ui.tab.AbstractTab;
+import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.toolbar.ITool;
 import net.veminal.pdf.ui.toolbar.ToolbarBuild;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.ToolBarManager;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -34,7 +33,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 /**
  * Template for the user interface.
@@ -79,6 +77,14 @@ public final class Frame extends ApplicationWindow {
      * Toolbar.
      */
     private final IEventList toolbarAction;
+    /**
+     * File Browser.
+     */
+    private AbstractTable fileList;
+    /**
+     * Tabs.
+     */
+    private AbstractTab textTab;
 
     /**
      * Constructor of class.
@@ -92,6 +98,8 @@ public final class Frame extends ApplicationWindow {
      * @param ftMenu      the IEventList
      * @param hMenu       the IEventList
      * @param tool        the IEventList
+     * @param browser     the AbstractTable
+     * @param tab         the AbstractTab
      */
     @Inject
     @SuppressWarnings("ALL")
@@ -102,7 +110,8 @@ public final class Frame extends ApplicationWindow {
                  @EditList final IEventList eMenu,
                  @FormatList final IEventList ftMenu,
                  @HelpList final IEventList hMenu,
-                 @Toolbar final IEventList tool) {
+                 @Toolbar final IEventList tool,
+                 final AbstractTable browser, final AbstractTab tab) {
         super(null);
         this.readConfig = read;
         this.path = pathToFile;
@@ -113,6 +122,8 @@ public final class Frame extends ApplicationWindow {
         this.formatMenu = ftMenu;
         this.helpMenu = hMenu;
         this.toolbarAction = tool;
+        this.fileList = browser;
+        this.textTab = tab;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -154,20 +165,8 @@ public final class Frame extends ApplicationWindow {
         splitter.setLayoutData(new GridData(
                 SWT.FILL, SWT.FILL, true, true));
         content.setLayout(gridLayout);
-        TreeViewer pdfList = new TreeViewer(splitter, SWT.LEFT | SWT.BORDER
-                | SWT.V_SCROLL);
-        pdfList.getTree().setLayoutData(new GridData(
-                SWT.FILL, SWT.FILL, true, true));
-        CTabFolder textTab = new CTabFolder(splitter, SWT.BORDER);
-        CTabItem item = new CTabItem(textTab, SWT.CLOSE | SWT.COLOR_RED);
-        textTab.setLayoutData(new GridData(
-                SWT.FILL, SWT.FILL, true, true));
-        Text pdfText = new Text(textTab, SWT.MULTI | SWT.H_SCROLL
-                | SWT.V_SCROLL | SWT.BORDER);
-        pdfText.setLayoutData(new GridData(
-                SWT.FILL, SWT.FILL, true, true));
-        item.setText("Tab");
-        item.setControl(pdfText);
+        fileList.createContents(splitter);
+        textTab.createContents(splitter);
         final int treeWeight = 1;
         final int textWeight = 4;
         Image icon = new Image(Display.getCurrent(), "icon.ico");

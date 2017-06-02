@@ -12,9 +12,14 @@ import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataFields;
 import net.veminal.pdf.configuration.read.ReadDataList;
 import net.veminal.pdf.core.modules.ActionsListModule;
+import net.veminal.pdf.core.modules.UIModule;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.core.modules.ToolbarModule;
 import net.veminal.pdf.ui.Frame;
+import net.veminal.pdf.ui.tab.AbstractTab;
+import net.veminal.pdf.ui.tab.TabEditor;
+import net.veminal.pdf.ui.table.AbstractTable;
+import net.veminal.pdf.ui.table.FileTableBrowser;
 
 /**
  * Application run class.
@@ -38,7 +43,8 @@ final class Main {
         final String path = "dictionary.json";
         final String pathImages = "images.json";
         Injector injectObject = Guice.createInjector(new ConfigurationModule(),
-                new ActionsListModule(), new ToolbarModule());
+                new ActionsListModule(), new ToolbarModule(),
+                new UIModule());
         ReadConfig readTitles = injectObject.getInstance(ReadDataFields.class);
         ReadConfig readImage = injectObject.getInstance(ReadDataList.class);
         IEventList fileMenu = injectObject.getInstance(FileActionsList.class);
@@ -48,9 +54,12 @@ final class Main {
         IEventList toolbarAction = injectObject.getInstance(
                 ToolbarActionsList.class);
         IEventList helpMenu = injectObject.getInstance(HelpActionsList.class);
+        AbstractTable browser = injectObject.getInstance(
+                FileTableBrowser.class);
+        AbstractTab tab = injectObject.getInstance(TabEditor.class);
         Frame frame = new Frame(readTitles, readImage, path,
-                pathImages, fileMenu, editMenu,
-                formatMenu, helpMenu, toolbarAction);
+                pathImages, fileMenu, editMenu, formatMenu,
+                helpMenu, toolbarAction, browser, tab);
         frame.run();
     }
 }
