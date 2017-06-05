@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Assembly PDF dialog.
@@ -75,6 +76,7 @@ public final class AssemblyPDFDialog extends Dialog {
         Composite composite = new Composite(area, SWT.NONE);
         composite.setLayout(gridLayout);
         composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        createInputName(composite);
         createOnePageButton(composite);
         createMultiPageButton(composite);
         createDataList(composite);
@@ -126,6 +128,22 @@ public final class AssemblyPDFDialog extends Dialog {
         List listFiles = new List(composite, SWT.V_SCROLL);
         listFiles.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
                 true, true));
+    }
+
+    /**
+     * Enter the name of the file to be collected.
+     *
+     * @param composite the Composite
+     */
+    private void createInputName(final Composite composite) {
+        Label labelTitle = new Label(composite, SWT.NONE);
+        readConfig.readPath(path);
+        labelTitle.setText((String) readConfig.parse("file.name"));
+        GridData data = new GridData();
+        data.grabExcessHorizontalSpace = true;
+        data.horizontalAlignment = GridData.FILL;
+        Text inputName = new Text(composite, SWT.BORDER);
+        inputName.setLayoutData(data);
     }
 
     @Override

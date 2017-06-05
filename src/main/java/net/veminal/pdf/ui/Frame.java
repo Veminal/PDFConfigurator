@@ -3,10 +3,12 @@ package net.veminal.pdf.ui;
 import com.google.inject.Inject;
 import net.veminal.pdf.actions.IEventList;
 import net.veminal.pdf.configuration.read.ReadConfig;
+import net.veminal.pdf.configuration.write.WriteConfig;
 import net.veminal.pdf.core.annotations.EditList;
 import net.veminal.pdf.core.annotations.FileList;
 import net.veminal.pdf.core.annotations.FormatList;
 import net.veminal.pdf.core.annotations.HelpList;
+import net.veminal.pdf.core.annotations.IntReader;
 import net.veminal.pdf.core.annotations.ListReader;
 import net.veminal.pdf.core.annotations.StringReader;
 import net.veminal.pdf.core.annotations.Toolbar;
@@ -50,6 +52,10 @@ public final class Frame extends ApplicationWindow {
      */
     private final ReadConfig readConfigImage;
     /**
+     * Read Size.
+     */
+    private final ReadConfig readSize;
+    /**
      * Path to file.
      */
     private final String path;
@@ -57,6 +63,10 @@ public final class Frame extends ApplicationWindow {
      * Path to image files.
      */
     private final String pathImage;
+    /**
+     * Size file.
+     */
+    private final String sizeFile;
     /**
      * File menu.
      */
@@ -85,14 +95,20 @@ public final class Frame extends ApplicationWindow {
      * Tabs.
      */
     private AbstractTab textTab;
+    /**
+     * Write config.
+     */
+    private final WriteConfig writeConfig;
 
     /**
      * Constructor of class.
      *
      * @param read        the ReadConfig
      * @param readImage   the ReadConfig
+     * @param sizeRead    the ReadConfig
      * @param pathToFile  the String
      * @param pathToImage the String
+     * @param size        the String
      * @param fMenu       the IEventList
      * @param eMenu       the IEventList
      * @param ftMenu      the IEventList
@@ -100,6 +116,7 @@ public final class Frame extends ApplicationWindow {
      * @param tool        the IEventList
      * @param browser     the AbstractTable
      * @param tab         the AbstractTab
+     * @param write       the WriteConfig
      */
     @Inject
     @SuppressWarnings("ALL")
@@ -111,7 +128,9 @@ public final class Frame extends ApplicationWindow {
                  @FormatList final IEventList ftMenu,
                  @HelpList final IEventList hMenu,
                  @Toolbar final IEventList tool,
-                 final AbstractTable browser, final AbstractTab tab) {
+                 final AbstractTable browser, final AbstractTab tab,
+                 @IntReader final ReadConfig sizeRead, final String size,
+                 final WriteConfig write) {
         super(null);
         this.readConfig = read;
         this.path = pathToFile;
@@ -124,6 +143,9 @@ public final class Frame extends ApplicationWindow {
         this.toolbarAction = tool;
         this.fileList = browser;
         this.textTab = tab;
+        this.readSize = sizeRead;
+        this.sizeFile = size;
+        this.writeConfig = write;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -156,8 +178,10 @@ public final class Frame extends ApplicationWindow {
     @Override
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
-        final int height = 800;
-        final int width = 600;
+        readSize.readPath(sizeFile);
+        final int height = (int) readSize.parse("window.height");
+        readSize.readPath(sizeFile);
+        final int width = (int) readSize.parse("window.width");
         final int column = 3;
         Composite content = new Composite(shell, SWT.NONE);
         GridLayout gridLayout = new GridLayout(column, false);
@@ -197,5 +221,16 @@ public final class Frame extends ApplicationWindow {
         ITool tool = new ToolbarBuild(readConfig, readConfigImage,
                 toolbarAction, path, pathImage);
         return tool.initial();
+    }
+
+    @Override
+    @SuppressWarnings("SuspiciousNameCombination")
+    protected boolean canHandleShellCloseEvent() {
+        final int height = Display.getCurrent().getActiveShell().getSize().x;
+        final int width = Display.getCurrent().getActiveShell().getSize().y;
+        writeConfig.readToPath(sizeFile);
+        writeConfig.writeData(height, width, "window.height",
+                "window.width");
+        return super.canHandleShellCloseEvent();
     }
 }

@@ -1,23 +1,11 @@
 {
   "save.format": [
-    "*.pdf"
+    "SAVE FILE",
+    "*.pdf",
+    "*.docx",
+    "*.txt"
   ],
   "open.format": [
-    "*.*",
-    "*.pdf",
-    "*.doc",
-    "*.docx",
-    "*.txt",
-    "*.md",
-    "*.html",
-    "*.xml",
-    "*.java",
-    "*.js",
-    "*.c",
-    "*.css",
-    "*.cpp",
-    "*.json",
-    "*.jpeg",
-    "*.png"
+    "*.*"
   ]
 }
