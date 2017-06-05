@@ -9,13 +9,15 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Java(programming language)-1.8_131
 <li> Eclipse Standart Widget Toolkit-4.7M3.
 <li> Eclipse JFace-3.12
-<li> Google gson-2.8.0
+<li> Google gson-2.8.1
 <li> Google Guice - 4.1.0
 <li> Apache PDFBox - 2.0.6
 
 # Stages of development:
 10.05.2017
 The user interface is developed.
+05.06.2017
+Development of algorithm for creating PDF document
 
 # Versions
 First version in development
