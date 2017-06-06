@@ -1,9 +1,11 @@
 # PDFConfigurator
 Processing of PDF files
 
-This program is designed to work with PDF files. 
+>This program is designed to work with PDF files. 
 The functional of the program includes page separation, 
 extracting pages from a file, extracting a fragment from the text, assembling PDF files.
+
+![Image of GUI](https://pbs.twimg.com/media/DBUbSfnW0AEFmgx.jpg:large)
 
 ### Technologies used(The list changes):
 <li> Java(programming language)-1.8_131
@@ -13,11 +15,8 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Google Guice - 4.1.0
 <li> Apache PDFBox - 2.0.6
 
-# Stages of development:
-10.05.2017
-The user interface is developed.
-05.06.2017
-Development of algorithm for creating PDF document
-
 # Versions
 First version in development
+
+#Requirements for operation
+Personal computer with installed virtual machine Java 8

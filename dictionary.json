@@ -3,9 +3,9 @@
   "menu.edit": "&Edit",
   "menu.format": "&Format",
   "menu.help": "&Help",
-  "open": "&Open",
-  "save": "&Save",
-  "save.as": "&Save as...",
+  "open": "&Open@Ctrl+O",
+  "save": "&Save@Ctrl+S",
+  "save.as": "&Save as...@Ctrl+Shift+S",
   "settings": "&Settings",
   "exit": "&Exit",
   "cut": "&Cut",
@@ -31,5 +31,6 @@
   "multi.page": "&Each file on a separate page",
   "list.files": "&File list:",
   "file.name": "&File name:",
-  "about.dialog.title": "About"
+  "about.dialog.title": "About",
+  "split.status.title": "Split status"
 }

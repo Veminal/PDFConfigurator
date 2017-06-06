@@ -14,7 +14,6 @@ import javax.annotation.PostConstruct;
  * @version 1.0
  */
 public abstract class AbstractTable {
-
     /**
      * Tree configuration.
      *

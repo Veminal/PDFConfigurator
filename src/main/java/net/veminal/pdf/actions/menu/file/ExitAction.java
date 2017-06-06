@@ -4,6 +4,7 @@ import net.veminal.pdf.actions.IEvent;
 import net.veminal.pdf.core.annotations.NotUsed;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import org.eclipse.jface.action.Action;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * Action for menu item "Exit".
@@ -17,8 +18,7 @@ public final class ExitAction implements IEvent {
         return new Action((String) menuItemsName.parse("exit")) {
             @Override
             public void run() {
-                final int status = -1;
-                System.exit(status);
+                Display.getCurrent().getActiveShell().close();
             }
         };
     }

@@ -1,6 +1,5 @@
 {
   "save.format": [
-    "SAVE FILE",
     "*.pdf",
     "*.docx",
     "*.txt"
