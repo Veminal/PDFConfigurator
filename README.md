@@ -18,5 +18,5 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 # Versions
 First version in development
 
-#Requirements for operation
+# Requirements for operation
 Personal computer with installed virtual machine Java 8
