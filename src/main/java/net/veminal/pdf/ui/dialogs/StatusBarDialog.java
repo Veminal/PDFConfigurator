@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Veminal
  * @version 1.0
  */
-public final class SplitStatusDialog extends Dialog {
+public final class StatusBarDialog extends Dialog {
     /**
      * Read config.
      */
@@ -33,9 +33,9 @@ public final class SplitStatusDialog extends Dialog {
      * @param pathToFile  the String
      */
     @Inject
-    public SplitStatusDialog(final Shell parentShell,
-                             @StringReader final ReadConfig config,
-                             final String pathToFile) {
+    public StatusBarDialog(final Shell parentShell,
+                           @StringReader final ReadConfig config,
+                           final String pathToFile) {
         super(parentShell);
         this.readConfig = config;
         this.path = pathToFile;

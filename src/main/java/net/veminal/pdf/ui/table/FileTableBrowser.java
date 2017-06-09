@@ -17,6 +17,5 @@ public final class FileTableBrowser extends AbstractTable {
 
     @Override
     public void items(final Table parent, final int i) {
-        item = new TableItem(parent, i);
     }
 }

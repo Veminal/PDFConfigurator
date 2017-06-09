@@ -34,8 +34,10 @@ public class ReadDataListTest {
         readConfig.readPath(path);
         List result = (List)readConfig.parse("path");
         List<String> wait = new ArrayList<>();
+        wait.add("images/new.png");
         wait.add("images/open.png");
         wait.add("images/save.png");
+        wait.add("images/print.png");
         wait.add("images/del.png");
         wait.add("images/cut.png");
         wait.add("images/copy.png");
