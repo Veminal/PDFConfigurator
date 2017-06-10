@@ -27,6 +27,7 @@
   "help": "&Help",
   "license": "&License",
   "about": "&About",
+  "page" : "New page",
   "frame.title": "PDF Configurator",
   "assembly.dialog.title": "Assembly PDF",
   "one.page": "&Collect files in one page",

@@ -11,12 +11,14 @@ import net.veminal.pdf.core.annotations.HelpList;
 import net.veminal.pdf.core.annotations.IntReader;
 import net.veminal.pdf.core.annotations.ListReader;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.core.annotations.TableContext;
 import net.veminal.pdf.core.annotations.Toolbar;
 import net.veminal.pdf.ui.menu.EditMenu;
 import net.veminal.pdf.ui.menu.FileMenu;
 import net.veminal.pdf.ui.menu.FormatMenu;
 import net.veminal.pdf.ui.menu.HelpMenu;
 import net.veminal.pdf.ui.menu.IMenu;
+import net.veminal.pdf.ui.menu.TableContextMenu;
 import net.veminal.pdf.ui.tab.AbstractTab;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.toolbar.ITool;
@@ -88,6 +90,10 @@ public final class Frame extends ApplicationWindow {
      */
     private final IEventList toolbarAction;
     /**
+     * Table context menu.
+     */
+    private final IEventList tableMenu;
+    /**
      * File Browser.
      */
     private AbstractTable fileList;
@@ -103,20 +109,21 @@ public final class Frame extends ApplicationWindow {
     /**
      * Constructor of class.
      *
-     * @param read        the ReadConfig
-     * @param readImage   the ReadConfig
-     * @param sizeRead    the ReadConfig
-     * @param pathToFile  the String
-     * @param pathToImage the String
-     * @param size        the String
-     * @param fMenu       the IEventList
-     * @param eMenu       the IEventList
-     * @param ftMenu      the IEventList
-     * @param hMenu       the IEventList
-     * @param tool        the IEventList
-     * @param browser     the AbstractTable
-     * @param tab         the AbstractTab
-     * @param write       the WriteConfig
+     * @param read         the ReadConfig
+     * @param readImage    the ReadConfig
+     * @param sizeRead     the ReadConfig
+     * @param pathToFile   the String
+     * @param pathToImage  the String
+     * @param size         the String
+     * @param fMenu        the IEventList
+     * @param eMenu        the IEventList
+     * @param ftMenu       the IEventList
+     * @param hMenu        the IEventList
+     * @param tool         the IEventList
+     * @param tableContext the EventList
+     * @param browser      the AbstractTable
+     * @param tab          the AbstractTab
+     * @param write        the WriteConfig
      */
     @Inject
     @SuppressWarnings("ALL")
@@ -130,7 +137,7 @@ public final class Frame extends ApplicationWindow {
                  @Toolbar final IEventList tool,
                  final AbstractTable browser, final AbstractTab tab,
                  @IntReader final ReadConfig sizeRead, final String size,
-                 final WriteConfig write) {
+                 final WriteConfig write, @TableContext final IEventList tableContext) {
         super(null);
         this.readConfig = read;
         this.path = pathToFile;
@@ -146,6 +153,7 @@ public final class Frame extends ApplicationWindow {
         this.readSize = sizeRead;
         this.sizeFile = size;
         this.writeConfig = write;
+        this.tableMenu = tableContext;
         addMenuBar();
         addToolBar(SWT.FLAT | SWT.WRAP);
     }
@@ -189,7 +197,9 @@ public final class Frame extends ApplicationWindow {
         splitter.setLayoutData(new GridData(
                 SWT.FILL, SWT.FILL, true, true));
         content.setLayout(gridLayout);
+        IMenu tablePopup = new TableContextMenu(readConfig, tableMenu, path);
         fileList.createContents(splitter);
+        fileList.addContextMenu(tablePopup.initial());
         textTab.createContents(splitter);
         final int treeWeight = 1;
         final int textWeight = 4;

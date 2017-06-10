@@ -13,10 +13,10 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Eclipse JFace-3.12
 <li> Google gson-2.8.1
 <li> Google Guice - 4.1.0
-<li> Apache PDFBox - 2.0.6
+<li> IText-7.0.2
 
-# Versions
+## Versions
 First version in development
 
-#Requirements for operation
+## Requirements for operation
 Personal computer with installed virtual machine Java 8

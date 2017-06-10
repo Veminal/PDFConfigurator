@@ -7,6 +7,7 @@ import net.veminal.pdf.actions.FileActionsList;
 import net.veminal.pdf.actions.FormatActionsList;
 import net.veminal.pdf.actions.HelpActionsList;
 import net.veminal.pdf.actions.IEventList;
+import net.veminal.pdf.actions.PopupTableActionList;
 import net.veminal.pdf.actions.ToolbarActionsList;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataFields;
@@ -60,13 +61,15 @@ final class Main {
         IEventList toolbarAction = injectObject.getInstance(
                 ToolbarActionsList.class);
         IEventList helpMenu = injectObject.getInstance(HelpActionsList.class);
+        IEventList tableContextMenu = injectObject.getInstance(
+                PopupTableActionList.class);
         AbstractTable browser = injectObject.getInstance(
                 FileTableBrowser.class);
         AbstractTab tab = injectObject.getInstance(TabEditor.class);
         Frame frame = new Frame(readTitles, readImage, path,
                 pathImages, fileMenu, editMenu, formatMenu,
                 helpMenu, toolbarAction, browser, tab, readSize,
-                sizePath, writeSize);
+                sizePath, writeSize, tableContextMenu);
         frame.run();
     }
 }

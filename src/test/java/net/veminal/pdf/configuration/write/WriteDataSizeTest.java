@@ -26,9 +26,9 @@ public class WriteDataSizeTest {
     @Test
     public void writeTest() {
         final String key1 = "window.height";
-        final int height = 1366;
+        final int height = 800;
         final String key2 = "window.width";
-        final int width = 768;
+        final int width = 600;
         String path = "app.json";
         writeConfig.readToPath(path);
         writeConfig.writeData(height, width, key1, key2);
