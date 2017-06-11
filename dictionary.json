@@ -27,13 +27,14 @@
   "help": "&Help",
   "license": "&License",
   "about": "&About",
-  "page" : "New page",
+  "page" : "&New page",
   "frame.title": "PDF Configurator",
   "assembly.dialog.title": "Assembly PDF",
   "one.page": "&Collect files in one page",
   "multi.page": "&Each file on a separate page",
   "list.files": "&File list:",
   "file.name": "&File name:",
+  "file.path": "&Path to file",
   "about.dialog.title": "About",
   "split.status.title": "Split status"
 }

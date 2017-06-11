@@ -5,7 +5,7 @@ Processing of PDF files
 The functional of the program includes page separation, 
 extracting pages from a file, extracting a fragment from the text, assembling PDF files.
 
-![Image of GUI](https://pbs.twimg.com/media/DBUbSfnW0AEFmgx.jpg:large)
+![Image of GUI](https://pbs.twimg.com/media/DB9zaTqXcAEQ7ky.jpg:large)
 
 ### Technologies used(The list changes):
 <li> Java(programming language)-1.8_131

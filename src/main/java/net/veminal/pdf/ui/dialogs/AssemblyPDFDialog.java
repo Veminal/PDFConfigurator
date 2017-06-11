@@ -43,6 +43,18 @@ public final class AssemblyPDFDialog extends Dialog {
      * in which several pages are assembled.
      */
     private Button multiPageButton;
+    /**
+     * List Files.
+     */
+    private List listFiles;
+    /**
+     * Input file name.
+     */
+    private Text inputName;
+    /**
+     * Input file path.
+     */
+    private Text inputPath;
 
     /**
      * Constructor of class.
@@ -77,6 +89,7 @@ public final class AssemblyPDFDialog extends Dialog {
         composite.setLayout(gridLayout);
         composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
         createInputName(composite);
+        createInputPath(composite);
         createOnePageButton(composite);
         createMultiPageButton(composite);
         createDataList(composite);
@@ -125,7 +138,7 @@ public final class AssemblyPDFDialog extends Dialog {
         GridData data = new GridData();
         data.grabExcessHorizontalSpace = true;
         data.horizontalAlignment = GridData.FILL_VERTICAL;
-        List listFiles = new List(composite, SWT.V_SCROLL);
+        listFiles = new List(composite, SWT.V_SCROLL);
         listFiles.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
                 true, true));
     }
@@ -142,8 +155,25 @@ public final class AssemblyPDFDialog extends Dialog {
         GridData data = new GridData();
         data.grabExcessHorizontalSpace = true;
         data.horizontalAlignment = GridData.FILL;
-        Text inputName = new Text(composite, SWT.BORDER);
+        inputName = new Text(composite, SWT.BORDER);
         inputName.setLayoutData(data);
+    }
+
+    /**
+     * Enter the path of the file to be collected.
+     *
+     * @param composite the Composite
+     */
+    private void createInputPath(final Composite composite) {
+        Label labelTitle = new Label(composite, SWT.NONE);
+        readConfig.readPath(path);
+        labelTitle.setText((String) readConfig.parse("file.path"));
+        GridData data = new GridData();
+        data.grabExcessHorizontalSpace = true;
+        data.horizontalAlignment = GridData.FILL;
+        inputPath = new Text(composite, SWT.BORDER);
+        inputPath.setLayoutData(data);
+        inputPath.setEnabled(false);
     }
 
     @Override

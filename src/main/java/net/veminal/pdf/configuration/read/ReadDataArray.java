@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +21,10 @@ import java.lang.reflect.Type;
  */
 public final class ReadDataArray implements ReadConfig<String[]> {
     /**
+     * Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(ReadDataArray.class);
+    /**
      * Read JSON file.
      */
     private JsonReader reader;
@@ -28,7 +34,7 @@ public final class ReadDataArray implements ReadConfig<String[]> {
         try {
             reader = new JsonReader(new FileReader(path));
         } catch (FileNotFoundException e) {
-            e.getMessage();
+           logger.error(e.getMessage());
         }
     }
 

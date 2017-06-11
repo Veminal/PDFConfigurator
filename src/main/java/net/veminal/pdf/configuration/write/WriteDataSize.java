@@ -1,6 +1,8 @@
 package net.veminal.pdf.configuration.write;
 
 import com.google.gson.stream.JsonWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +15,10 @@ import java.io.IOException;
  */
 public final class WriteDataSize implements WriteConfig {
     /**
+     * Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(WriteDataSize.class);
+    /**
      * Json writer.
      */
     private JsonWriter writer;
@@ -22,7 +28,7 @@ public final class WriteDataSize implements WriteConfig {
         try {
             writer = new JsonWriter(new FileWriter(path));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -35,8 +41,9 @@ public final class WriteDataSize implements WriteConfig {
             writer.name(key2).value(object2);
             writer.endObject();
             writer.close();
+            logger.info("Size recorded");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }
