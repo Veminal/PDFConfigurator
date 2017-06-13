@@ -5,6 +5,8 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +52,8 @@ public final class CreatePDFParagraph implements IDocumentCreate {
             }
             pdf.close();
         } catch (FileNotFoundException e) {
+            MessageDialog.openError(Display.getCurrent().getActiveShell(),
+                    "Error create", e.getMessage());
             logger.error(e.getMessage());
         }
     }

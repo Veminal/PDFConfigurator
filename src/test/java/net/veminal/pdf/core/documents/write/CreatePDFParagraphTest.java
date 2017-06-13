@@ -20,14 +20,14 @@ public class CreatePDFParagraphTest {
     public void setUp() {
         Injector injector = Guice.createInjector(new DocumentModule());
         IList files = injector.getInstance(FileList.class);
-        files.addFile("LICENSE");
+        files.addFile("pom.xml");
         files.addFile("dictionary.json");
         pdf = new CreatePDFParagraph(files);
     }
 
     @Test
     public void createTest() {
-        final String name = "test.pdf";
+        final String name = "C:/users/user/desktop/test.pdf";
         pdf.saveFile(name);
         assert true;
     }

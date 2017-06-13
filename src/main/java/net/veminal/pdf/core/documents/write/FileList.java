@@ -1,5 +1,8 @@
 package net.veminal.pdf.core.documents.write;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,6 +18,10 @@ import java.util.List;
  */
 public final class FileList implements IList {
     /**
+     * Logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(FileList.class);
+    /**
      * File list.
      */
     private List<List<String>> list = new ArrayList<>();
@@ -22,15 +29,16 @@ public final class FileList implements IList {
     @Override
     public void addFile(final String path) {
         try {
-            List<String> s = Files.readAllLines(Paths.get(path),
+            List<String> files = Files.readAllLines(Paths.get(path),
                     StandardCharsets.UTF_8);
-            list.add(s);
+            list.add(files);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<List<String>> getList() {
         return list;
     }

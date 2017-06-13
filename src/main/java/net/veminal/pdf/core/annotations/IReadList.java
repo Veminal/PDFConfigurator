@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Binding annotation for IRead realization.
+ * Binding annotation for ISplit realization.
  *
  * @author Veminal
  * @version 1.0

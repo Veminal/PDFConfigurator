@@ -1,7 +1,5 @@
 package net.veminal.pdf.core.documents.write;
 
-import java.util.List;
-
 /**
  * File list interface.
  *
@@ -19,7 +17,8 @@ public interface IList {
     /**
      * Get file list.
      *
+     * @param <T> the generic
      * @return T
      */
-    List<List<String>> getList();
+    <T> T getList();
 }

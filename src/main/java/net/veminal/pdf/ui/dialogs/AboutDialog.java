@@ -61,4 +61,6 @@ public final class AboutDialog extends Dialog {
         createButton(parent, IDialogConstants.OK_ID,
                 IDialogConstants.OK_LABEL, true);
     }
+
+
 }
