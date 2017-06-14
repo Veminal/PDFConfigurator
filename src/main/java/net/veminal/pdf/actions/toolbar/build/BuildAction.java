@@ -1,16 +1,12 @@
 package net.veminal.pdf.actions.toolbar.build;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import net.veminal.pdf.actions.IEvent;
-import net.veminal.pdf.configuration.read.ReadDataFields;
-import net.veminal.pdf.core.annotations.NotUsed;
 import net.veminal.pdf.configuration.read.ReadConfig;
-import net.veminal.pdf.core.modules.ConfigurationModule;
-import net.veminal.pdf.ui.dialogs.AssemblyPDFDialog;
+import net.veminal.pdf.core.annotations.NotUsed;
+import net.veminal.pdf.core.events.show.BuildDialogShow;
+import net.veminal.pdf.core.events.show.ShowDialog;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * Action for button "Build".
@@ -32,14 +28,8 @@ public final class BuildAction implements IEvent {
             @Override
             public void run() {
                 super.run();
-                final String path = "dictionary.json";
-                Injector injectObject = Guice.createInjector(
-                        new ConfigurationModule());
-                ReadConfig readTitles = injectObject.getInstance(
-                        ReadDataFields.class);
-                AssemblyPDFDialog assemblyPDF = new AssemblyPDFDialog(
-                        Display.getCurrent().getActiveShell(), readTitles, path);
-                assemblyPDF.open();
+                ShowDialog showDialog = new BuildDialogShow();
+                showDialog.create();
             }
         };
     }

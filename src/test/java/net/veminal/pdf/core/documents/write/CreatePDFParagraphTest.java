@@ -20,8 +20,7 @@ public class CreatePDFParagraphTest {
     public void setUp() {
         Injector injector = Guice.createInjector(new DocumentModule());
         IList files = injector.getInstance(FileList.class);
-        files.addFile("pom.xml");
-        files.addFile("dictionary.json");
+        files.addFile("C:/main.cpp");
         pdf = new CreatePDFParagraph(files);
     }
 

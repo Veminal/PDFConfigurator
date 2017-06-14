@@ -36,7 +36,7 @@ public final class OpenDialog extends AbstractFileDialog {
     protected String[] readExtensions() {
         extensionReader.readPath(path);
         return (String[]) extensionReader.
-                parse("open.format");
+                parse("create.format");
     }
 
 

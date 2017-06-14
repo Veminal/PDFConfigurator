@@ -1,15 +1,11 @@
 package net.veminal.pdf.actions.menu.help;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import net.veminal.pdf.actions.IEvent;
-import net.veminal.pdf.configuration.read.ReadDataFields;
-import net.veminal.pdf.core.annotations.NotUsed;
 import net.veminal.pdf.configuration.read.ReadConfig;
-import net.veminal.pdf.core.modules.ConfigurationModule;
-import net.veminal.pdf.ui.dialogs.AboutDialog;
+import net.veminal.pdf.core.annotations.NotUsed;
+import net.veminal.pdf.core.events.show.AboutDialogShow;
+import net.veminal.pdf.core.events.show.ShowDialog;
 import org.eclipse.jface.action.Action;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * Action for menu item "About".
@@ -24,14 +20,8 @@ public final class AboutAction implements IEvent {
             @Override
             public void run() {
                 super.run();
-                final String path = "dictionary.json";
-                Injector injectObject = Guice.createInjector(
-                        new ConfigurationModule());
-                ReadConfig readText = injectObject.getInstance(
-                        ReadDataFields.class);
-                AboutDialog dialog = new AboutDialog(
-                        Display.getCurrent().getActiveShell(), readText, path);
-                dialog.open();
+                ShowDialog showDialog = new AboutDialogShow();
+                showDialog.create();
             }
         };
     }

@@ -53,4 +53,13 @@ public abstract class AbstractTable {
      * @param i      the int
      */
     public abstract void items(Table parent, int i);
+
+    /**
+     * Set enabled.
+     *
+     * @param variant the boolean
+     */
+    public void enabled(final boolean variant) {
+        fileTable.setEnabled(variant);
+    }
 }

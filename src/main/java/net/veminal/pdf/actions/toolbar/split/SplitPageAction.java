@@ -3,6 +3,8 @@ package net.veminal.pdf.actions.toolbar.split;
 import net.veminal.pdf.actions.IEvent;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.core.annotations.NotUsed;
+import net.veminal.pdf.core.events.show.ShowDialog;
+import net.veminal.pdf.core.events.show.SplitDialogShow;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 
@@ -25,6 +27,8 @@ public final class SplitPageAction implements IEvent {
                 ImageDescriptor.createFromFile(null, path)) {
             @Override
             public void run() {
+                ShowDialog dialog = new SplitDialogShow();
+                dialog.create();
             }
         };
     }

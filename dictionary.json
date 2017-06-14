@@ -34,7 +34,11 @@
   "multi.page": "&Each file on a separate page",
   "list.files": "&File list:",
   "file.name": "&File name:",
-  "file.path": "&Path to file",
+  "file.path": "&Path to file:",
   "about.dialog.title": "About",
-  "split.status.title": "Split status"
+  "split.dialog.title": "Split PDF",
+  "import.button": "&Import for processing",
+  "show.catalog": "&...",
+  "target.catalog": "&Target:",
+  "split.button": "&Split"
 }
