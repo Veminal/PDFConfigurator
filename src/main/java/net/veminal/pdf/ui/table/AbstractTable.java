@@ -62,4 +62,13 @@ public abstract class AbstractTable {
     public void enabled(final boolean variant) {
         fileTable.setEnabled(variant);
     }
+
+    /**
+     * File table check enable.
+     *
+     * @return availability status
+     */
+    public boolean isEnabled() {
+        return fileTable.isEnabled();
+    }
 }

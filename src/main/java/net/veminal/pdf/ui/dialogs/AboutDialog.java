@@ -52,7 +52,7 @@ public final class AboutDialog extends Dialog {
     @Override
     protected Point getInitialSize() {
         final int h = 350;
-        final int w = 350;
+        final int w = 450;
         return new Point(h, w);
     }
 
@@ -61,6 +61,4 @@ public final class AboutDialog extends Dialog {
         createButton(parent, IDialogConstants.OK_ID,
                 IDialogConstants.OK_LABEL, true);
     }
-
-
 }

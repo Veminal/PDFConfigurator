@@ -1,8 +1,12 @@
 package net.veminal.pdf.ui.dialogs;
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import net.veminal.pdf.configuration.read.ReadConfig;
+import net.veminal.pdf.configuration.read.ReadDataArray;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -15,6 +19,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -52,6 +57,14 @@ public final class SplitDialog extends Dialog {
      * File table.
      */
     private AbstractTable fileTable;
+    /**
+     * Select target catalog get text.
+     */
+    private String target;
+    /**
+     * Select filename get text.
+     */
+    private String filename;
 
     /**
      * Constructor of class.
@@ -123,6 +136,23 @@ public final class SplitDialog extends Dialog {
         btnPdfFile.setText((String) readConfig.parse("show.catalog"));
         textFile.setLayoutData(data);
         btnPdfFile.setLayoutData(new GridData(GridData.FILL));
+        btnPdfFile.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent event) {
+                final String extensionsPath = "extensions.json";
+                Injector injectObject = Guice.createInjector(
+                        new ConfigurationModule());
+                ReadConfig readArray = injectObject.getInstance(
+                        ReadDataArray.class);
+                AbstractFileDialog openDialog = new OpenDialog(
+                        readArray, extensionsPath);
+                openDialog.creating(SWT.OPEN);
+                final String file = openDialog.getPath();
+                if (file != null) {
+                    textFile.setText(file);
+                }
+            }
+        });
     }
 
     /**
@@ -146,6 +176,18 @@ public final class SplitDialog extends Dialog {
         readConfig.readPath(defaultPath);
         textTargetDirectory.setText((String) readConfig.parse(
                 "default.path"));
+        btnTargetFile.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent event) {
+                DirectoryDialog directory = new DirectoryDialog(
+                        Display.getCurrent().getActiveShell());
+                directory.setFilterPath(textTargetDirectory.getText());
+                final String dir = directory.open();
+                if (dir != null) {
+                    textTargetDirectory.setText(dir);
+                }
+            }
+        });
     }
 
     /**
@@ -160,10 +202,16 @@ public final class SplitDialog extends Dialog {
         splitButton.setText((String) readConfig.parse("split.button"));
         Image image = new Image(Display.getCurrent(), "images/split_page.png");
         splitButton.setImage(image);
+        splitButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent event) {
+            }
+        });
     }
 
     /**
      * Create import check.
+     *
      * @param parent the Composite
      */
     private void createImportCheckButton(final Composite parent) {
@@ -186,6 +234,7 @@ public final class SplitDialog extends Dialog {
 
     /**
      * Create file browser.
+     *
      * @param parent the Composite
      */
     private void createTable(final Composite parent) {

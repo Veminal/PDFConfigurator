@@ -5,7 +5,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 
 /**
- * Abstract class for dialogs that implement reading and saving files.
+ * Abstract class for dialogs that implement
+ * reading and saving files.
  *
  * @author Veminal
  * @version 1.0

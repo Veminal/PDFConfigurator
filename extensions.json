@@ -4,8 +4,8 @@
     "*.docx",
     "*.txt"
   ],
-  "open.format": [
-    "*.*",
-    "*.pdf"
+  "create.format": [
+    "*.pdf",
+    "*.*"
   ]
 }

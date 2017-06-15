@@ -178,7 +178,7 @@ public final class AssemblyPDFDialog extends Dialog {
 
     @Override
     protected Point getInitialSize() {
-        final int h = 300;
+        final int h = 400;
         final int w = 450;
         return new Point(h, w);
     }
