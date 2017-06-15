@@ -28,6 +28,7 @@
   "license": "&License",
   "about": "&About",
   "page" : "&New page",
+  "split": "&Split Document",
   "frame.title": "PDF Configurator",
   "assembly.dialog.title": "Assembly PDF",
   "one.page": "&Collect files in one page",

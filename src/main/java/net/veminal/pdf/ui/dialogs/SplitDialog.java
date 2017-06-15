@@ -57,14 +57,6 @@ public final class SplitDialog extends Dialog {
      * File table.
      */
     private AbstractTable fileTable;
-    /**
-     * Select target catalog get text.
-     */
-    private String target;
-    /**
-     * Select filename get text.
-     */
-    private String filename;
 
     /**
      * Constructor of class.
@@ -147,9 +139,9 @@ public final class SplitDialog extends Dialog {
                 AbstractFileDialog openDialog = new OpenDialog(
                         readArray, extensionsPath);
                 openDialog.creating(SWT.OPEN);
-                final String file = openDialog.getPath();
-                if (file != null) {
-                    textFile.setText(file);
+                final String filename = openDialog.getPath();
+                if (filename != null) {
+                    textFile.setText(filename);
                 }
             }
         });
@@ -182,9 +174,9 @@ public final class SplitDialog extends Dialog {
                 DirectoryDialog directory = new DirectoryDialog(
                         Display.getCurrent().getActiveShell());
                 directory.setFilterPath(textTargetDirectory.getText());
-                final String dir = directory.open();
-                if (dir != null) {
-                    textTargetDirectory.setText(dir);
+                final String target = directory.open();
+                if (target != null) {
+                    textTargetDirectory.setText(target);
                 }
             }
         });

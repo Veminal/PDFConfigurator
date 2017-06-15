@@ -21,4 +21,11 @@ public interface ISplit {
      * @param number   the int
      */
     void loadDocument(String filename, int number);
+
+    /**
+     * Split document.
+     *
+     * @param savePath the String
+     */
+    void splitDocument(String savePath);
 }

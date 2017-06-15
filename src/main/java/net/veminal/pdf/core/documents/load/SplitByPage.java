@@ -17,4 +17,8 @@ public final class SplitByPage implements ISplit {
     @NotUsed
     public void loadDocument(final String filename, final int number) {
     }
+
+    @Override
+    public void splitDocument(final String savePath) {
+    }
 }

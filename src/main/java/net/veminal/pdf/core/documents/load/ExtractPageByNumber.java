@@ -17,4 +17,8 @@ public final class ExtractPageByNumber implements ISplit {
     @Override
     public void loadDocument(final String filename, final int number) {
     }
+
+    @Override
+    public void splitDocument(final String savePath) {
+    }
 }
