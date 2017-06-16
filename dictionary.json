@@ -41,5 +41,6 @@
   "import.button": "&Import for processing",
   "show.catalog": "&...",
   "target.catalog": "&Target:",
-  "split.button": "&Split"
+  "split.button": "&Split",
+  "extract.exception": "Error read path"
 }

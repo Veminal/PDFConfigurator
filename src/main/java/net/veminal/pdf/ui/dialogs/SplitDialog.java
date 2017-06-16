@@ -6,6 +6,8 @@ import com.google.inject.Injector;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataArray;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.core.documents.load.ISplit;
+import net.veminal.pdf.core.documents.load.SplitByPage;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
@@ -176,7 +178,7 @@ public final class SplitDialog extends Dialog {
                 directory.setFilterPath(textTargetDirectory.getText());
                 final String target = directory.open();
                 if (target != null) {
-                    textTargetDirectory.setText(target);
+                    textTargetDirectory.setText(target + "\\");
                 }
             }
         });
@@ -197,6 +199,12 @@ public final class SplitDialog extends Dialog {
         splitButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent event) {
+                final String filename = textFile.getText();
+                final String target = textTargetDirectory.getText();
+                if (filename != null && target != null) {
+                    ISplit splitByPage = new SplitByPage(filename, target);
+                    splitByPage.extract();
+                }
             }
         });
     }

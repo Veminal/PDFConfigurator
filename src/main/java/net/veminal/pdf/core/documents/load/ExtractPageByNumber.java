@@ -1,7 +1,5 @@
 package net.veminal.pdf.core.documents.load;
 
-import net.veminal.pdf.core.annotations.NotUsed;
-
 /**
  * Extract the page by number.
  *
@@ -10,15 +8,6 @@ import net.veminal.pdf.core.annotations.NotUsed;
  */
 public final class ExtractPageByNumber implements ISplit {
     @Override
-    @NotUsed
-    public void loadDocument(final String filename) {
-    }
-
-    @Override
-    public void loadDocument(final String filename, final int number) {
-    }
-
-    @Override
-    public void splitDocument(final String savePath) {
+    public void extract() {
     }
 }
