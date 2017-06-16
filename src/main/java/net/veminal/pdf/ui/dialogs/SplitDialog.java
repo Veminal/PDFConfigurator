@@ -199,12 +199,15 @@ public final class SplitDialog extends Dialog {
         splitButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent event) {
-                final String filename = textFile.getText();
-                final String target = textTargetDirectory.getText();
-                if (filename != null && target != null) {
-                    ISplit splitByPage = new SplitByPage(filename, target);
-                    splitByPage.extract();
-                }
+                Runnable thread = () -> {
+                    final String filename = textFile.getText();
+                    final String target = textTargetDirectory.getText();
+                    if (filename != null && target != null) {
+                        ISplit splitByPage = new SplitByPage(filename, target);
+                        splitByPage.extract();
+                    }
+                };
+                thread.run();
             }
         });
     }
