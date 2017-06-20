@@ -4,15 +4,7 @@ import com.google.inject.Inject;
 import net.veminal.pdf.actions.IEventList;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.write.WriteConfig;
-import net.veminal.pdf.core.annotations.EditList;
-import net.veminal.pdf.core.annotations.FileList;
-import net.veminal.pdf.core.annotations.FormatList;
-import net.veminal.pdf.core.annotations.HelpList;
-import net.veminal.pdf.core.annotations.IntReader;
-import net.veminal.pdf.core.annotations.ListReader;
-import net.veminal.pdf.core.annotations.StringReader;
-import net.veminal.pdf.core.annotations.TableContext;
-import net.veminal.pdf.core.annotations.Toolbar;
+import net.veminal.pdf.core.annotations.*;
 import net.veminal.pdf.ui.menu.EditMenu;
 import net.veminal.pdf.ui.menu.FileMenu;
 import net.veminal.pdf.ui.menu.FormatMenu;
@@ -135,7 +127,7 @@ public final class Frame extends ApplicationWindow {
                  @FormatList final IEventList ftMenu,
                  @HelpList final IEventList hMenu,
                  @Toolbar final IEventList tool,
-                 final AbstractTable browser, final AbstractTab tab,
+                 @FileTable final AbstractTable browser, final AbstractTab tab,
                  @IntReader final ReadConfig sizeRead, final String size,
                  final WriteConfig write, @TableContext final IEventList tableContext) {
         super(null);

@@ -42,5 +42,6 @@
   "show.catalog": "&...",
   "target.catalog": "&Target:",
   "split.button": "&Split",
-  "extract.exception": "Error read path"
+  "extract.exception": "Error read path",
+  "completed" : "Operation completed"
 }

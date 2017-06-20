@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * Abstract class for file browser.
@@ -33,7 +34,6 @@ public abstract class AbstractTable {
         fileTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
                 true, true));
         fileTable.setLinesVisible(true);
-        items(fileTable, SWT.FULL_SELECTION);
     }
 
     /**
@@ -48,11 +48,17 @@ public abstract class AbstractTable {
 
     /**
      * Table items.
-     *
-     * @param parent the Table
-     * @param i      the int
      */
-    public abstract void items(Table parent, int i);
+    public void items() {
+    }
+
+    /**
+     * Output file list.
+     *
+     * @param target the String
+     * @return list files
+     */
+    protected abstract List outFilesList(String target);
 
     /**
      * Set enabled.

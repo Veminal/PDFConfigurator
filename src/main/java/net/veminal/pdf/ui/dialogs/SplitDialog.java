@@ -5,12 +5,14 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataArray;
+import net.veminal.pdf.core.annotations.SplitFileTable;
 import net.veminal.pdf.core.annotations.StringReader;
 import net.veminal.pdf.core.documents.load.ISplit;
 import net.veminal.pdf.core.documents.load.SplitByPage;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -59,6 +61,10 @@ public final class SplitDialog extends Dialog {
      * File table.
      */
     private AbstractTable fileTable;
+    /**
+     * Check button import to table.
+     */
+    private Button btnImport;
 
     /**
      * Constructor of class.
@@ -73,7 +79,7 @@ public final class SplitDialog extends Dialog {
     public SplitDialog(final Shell parentShell,
                        @StringReader final ReadConfig read,
                        final String pathToFile, final String defPath,
-                       final AbstractTable table) {
+                       @SplitFileTable final AbstractTable table) {
         super(parentShell);
         this.readConfig = read;
         this.path = pathToFile;
@@ -199,15 +205,18 @@ public final class SplitDialog extends Dialog {
         splitButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent event) {
-                Runnable thread = () -> {
+                Button btnCheck = (Button) event.getSource();
+                Runnable splitThread = () -> {
                     final String filename = textFile.getText();
                     final String target = textTargetDirectory.getText();
                     if (filename != null && target != null) {
+                        btnCheck.setEnabled(false);
                         ISplit splitByPage = new SplitByPage(filename, target);
                         splitByPage.extract();
                     }
                 };
-                thread.run();
+                splitThread.run();
+                btnCheck.setEnabled(true);
             }
         });
     }
@@ -218,7 +227,7 @@ public final class SplitDialog extends Dialog {
      * @param parent the Composite
      */
     private void createImportCheckButton(final Composite parent) {
-        Button btnImport = new Button(parent, SWT.CHECK);
+        btnImport = new Button(parent, SWT.CHECK);
         readConfig.readPath(path);
         btnImport.setText((String) readConfig.parse("import.button"));
         btnImport.setLayoutData(new GridData(GridData.BEGINNING));

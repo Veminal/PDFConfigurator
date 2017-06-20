@@ -8,7 +8,7 @@ import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.core.modules.UIModule;
 import net.veminal.pdf.ui.dialogs.SplitDialog;
 import net.veminal.pdf.ui.table.AbstractTable;
-import net.veminal.pdf.ui.table.FileTableBrowser;
+import net.veminal.pdf.ui.table.SplitFileTableBrowser;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -26,7 +26,8 @@ public final class SplitDialogShow implements ShowDialog {
                 new ConfigurationModule(), new UIModule());
         ReadConfig read = injectObject.getInstance(
                 ReadDataFields.class);
-        AbstractTable table = injectObject.getInstance(FileTableBrowser.class);
+        AbstractTable table = injectObject.getInstance(
+                SplitFileTableBrowser.class);
         SplitDialog dialog = new SplitDialog(Display.getCurrent()
                 .getActiveShell(), read, path, defaultPath, table);
         dialog.open();
