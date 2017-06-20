@@ -42,6 +42,7 @@
   "show.catalog": "&...",
   "target.catalog": "&Target:",
   "split.button": "&Split",
+  "select.all.button": "&Select All",
   "extract.exception": "Error read path",
   "completed" : "Operation completed"
 }

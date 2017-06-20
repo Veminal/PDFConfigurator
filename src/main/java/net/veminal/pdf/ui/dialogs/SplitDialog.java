@@ -12,7 +12,6 @@ import net.veminal.pdf.core.documents.load.SplitByPage;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -65,6 +64,10 @@ public final class SplitDialog extends Dialog {
      * Check button import to table.
      */
     private Button btnImport;
+    /**
+     * Select all button to table.
+     */
+    private Button selectAllButton;
 
     /**
      * Constructor of class.
@@ -114,6 +117,7 @@ public final class SplitDialog extends Dialog {
         createInputTargetFile(composite);
         createSplitButton(composite);
         createImportCheckButton(parent);
+        createSelectAllButton(parent);
         createTable(parent);
         return area;
     }
@@ -237,8 +241,10 @@ public final class SplitDialog extends Dialog {
                 Button btnCheck = (Button) event.getSource();
                 if (btnCheck.getSelection()) {
                     fileTable.enabled(true);
+                    selectAllButton.setEnabled(true);
                 } else {
                     fileTable.enabled(false);
+                    selectAllButton.setEnabled(false);
                 }
             }
         });
@@ -252,6 +258,20 @@ public final class SplitDialog extends Dialog {
     private void createTable(final Composite parent) {
         fileTable.createContents(parent);
         fileTable.enabled(false);
+    }
+
+    /**
+     * Create select all button.
+     *
+     * @param parent the Composite
+     */
+    private void createSelectAllButton(final Composite parent) {
+        selectAllButton = new Button(parent, SWT.CHECK);
+        readConfig.readPath(path);
+        selectAllButton.setText((String) readConfig.parse("select.all.button"));
+        selectAllButton.setLayoutData(new GridData(GridData.BEGINNING));
+        selectAllButton.setEnabled(false);
+        selectAllButton.setSelection(true);
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -21,6 +22,10 @@ public abstract class AbstractTable {
      * Table file viewer.
      */
     private Table fileTable;
+    /**
+     * Item of table.
+     */
+    private TableItem item;
 
     /**
      * Tree configuration.
@@ -48,8 +53,15 @@ public abstract class AbstractTable {
 
     /**
      * Table items.
+     *
+     * @param target the String
      */
-    public void items() {
+    public void items(final String target) {
+        List filesList = outFilesList(target);
+        for (Object o : filesList) {
+            item = new TableItem(fileTable, SWT.NONE);
+            item.setText((String) o);
+        }
     }
 
     /**
@@ -70,11 +82,10 @@ public abstract class AbstractTable {
     }
 
     /**
-     * File table check enable.
-     *
-     * @return availability status
+     * Item click.
      */
-    public boolean isEnabled() {
-        return fileTable.isEnabled();
+    public void itemClick() {
+        item.addListener(SWT.NONE, event -> {
+        });
     }
 }
