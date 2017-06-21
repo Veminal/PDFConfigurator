@@ -40,7 +40,7 @@ public final class SplitByPage implements ISplit {
     @Override
     public void extract() {
         try {
-            final long splitBySize = Long.MAX_VALUE;
+            final long splitBySize = 20000;
             PdfDocument document = new PdfDocument(new PdfReader(filename));
             List<PdfDocument> splitDocuments = new PdfSplitter(document) {
                 private final int n = 1;

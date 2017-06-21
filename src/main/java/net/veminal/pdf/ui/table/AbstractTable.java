@@ -1,9 +1,11 @@
 package net.veminal.pdf.ui.table;
 
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
@@ -38,7 +40,6 @@ public abstract class AbstractTable {
                 | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
         fileTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
                 true, true));
-        fileTable.setLinesVisible(true);
     }
 
     /**
@@ -54,14 +55,19 @@ public abstract class AbstractTable {
     /**
      * Table items.
      *
-     * @param target the String
+     * @param target the T
      */
     public void items(final String target) {
         List filesList = outFilesList(target);
-        for (Object o : filesList) {
-            item = new TableItem(fileTable, SWT.NONE);
-            item.setText((String) o);
-        }
+        fileTable.getDisplay().asyncExec(() -> {
+            for (Object o : filesList) {
+                item = new TableItem(fileTable, SWT.NONE);
+                item.setText((String) o);
+            }
+            MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
+                    "Completed",
+                    "Operation completed");
+        });
     }
 
     /**

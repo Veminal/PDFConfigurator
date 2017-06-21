@@ -218,6 +218,7 @@ public final class SplitDialog extends Dialog {
                         ISplit splitByPage = new SplitByPage(filename, target);
                         splitByPage.extract();
                     }
+                    fileTable.items(target);
                 };
                 splitThread.run();
                 btnCheck.setEnabled(true);
