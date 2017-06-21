@@ -88,10 +88,11 @@ public abstract class AbstractTable {
     }
 
     /**
-     * Item click.
+     * Check item.
+     *
+     * @param variant the boolean
      */
-    public void itemClick() {
-        item.addListener(SWT.NONE, event -> {
-        });
+    public void checked(final boolean variant) {
+        item.setChecked(variant);
     }
 }

@@ -217,8 +217,8 @@ public final class SplitDialog extends Dialog {
                         btnCheck.setEnabled(false);
                         ISplit splitByPage = new SplitByPage(filename, target);
                         splitByPage.extract();
+                        fileTable.items(target);
                     }
-                    fileTable.items(target);
                 };
                 splitThread.run();
                 btnCheck.setEnabled(true);

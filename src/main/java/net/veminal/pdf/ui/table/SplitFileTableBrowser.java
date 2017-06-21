@@ -16,8 +16,9 @@ public final class SplitFileTableBrowser extends AbstractTable {
         File path = new File(target);
         File[] files = path.listFiles();
         List<String> listFiles = new ArrayList<>();
-        for (File f: files != null ? files : new File[0]) {
-            listFiles.add(f.getName() + "(" + path.getPath() + ")");
+        assert files != null;
+        for (File f : files) {
+            listFiles.add(f.getName() + " (" + path.getPath() + ")");
         }
         return listFiles;
     }
