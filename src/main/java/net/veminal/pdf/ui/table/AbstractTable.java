@@ -86,13 +86,4 @@ public abstract class AbstractTable {
     public void enabled(final boolean variant) {
         fileTable.setEnabled(variant);
     }
-
-    /**
-     * Check item.
-     *
-     * @param variant the boolean
-     */
-    public void checked(final boolean variant) {
-        item.setChecked(variant);
-    }
 }
