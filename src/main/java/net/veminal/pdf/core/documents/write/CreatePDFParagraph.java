@@ -32,6 +32,7 @@ public final class CreatePDFParagraph implements IDocumentCreate {
 
     /**
      * Constructor of class.
+     *
      * @param fileList the IList
      */
     @Inject
@@ -46,7 +47,7 @@ public final class CreatePDFParagraph implements IDocumentCreate {
             PdfDocument document = new PdfDocument(writer);
             Document pdf = new Document(document);
             for (List<String> file : files) {
-                for (String line: file) {
+                for (String line : file) {
                     pdf.add(new Paragraph(line));
                 }
             }
