@@ -15,11 +15,20 @@ public final class SplitFileTableBrowser extends AbstractTable {
     protected List outFilesList(final String target) {
         File path = new File(target);
         File[] files = path.listFiles();
-        List<String> listFiles = new ArrayList<>();
         assert files != null;
+        List<String> listFiles = new ArrayList<>();
         for (File f : files) {
-            listFiles.add(f.getName() + " (" + path.getPath() + ")");
+            listFiles.add(f.getAbsolutePath());
         }
+        listFiles.sort((o1, o2) -> {
+            if (o1.length() > o2.length()) {
+                return 1;
+            } else if (o1.length() < o2.length()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
         return listFiles;
     }
 }

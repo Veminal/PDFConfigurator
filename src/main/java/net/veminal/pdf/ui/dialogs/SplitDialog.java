@@ -55,7 +55,6 @@ public final class SplitDialog extends Dialog {
      * Text target catalog.
      */
     private Text textTargetDirectory;
-
     /**
      * File table.
      */
