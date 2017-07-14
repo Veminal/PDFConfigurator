@@ -13,7 +13,7 @@ extracting pages from a file, extracting a fragment from the text, assembling PD
 <li> Eclipse JFace-3.12
 <li> Google gson-2.8.1
 <li> Google Guice - 4.1.0
-<li> IText-7.0.2
+<li> IText-7.0.3
 
 ## Versions
 First version in development
