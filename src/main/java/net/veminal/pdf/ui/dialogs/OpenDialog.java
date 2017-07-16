@@ -27,7 +27,8 @@ public final class OpenDialog extends AbstractFileDialog {
      * @param pathToFile the String
      */
     @Inject
-    public OpenDialog(@ArrayReader final ReadConfig reader, final String pathToFile) {
+    public OpenDialog(@ArrayReader final ReadConfig reader,
+                      final String pathToFile) {
         this.extensionReader = reader;
         this.path = pathToFile;
     }

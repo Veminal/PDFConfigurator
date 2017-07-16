@@ -12,6 +12,7 @@ import net.veminal.pdf.core.documents.load.SplitByPage;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -60,13 +61,13 @@ public final class SplitDialog extends Dialog {
      */
     private AbstractTable fileTable;
     /**
-     * Check button import to table.
-     */
-    private Button btnImport;
-    /**
      * Select all button to table.
      */
     private Button selectAllButton;
+    /**
+     * Submit button.
+     */
+    private Button submitButton;
 
     /**
      * Constructor of class.
@@ -221,6 +222,7 @@ public final class SplitDialog extends Dialog {
                 };
                 splitThread.run();
                 btnCheck.setEnabled(true);
+                submitButton.setEnabled(true);
             }
         });
     }
@@ -231,7 +233,7 @@ public final class SplitDialog extends Dialog {
      * @param parent the Composite
      */
     private void createImportCheckButton(final Composite parent) {
-        btnImport = new Button(parent, SWT.CHECK);
+        Button btnImport = new Button(parent, SWT.CHECK);
         readConfig.readPath(path);
         btnImport.setText((String) readConfig.parse("import.button"));
         btnImport.setLayoutData(new GridData(GridData.BEGINNING));
@@ -277,5 +279,13 @@ public final class SplitDialog extends Dialog {
     @Override
     protected void okPressed() {
         super.okPressed();
+    }
+
+    @Override
+    protected void createButtonsForButtonBar(final Composite parent) {
+        super.createButtonsForButtonBar(parent);
+        submitButton = getButton(IDialogConstants.OK_ID);
+        submitButton.setText(IDialogConstants.OK_LABEL);
+        submitButton.setEnabled(false);
     }
 }
