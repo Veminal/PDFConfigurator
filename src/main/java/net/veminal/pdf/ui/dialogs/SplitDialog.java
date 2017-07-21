@@ -274,11 +274,11 @@ public final class SplitDialog extends Dialog {
         selectAllButton.setLayoutData(new GridData(GridData.BEGINNING));
         selectAllButton.setEnabled(false);
         selectAllButton.setSelection(true);
-    }
-
-    @Override
-    protected void okPressed() {
-        super.okPressed();
+        selectAllButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+            }
+        });
     }
 
     @Override
@@ -287,5 +287,10 @@ public final class SplitDialog extends Dialog {
         submitButton = getButton(IDialogConstants.OK_ID);
         submitButton.setText(IDialogConstants.OK_LABEL);
         submitButton.setEnabled(false);
+        submitButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+            }
+        });
     }
 }
