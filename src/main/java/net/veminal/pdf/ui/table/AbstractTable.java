@@ -3,7 +3,6 @@ package net.veminal.pdf.ui.table;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
@@ -30,17 +29,22 @@ public abstract class AbstractTable {
     private TableItem item;
 
     /**
-     * Tree configuration.
+     * Build table.
      *
      * @param parent the Composite
      */
     @PostConstruct
     public void createContents(final Composite parent) {
-        fileTable = new Table(parent, SWT.CHECK | SWT.BORDER
-                | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
-        fileTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-                true, true));
+        fileTable = configTable(parent);
     }
+
+    /**
+     * Configuration table.
+     *
+     * @param parent the Composite
+     * @return Table
+     */
+    protected abstract Table configTable(Composite parent);
 
     /**
      * Create context menu.

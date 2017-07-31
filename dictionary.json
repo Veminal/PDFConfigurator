@@ -7,7 +7,7 @@
   "open": "&Open",
   "save": "&Save",
   "save.as": "&Save as...",
-  "print.pdf" : "&Print",
+  "print.pdf": "&Print",
   "settings": "&Settings",
   "exit": "&Exit",
   "cut": "&Cut",
@@ -27,7 +27,7 @@
   "help": "&Help",
   "license": "&License",
   "about": "&About",
-  "page" : "&New page",
+  "page": "&New page",
   "split": "&Split Document",
   "frame.title": "PDF Configurator",
   "assembly.dialog.title": "Assembly PDF",
@@ -44,5 +44,6 @@
   "split.button": "&Split",
   "select.all.button": "&Select All",
   "extract.exception": "Error read path",
-  "completed" : "Operation completed"
+  "completed": "Operation completed",
+  "extract.pages.dialog.title": "Extract by page number dialog"
 }

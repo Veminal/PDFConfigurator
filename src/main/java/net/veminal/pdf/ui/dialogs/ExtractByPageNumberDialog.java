@@ -2,7 +2,9 @@ package net.veminal.pdf.ui.dialogs;
 
 import com.google.inject.Inject;
 import net.veminal.pdf.configuration.read.ReadConfig;
+import net.veminal.pdf.core.annotations.PageTable;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -22,6 +24,10 @@ public final class ExtractByPageNumberDialog extends Dialog {
      * Path to file.
      */
     private final String path;
+    /**
+     * Page table.
+     */
+    private final AbstractTable pageTable;
 
     /**
      * Constructor of class.
@@ -29,13 +35,24 @@ public final class ExtractByPageNumberDialog extends Dialog {
      * @param parentShell the Shell
      * @param read        the ReadConfig
      * @param pathToFile  the String
+     * @param pTable      the AbstractTable
      */
     @Inject
     public ExtractByPageNumberDialog(final Shell parentShell,
                                      @StringReader final ReadConfig read,
-                                     final String pathToFile) {
+                                     final String pathToFile,
+                                     @PageTable final AbstractTable pTable) {
         super(parentShell);
         this.config = read;
         this.path = pathToFile;
+        this.pageTable = pTable;
+    }
+
+    @Override
+    protected void configureShell(final Shell newShell) {
+        super.configureShell(newShell);
+        config.readPath(path);
+        newShell.setText((String) config.parse(
+                "extract.pages.dialog.title"));
     }
 }

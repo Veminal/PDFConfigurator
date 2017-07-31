@@ -8,16 +8,16 @@ import org.eclipse.swt.widgets.Table;
 import java.util.List;
 
 /**
- * Tree file browser.
+ * Page table browser.
  *
- * @author Veminal
+ * @author Version
  * @version 1.0
  */
-public final class FileTableBrowser extends AbstractTable {
+public final class PageTableBrowser extends AbstractTable {
     @Override
     protected Table configTable(final Composite parent) {
         Table fileTable = new Table(parent, SWT.CHECK | SWT.BORDER
-                | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
+                | SWT.V_SCROLL | SWT.H_SCROLL);
         fileTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
                 true, true));
         return fileTable;
