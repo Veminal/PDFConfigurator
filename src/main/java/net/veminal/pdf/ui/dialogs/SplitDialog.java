@@ -1,16 +1,14 @@
 package net.veminal.pdf.ui.dialogs;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import net.veminal.pdf.configuration.read.ReadConfig;
-import net.veminal.pdf.configuration.read.ReadDataArray;
 import net.veminal.pdf.core.annotations.SplitFileTable;
 import net.veminal.pdf.core.annotations.StringReader;
 import net.veminal.pdf.core.documents.load.ISplit;
 import net.veminal.pdf.core.documents.load.SplitByPage;
-import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.table.AbstractTable;
+import net.veminal.pdf.utils.FilesUtil;
+import net.veminal.pdf.utils.OpenPDFUtil;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -143,13 +141,10 @@ public final class SplitDialog extends Dialog {
         btnPdfFile.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent event) {
-                final String extensionsPath = "extensions.json";
-                Injector injectObject = Guice.createInjector(
-                        new ConfigurationModule());
-                ReadConfig readArray = injectObject.getInstance(
-                        ReadDataArray.class);
+                final String extensionsPath = FilesUtil.getExtensions();
+                OpenPDFUtil.initializer();
                 AbstractFileDialog openDialog = new OpenDialog(
-                        readArray, extensionsPath);
+                        OpenPDFUtil.getReadArray(), extensionsPath);
                 openDialog.creating(SWT.OPEN);
                 final String filename = openDialog.getPath();
                 if (filename != null) {
@@ -180,12 +175,14 @@ public final class SplitDialog extends Dialog {
         readConfig.readPath(defaultPath);
         textTargetDirectory.setText((String) readConfig.parse(
                 "default.path"));
+        textTargetDirectory.setLayoutData(data);
         btnTargetFile.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent event) {
                 DirectoryDialog directory = new DirectoryDialog(
                         Display.getCurrent().getActiveShell());
-                directory.setFilterPath(textTargetDirectory.getText());
+                final String defaultCatalog = textTargetDirectory.getText();
+                directory.setFilterPath(defaultCatalog);
                 final String target = directory.open();
                 if (target != null) {
                     textTargetDirectory.setText(target + "\\");

@@ -24,6 +24,7 @@ import net.veminal.pdf.ui.tab.AbstractTab;
 import net.veminal.pdf.ui.tab.TabEditor;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.table.FileTableBrowser;
+import net.veminal.pdf.utils.FilesUtil;
 
 /**
  * Application run class.
@@ -44,9 +45,9 @@ final class Main {
      * @param args of String[]
      */
     public static void main(final String[] args) {
-        final String path = "dictionary.json";
-        final String pathImages = "images.json";
-        final String sizePath = "app.json";
+        final String path = FilesUtil.getDictionary();
+        final String pathImages = FilesUtil.getImages();
+        final String sizePath = FilesUtil.getApp();
         Injector injectObject = Guice.createInjector(new ConfigurationModule(),
                 new ActionsListModule(), new ToolbarModule(),
                 new UIModule());

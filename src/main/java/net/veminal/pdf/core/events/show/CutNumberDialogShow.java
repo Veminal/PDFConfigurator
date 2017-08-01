@@ -9,6 +9,7 @@ import net.veminal.pdf.core.modules.UIModule;
 import net.veminal.pdf.ui.dialogs.ExtractByPageNumberDialog;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.table.PageTableBrowser;
+import net.veminal.pdf.utils.FilesUtil;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -20,14 +21,16 @@ import org.eclipse.swt.widgets.Display;
 public final class CutNumberDialogShow implements ShowDialog {
     @Override
     public void create() {
-        final String path = "dictionary.json";
+        final String path = FilesUtil.getDictionary();
+        final String defaultPath = FilesUtil.getDefault();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule(), new UIModule());
         ReadConfig read = injectObject.getInstance(
                 ReadDataFields.class);
         AbstractTable table = injectObject.getInstance(PageTableBrowser.class);
         ExtractByPageNumberDialog dialog = new ExtractByPageNumberDialog(
-                Display.getCurrent().getActiveShell(), read, path, table);
+                Display.getCurrent().getActiveShell(),
+                read, path, defaultPath, table);
         dialog.open();
     }
 }

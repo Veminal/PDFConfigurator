@@ -6,6 +6,7 @@ import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.configuration.read.ReadDataFields;
 import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.ui.dialogs.AboutDialog;
+import net.veminal.pdf.utils.FilesUtil;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -17,7 +18,7 @@ import org.eclipse.swt.widgets.Display;
 public final class AboutDialogShow implements ShowDialog {
     @Override
     public void create() {
-        final String path = "dictionary.json";
+        final String path = FilesUtil.getDictionary();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule());
         ReadConfig read = injectObject.getInstance(

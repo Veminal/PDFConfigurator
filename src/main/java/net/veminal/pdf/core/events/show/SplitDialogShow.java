@@ -9,6 +9,7 @@ import net.veminal.pdf.core.modules.UIModule;
 import net.veminal.pdf.ui.dialogs.SplitDialog;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.table.SplitFileTableBrowser;
+import net.veminal.pdf.utils.FilesUtil;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -20,8 +21,8 @@ import org.eclipse.swt.widgets.Display;
 public final class SplitDialogShow implements ShowDialog {
     @Override
     public void create() {
-        final String path = "dictionary.json";
-        final String defaultPath = "default.json";
+        final String path = FilesUtil.getDictionary();
+        final String defaultPath = FilesUtil.getDefault();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule(), new UIModule());
         ReadConfig read = injectObject.getInstance(
