@@ -45,5 +45,8 @@
   "select.all.button": "&Select All",
   "extract.exception": "Error read path",
   "completed": "Operation completed",
-  "extract.pages.dialog.title": "Extract by page number dialog"
+  "extract.pages.dialog.title": "Extract by page number dialog",
+  "page.count": "Pages count",
+  "button.extract": "Extract",
+  "open.button": "Open file"
 }

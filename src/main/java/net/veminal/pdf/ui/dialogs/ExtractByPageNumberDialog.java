@@ -9,15 +9,16 @@ import net.veminal.pdf.utils.FilesUtil;
 import net.veminal.pdf.utils.OpenPDFUtil;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -40,10 +41,6 @@ public final class ExtractByPageNumberDialog extends Dialog {
      */
     private final String path;
     /**
-     * Default path.
-     */
-    private final String defaultPath;
-    /**
      * Page table.
      */
     private final AbstractTable pageTable;
@@ -51,10 +48,6 @@ public final class ExtractByPageNumberDialog extends Dialog {
      * Path to main file.
      */
     private Text filePathText;
-    /**
-     * Path to target catalog.
-     */
-    private Text targetPath;
     /**
      * text from page.
      */
@@ -66,20 +59,17 @@ public final class ExtractByPageNumberDialog extends Dialog {
      * @param parentShell the Shell
      * @param read        the ReadConfig
      * @param pathToFile  the String
-     * @param defPath     the String
      * @param pTable      the AbstractTable
      */
     @Inject
     public ExtractByPageNumberDialog(final Shell parentShell,
                                      @StringReader final ReadConfig read,
                                      final String pathToFile,
-                                     final String defPath,
                                      @PageTable final AbstractTable pTable) {
         super(parentShell);
         this.config = read;
         this.path = pathToFile;
         this.pageTable = pTable;
-        this.defaultPath = defPath;
     }
 
     @Override
@@ -92,22 +82,22 @@ public final class ExtractByPageNumberDialog extends Dialog {
 
     @Override
     protected Point getInitialSize() {
-        final int h = 600;
-        final int w = 600;
+        final int h = 1000;
+        final int w = 1000;
         return new Point(h, w);
     }
 
     @Override
     protected Control createDialogArea(final Composite parent) {
-        final int column = 3;
+        final int column = 1;
         GridLayout gridLayout = new GridLayout(column, false);
         Composite area = (Composite) super.createDialogArea(parent);
         Composite composite = new Composite(area, SWT.NONE);
         composite.setLayout(gridLayout);
         composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
         createToFilePath(composite);
-        createToTargetPath(composite);
-        createTable(composite);
+        createWizard(composite);
+        createButtonExtract(composite);
         return area;
     }
 
@@ -116,8 +106,12 @@ public final class ExtractByPageNumberDialog extends Dialog {
      *
      * @param parent the Composite
      */
-    private void createTable(final Composite parent) {
-        pageTable.createContents(parent);
+    private void createWizard(final Composite parent) {
+        SashForm splitter = new SashForm(parent, SWT.HORIZONTAL);
+        splitter.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        pageTable.createContents(splitter);
+        pageText = new Text(splitter, SWT.BORDER);
+        pageText.setEnabled(false);
         pageTable.enabled(true);
     }
 
@@ -136,7 +130,9 @@ public final class ExtractByPageNumberDialog extends Dialog {
         data.grabExcessHorizontalSpace = true;
         data.horizontalAlignment = GridData.FILL;
         config.readPath(path);
-        btnPdfOpenButton.setText((String) config.parse("show.catalog"));
+        Image image = new Image(Display.getCurrent(), "images/open.png");
+        btnPdfOpenButton.setText((String) config.parse("open.button"));
+        btnPdfOpenButton.setImage(image);
         filePathText.setLayoutData(data);
         btnPdfOpenButton.setLayoutData(new GridData(GridData.FILL));
         btnPdfOpenButton.addSelectionListener(new SelectionAdapter() {
@@ -156,37 +152,19 @@ public final class ExtractByPageNumberDialog extends Dialog {
     }
 
     /**
-     * Create target path.
+     * Extract button.
      *
      * @param parent the Composite
      */
-    private void createToTargetPath(final Composite parent) {
-        Label labelTarget = new Label(parent, SWT.NONE);
+    private void createButtonExtract(final Composite parent) {
+        Button extractButton = new Button(parent, SWT.PUSH);
         config.readPath(path);
-        labelTarget.setText((String) config.parse("target.catalog"));
-        targetPath = new Text(parent, SWT.BORDER);
-        config.readPath(path);
-        Button btnTargetPath = new Button(parent, SWT.PUSH);
-        btnTargetPath.setText((String) config.parse("show.catalog"));
-        config.readPath(defaultPath);
-        targetPath.setText((String) config.parse("default.path"));
+        Image image = new Image(Display.getCurrent(), "images/cut.png");
+        extractButton.setText((String) config.parse("button.extract"));
+        extractButton.setImage(image);
         GridData data = new GridData();
         data.grabExcessHorizontalSpace = true;
-        data.horizontalAlignment = GridData.FILL;
-        btnTargetPath.setLayoutData(new GridData(GridData.FILL));
-        targetPath.setLayoutData(data);
-        btnTargetPath.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(final SelectionEvent e) {
-                final String defaultCatalog = targetPath.getText();
-                DirectoryDialog openDirectory = new DirectoryDialog(
-                        Display.getCurrent().getActiveShell());
-                openDirectory.setFilterPath(defaultCatalog);
-                final String targetCatalog = openDirectory.open();
-                if (targetCatalog != null) {
-                    targetPath.setText(targetCatalog + "\\");
-                }
-            }
-        });
+        data.horizontalAlignment = GridData.END;
+        extractButton.setLayoutData(data);
     }
 }

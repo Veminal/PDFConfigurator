@@ -22,7 +22,6 @@ public final class CutNumberDialogShow implements ShowDialog {
     @Override
     public void create() {
         final String path = FilesUtil.getDictionary();
-        final String defaultPath = FilesUtil.getDefault();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule(), new UIModule());
         ReadConfig read = injectObject.getInstance(
@@ -30,7 +29,7 @@ public final class CutNumberDialogShow implements ShowDialog {
         AbstractTable table = injectObject.getInstance(PageTableBrowser.class);
         ExtractByPageNumberDialog dialog = new ExtractByPageNumberDialog(
                 Display.getCurrent().getActiveShell(),
-                read, path, defaultPath, table);
+                read, path, table);
         dialog.open();
     }
 }
