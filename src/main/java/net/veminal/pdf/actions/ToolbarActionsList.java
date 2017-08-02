@@ -2,6 +2,7 @@ package net.veminal.pdf.actions;
 
 import net.veminal.pdf.actions.toolbar.build.BuildAction;
 import net.veminal.pdf.actions.toolbar.build.InjectAction;
+import net.veminal.pdf.actions.toolbar.build.MergeAction;
 import net.veminal.pdf.actions.toolbar.edit.CopyAction;
 import net.veminal.pdf.actions.toolbar.edit.CutAction;
 import net.veminal.pdf.actions.toolbar.edit.FontAction;
@@ -41,6 +42,7 @@ public final class ToolbarActionsList implements IEventList {
         IEvent cutNumber = new CutNumberAction();
         IEvent fragment = new FragmentAction();
         IEvent splitPage = new SplitPageAction();
+        IEvent mergePdf = new MergeAction();
         IEvent build = new BuildAction();
         IEvent inject = new InjectAction();
         IEvent settings = new SettingsAction();
@@ -56,6 +58,7 @@ public final class ToolbarActionsList implements IEventList {
         toolbarList.add(cutNumber);
         toolbarList.add(fragment);
         toolbarList.add(splitPage);
+        toolbarList.add(mergePdf);
         toolbarList.add(build);
         toolbarList.add(inject);
         toolbarList.add(settings);

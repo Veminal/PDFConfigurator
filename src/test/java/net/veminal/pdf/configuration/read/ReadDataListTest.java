@@ -46,6 +46,7 @@ public class ReadDataListTest {
         wait.add("images/cut_number.png");
         wait.add("images/fragment_select.png");
         wait.add("images/split_page.png");
+        wait.add("images/merge.png");
         wait.add("images/build.png");
         wait.add("images/inject.png");
         wait.add("images/settings.png");

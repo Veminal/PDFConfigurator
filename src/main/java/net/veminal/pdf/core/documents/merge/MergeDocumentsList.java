@@ -3,7 +3,6 @@ package net.veminal.pdf.core.documents.merge;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import net.veminal.pdf.core.annotations.NotUsed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +44,8 @@ public final class MergeDocumentsList implements IMerge {
                     new PdfWriter(target + name + ".pdf"));
             for (String path : files) {
                 PdfDocument documentMain = new PdfDocument(new PdfReader(path));
-                documentMain.copyPagesTo(firstPage, documentMain.getNumberOfPages(), documentTarget);
+                documentMain.copyPagesTo(firstPage,
+                        documentMain.getNumberOfPages(), documentTarget);
                 documentMain.close();
                 logger.info(path + " -COPIED");
             }
@@ -55,10 +55,5 @@ public final class MergeDocumentsList implements IMerge {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-    }
-
-    @Override
-    @NotUsed
-    public void mergeTwoFiles(final String fileMain, final String fileInject) {
     }
 }

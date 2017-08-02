@@ -20,6 +20,7 @@
   "select.fragment": "&Select a fragments",
   "split.page": "&Split by page",
   "extract.number": "&Extract by number",
+  "merge.pdf": "&Merge PDF",
   "build.fragments": "&Build fragments",
   "inject.fragments": "&Inject fragments",
   "assembly.pdf": "&Assembly PDF",

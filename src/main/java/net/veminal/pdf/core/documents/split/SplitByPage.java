@@ -56,6 +56,7 @@ public final class SplitByPage implements ISplit {
                 @Override
                 protected PdfWriter getNextPdfWriter(final PageRange d) {
                     try {
+                        logger.info("New page - " + partNumber + ".pdf");
                         return new PdfWriter(target
                                 + String.valueOf(partNumber++) + ".pdf");
                     } catch (FileNotFoundException e) {
@@ -68,6 +69,7 @@ public final class SplitByPage implements ISplit {
                 doc.close();
             }
             document.close();
+            logger.info("OPERATION COMPLETED");
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

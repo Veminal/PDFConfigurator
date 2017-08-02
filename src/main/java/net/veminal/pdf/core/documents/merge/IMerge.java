@@ -16,12 +16,4 @@ public interface IMerge {
      * @param target the T
      */
     void mergeFileList(List<String> files, String target);
-
-    /**
-     * Merge two file.
-     *
-     * @param fileMain   the String
-     * @param fileInject the String
-     */
-    void mergeTwoFiles(String fileMain, String fileInject);
 }

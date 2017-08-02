@@ -43,6 +43,7 @@ public class ReadDataArrayTest {
                 "images/cut_number.png",
                 "images/fragment_select.png",
                 "images/split_page.png",
+                "images/merge.png",
                 "images/build.png",
                 "images/inject.png",
                 "images/settings.png"

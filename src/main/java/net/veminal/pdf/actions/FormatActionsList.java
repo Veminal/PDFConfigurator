@@ -4,6 +4,7 @@ import net.veminal.pdf.actions.menu.format.AssemblyPDFAction;
 import net.veminal.pdf.actions.menu.format.BuildFragmentAction;
 import net.veminal.pdf.actions.menu.format.ExtractNumberAction;
 import net.veminal.pdf.actions.menu.format.InjectFragmentAction;
+import net.veminal.pdf.actions.menu.format.MergePdfAction;
 import net.veminal.pdf.actions.menu.format.SearchAction;
 import net.veminal.pdf.actions.menu.format.SelectFragmentAction;
 import net.veminal.pdf.actions.menu.format.SplitPageAction;
@@ -24,6 +25,7 @@ public final class FormatActionsList implements IEventList {
         IEvent selectFragment = new SelectFragmentAction();
         IEvent split = new SplitPageAction();
         IEvent extractNumber = new ExtractNumberAction();
+        IEvent mergePdf = new MergePdfAction();
         IEvent build = new BuildFragmentAction();
         IEvent inject = new InjectFragmentAction();
         IEvent assembly = new AssemblyPDFAction();
@@ -31,6 +33,7 @@ public final class FormatActionsList implements IEventList {
         formatList.add(selectFragment);
         formatList.add(split);
         formatList.add(extractNumber);
+        formatList.add(mergePdf);
         formatList.add(build);
         formatList.add(inject);
         formatList.add(assembly);
