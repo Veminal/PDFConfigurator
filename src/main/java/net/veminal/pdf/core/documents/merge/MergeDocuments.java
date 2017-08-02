@@ -1,22 +1,21 @@
-package net.veminal.pdf.core.documents.write;
+package net.veminal.pdf.core.documents.merge;
 
 import net.veminal.pdf.core.annotations.NotUsed;
 
 import java.util.List;
 
 /**
- * List documents merge.
+ * Merge documents.
  *
  * @author Veminal
  * @version 1.0
  */
-public final class MergeDocumentsList implements IMerge {
-    @Override
+public final class MergeDocuments implements IMerge {
+    @Override @NotUsed
     public void mergeFileList(final List<String> files, final String target) {
     }
 
     @Override
-    @NotUsed
     public void mergeTwoFiles(final String fileMain, final String fileInject) {
     }
 }

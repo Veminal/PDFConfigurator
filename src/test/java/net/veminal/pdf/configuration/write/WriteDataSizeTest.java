@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test write config.
+ * Test merge config.
  *
  * @author Veminal
  * @version 1.0

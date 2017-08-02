@@ -1,4 +1,4 @@
-package net.veminal.pdf.core.documents.write;
+package net.veminal.pdf.core.documents.merge;
 
 import java.util.List;
 

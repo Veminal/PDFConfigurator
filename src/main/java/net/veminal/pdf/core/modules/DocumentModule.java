@@ -1,7 +1,6 @@
 package net.veminal.pdf.core.modules;
 
 import com.google.inject.AbstractModule;
-import net.veminal.pdf.core.documents.write.FileList;
 
 /**
  * Dependency Configuration for PDF Working Classes.
@@ -12,6 +11,5 @@ import net.veminal.pdf.core.documents.write.FileList;
 public final class DocumentModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind(IList.class).to(FileList.class);
     }
 }
