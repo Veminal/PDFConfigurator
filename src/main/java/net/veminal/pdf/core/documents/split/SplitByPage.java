@@ -1,10 +1,12 @@
-package net.veminal.pdf.core.documents.load;
+package net.veminal.pdf.core.documents.split;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.utils.PageRange;
 import com.itextpdf.kernel.utils.PdfSplitter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +19,11 @@ import java.util.List;
  * @version 1.0
  */
 public final class SplitByPage implements ISplit {
+    /**
+     * Logger.
+     */
+    private Logger logger =
+            LoggerFactory.getLogger(SplitByPage.class);
     /**
      * File name.
      */
@@ -39,6 +46,7 @@ public final class SplitByPage implements ISplit {
 
     @Override
     public void extract() {
+        logger.info("Split pages");
         try {
             final long splitBySize = Integer.SIZE;
             PdfDocument document = new PdfDocument(new PdfReader(filename));
@@ -51,7 +59,7 @@ public final class SplitByPage implements ISplit {
                         return new PdfWriter(target
                                 + String.valueOf(partNumber++) + ".pdf");
                     } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        logger.error(e.getMessage());
                     }
                     return null;
                 }
@@ -61,7 +69,7 @@ public final class SplitByPage implements ISplit {
             }
             document.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

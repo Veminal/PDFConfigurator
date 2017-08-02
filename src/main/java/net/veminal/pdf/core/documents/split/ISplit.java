@@ -1,4 +1,4 @@
-package net.veminal.pdf.core.documents.load;
+package net.veminal.pdf.core.documents.split;
 
 /**
  * Read document interface.
