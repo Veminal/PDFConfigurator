@@ -68,9 +68,6 @@ public abstract class AbstractTable {
                 item = new TableItem(fileTable, SWT.NONE);
                 item.setText((String) o);
             }
-            MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
-                    "Completed",
-                    "Operation completed");
         });
     }
 
