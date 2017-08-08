@@ -1,5 +1,10 @@
 package net.veminal.pdf.utils;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * File names config.
  *
@@ -56,5 +61,24 @@ public final class FilesUtil {
      */
     public static String getImages() {
         return "images.json";
+    }
+
+    /**
+     * Get list files.
+     *
+     * @param target the String
+     * @return file list
+     */
+    public static List getDefaultFileList(final String target) {
+        File path = new File(target);
+        File[] files = path.listFiles((dir, name) ->
+                name.toLowerCase().endsWith(".pdf"));
+        assert files != null;
+        List<String> listFiles = new ArrayList<>();
+        for (File f : files) {
+            listFiles.add(f.getAbsolutePath());
+        }
+        listFiles.sort(Comparator.comparingInt(String::length));
+        return listFiles;
     }
 }

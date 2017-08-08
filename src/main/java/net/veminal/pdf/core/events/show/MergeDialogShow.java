@@ -22,14 +22,13 @@ public final class MergeDialogShow implements ShowDialog {
     @Override
     public void create() {
         final String path = FilesUtil.getDictionary();
-        final String def = FilesUtil.getDefault();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule(), new UIModule());
         ReadConfig read = injectObject.getInstance(
                 ReadDataFields.class);
         AbstractTable table = injectObject.getInstance(MergeTable.class);
         MergeDialog mergeDialog = new MergeDialog(
-                Display.getCurrent().getActiveShell(), read, path, def, table);
+                Display.getCurrent().getActiveShell(), read, path, table);
         mergeDialog.open();
     }
 }
