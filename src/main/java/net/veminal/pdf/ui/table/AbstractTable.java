@@ -85,4 +85,33 @@ public abstract class AbstractTable {
     public void enabled(final boolean variant) {
         fileTable.setEnabled(variant);
     }
+
+    /**
+     * Item check.
+     *
+     * @return check item
+     */
+    public boolean isItemCheck() {
+        return item.getChecked();
+    }
+
+    /**
+     * Set check items.
+     */
+    public void setItemsChecked() {
+        TableItem[] items = fileTable.getItems();
+        for (TableItem i : items) {
+            i.setChecked(true);
+        }
+    }
+
+    /**
+     * Disable check items.
+     */
+    public void disableItemCheck() {
+        TableItem[] items = fileTable.getItems();
+        for (TableItem i : items) {
+            i.setChecked(false);
+        }
+    }
 }

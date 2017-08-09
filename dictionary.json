@@ -50,5 +50,7 @@
   "page.count": "Pages count",
   "button.extract": "Extract",
   "open.button": "Open file",
-  "title.merge.dialog": "Merge PDF"
+  "title.merge.dialog": "Merge PDF",
+  "merge.button": "Merge",
+  "open.directory.button": "Open Directory"
 }

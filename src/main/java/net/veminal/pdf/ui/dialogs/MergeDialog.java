@@ -9,6 +9,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -44,6 +45,10 @@ public final class MergeDialog extends Dialog {
      * Path to directory.
      */
     private Text textDirectory;
+    /**
+     * Select all button.
+     */
+    private Button selectAllBtn;
 
     /**
      * Constructor of class.
@@ -80,14 +85,16 @@ public final class MergeDialog extends Dialog {
 
     @Override
     protected Control createDialogArea(final Composite parent) {
-        final int column = 3;
+        final int column = 1;
         GridLayout gridLayout = new GridLayout(column, false);
         Composite area = (Composite) super.createDialogArea(parent);
         Composite composite = new Composite(area, SWT.NONE);
         composite.setLayout(gridLayout);
         composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
         createText(composite);
+        createSelectAllButton(composite);
         createTable(composite);
+        createButtonMerge(composite);
         return area;
     }
 
@@ -116,7 +123,9 @@ public final class MergeDialog extends Dialog {
         data.horizontalAlignment = GridData.FILL;
         Button btnTarget = new Button(parent, SWT.PUSH);
         config.readPath(path);
-        btnTarget.setText((String) config.parse("show.catalog"));
+        Image image = new Image(Display.getCurrent(), "images/open.png");
+        btnTarget.setText((String) config.parse("open.directory.button"));
+        btnTarget.setImage(image);
         textDirectory.setLayoutData(data);
         btnTarget.setLayoutData(new GridData(GridData.FILL));
         btnTarget.addSelectionListener(new SelectionAdapter() {
@@ -133,5 +142,37 @@ public final class MergeDialog extends Dialog {
                 }
             }
         });
+    }
+
+    /**
+     * Create merge button.
+     *
+     * @param parent the Composite
+     */
+    public void createButtonMerge(final Composite parent) {
+        Button btnMerge = new Button(parent, SWT.PUSH);
+        config.readPath(path);
+        btnMerge.setText((String) config.parse("merge.button"));
+        Image image = new Image(Display.getCurrent(), "images/merge.png");
+        btnMerge.setImage(image);
+        btnMerge.setLayoutData(new GridData(GridData.END));
+        btnMerge.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+                super.widgetSelected(e);
+            }
+        });
+    }
+
+    /**
+     * Create select all button.
+     *
+     * @param parent the Composite
+     */
+    public void createSelectAllButton(final Composite parent) {
+        selectAllBtn = new Button(parent, SWT.CHECK);
+        config.readPath(path);
+        selectAllBtn.setText((String) config.parse("select.all.button"));
+        selectAllBtn.setLayoutData(new GridData(GridData.BEGINNING));
     }
 }
