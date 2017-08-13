@@ -17,7 +17,7 @@ public final class FileTableBrowser extends AbstractTable {
     @Override
     protected Table configTable(final Composite parent) {
         Table fileTable = new Table(parent, SWT.CHECK | SWT.BORDER
-                | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
+                | SWT.V_SCROLL | SWT.H_SCROLL | SWT.DELIMITER_SELECTION);
         fileTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
                 true, true));
         return fileTable;

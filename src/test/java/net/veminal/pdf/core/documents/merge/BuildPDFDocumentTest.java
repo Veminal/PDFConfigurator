@@ -16,17 +16,9 @@ public class BuildPDFDocumentTest {
     }
 
     @Test
-    public void testDirectory() {
-        docs.add("C:\\main.cpp");
-        docs.add("C:\\Users\\user\\Desktop\\PDFConfigurator-master\\pom.xml");
-        List<List<String>> f = DirectoryFilesUtil.fileList(docs);
-        assert true;
-    }
-
-    @Test
     public void buildPDF() {
         docs.add("C:\\main.cpp");
-        docs.add("C:\\Users\\user\\Desktop\\PDFConfigurator-master\\pom.xml");
+        docs.add("C:\\Users\\user\\Desktop\\pom.xml");
         Build build = new BuildPDFDocument(
                 DirectoryFilesUtil.fileList(docs));
         final String path = "C:\\Users\\user\\Desktop\\test.pdf";

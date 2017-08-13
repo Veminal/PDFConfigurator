@@ -114,7 +114,6 @@ public final class SplitDialog extends Dialog {
         createInputFileName(composite);
         createInputTargetFile(composite);
         createSplitButton(composite);
-        createImportCheckButton(parent);
         createSelectAllButton(parent);
         createTable(parent);
         return area;
@@ -207,44 +206,20 @@ public final class SplitDialog extends Dialog {
             @Override
             public void widgetSelected(final SelectionEvent event) {
                 Button btnCheck = (Button) event.getSource();
-                Runnable splitThread = () -> {
-                    final String filename = textFile.getText();
-                    final String target = textTargetDirectory.getText();
-                    if (filename != null && target != null) {
+                final String filename = textFile.getText();
+                final String target = textTargetDirectory.getText();
+                if (filename != null && target != null) {
+                    Runnable splitThread = () -> {
                         btnCheck.setEnabled(false);
                         ISplit splitByPage = new SplitByPage(filename, target);
                         splitByPage.extract();
                         fileTable.items(target);
-                    }
-                };
-                splitThread.run();
+                    };
+                    splitThread.run();
+                }
                 btnCheck.setEnabled(true);
                 submitButton.setEnabled(true);
-            }
-        });
-    }
-
-    /**
-     * Create import check.
-     *
-     * @param parent the Composite
-     */
-    private void createImportCheckButton(final Composite parent) {
-        Button btnImport = new Button(parent, SWT.CHECK);
-        readConfig.readPath(path);
-        btnImport.setText((String) readConfig.parse("import.button"));
-        btnImport.setLayoutData(new GridData(GridData.BEGINNING));
-        btnImport.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(final SelectionEvent event) {
-                Button btnCheck = (Button) event.getSource();
-                if (btnCheck.getSelection()) {
-                    fileTable.enabled(true);
-                    selectAllButton.setEnabled(true);
-                } else {
-                    fileTable.enabled(false);
-                    selectAllButton.setEnabled(false);
-                }
+                selectAllButton.setEnabled(true);
             }
         });
     }
@@ -256,7 +231,7 @@ public final class SplitDialog extends Dialog {
      */
     private void createTable(final Composite parent) {
         fileTable.createContents(parent);
-        fileTable.enabled(false);
+        fileTable.enabled(true);
     }
 
     /**
@@ -264,16 +239,21 @@ public final class SplitDialog extends Dialog {
      *
      * @param parent the Composite
      */
+    @SuppressWarnings("all")
     private void createSelectAllButton(final Composite parent) {
         selectAllButton = new Button(parent, SWT.CHECK);
         readConfig.readPath(path);
         selectAllButton.setText((String) readConfig.parse("select.all.button"));
         selectAllButton.setLayoutData(new GridData(GridData.BEGINNING));
         selectAllButton.setEnabled(false);
-        selectAllButton.setSelection(true);
+        selectAllButton.setSelection(false);
         selectAllButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent e) {
+                Button buttonCheck = (Button) e.getSource();
+                if (buttonCheck.getSelection()) {
+                    fileTable.setItemsChecked();
+                } else fileTable.disableItemCheck();
             }
         });
     }
@@ -284,10 +264,10 @@ public final class SplitDialog extends Dialog {
         submitButton = getButton(IDialogConstants.OK_ID);
         submitButton.setText(IDialogConstants.OK_LABEL);
         submitButton.setEnabled(false);
-        submitButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(final SelectionEvent e) {
-            }
-        });
+    }
+
+    @Override
+    protected void okPressed() {
+        super.okPressed();
     }
 }

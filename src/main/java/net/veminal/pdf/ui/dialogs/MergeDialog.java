@@ -140,6 +140,7 @@ public final class MergeDialog extends Dialog {
                             fileTable.items(textDirectory.getText());
                     showFiles.run();
                 }
+                selectAllBtn.setEnabled(true);
             }
         });
     }
@@ -149,7 +150,7 @@ public final class MergeDialog extends Dialog {
      *
      * @param parent the Composite
      */
-    public void createButtonMerge(final Composite parent) {
+    private void createButtonMerge(final Composite parent) {
         Button btnMerge = new Button(parent, SWT.PUSH);
         config.readPath(path);
         btnMerge.setText((String) config.parse("merge.button"));
@@ -169,10 +170,22 @@ public final class MergeDialog extends Dialog {
      *
      * @param parent the Composite
      */
-    public void createSelectAllButton(final Composite parent) {
+    private void createSelectAllButton(final Composite parent) {
         selectAllBtn = new Button(parent, SWT.CHECK);
         config.readPath(path);
         selectAllBtn.setText((String) config.parse("select.all.button"));
         selectAllBtn.setLayoutData(new GridData(GridData.BEGINNING));
+        selectAllBtn.setEnabled(false);
+        selectAllBtn.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+                Button buttonCheck = (Button) e.getSource();
+                if (buttonCheck.getSelection()) {
+                    fileTable.setItemsChecked();
+                } else {
+                    fileTable.disableItemCheck();
+                }
+            }
+        });
     }
 }
