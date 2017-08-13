@@ -66,4 +66,22 @@ public final class NumbersUtil {
         }
         return numbers;
     }
+
+    /**
+     * Page number to String.
+     *
+     * @param path the String
+     * @return numberString
+     */
+    public static List<String> toStringPage(final String path) {
+        logger.info("Page number to string");
+        List<Integer> numbers = getNumberPage(path);
+        List<String> numberString = new ArrayList<>();
+        for (int n : numbers) {
+            String element = String.valueOf(n);
+            logger.info("Page - " + n + " - COMPLETED");
+            numberString.add(element);
+        }
+        return numberString;
+    }
 }

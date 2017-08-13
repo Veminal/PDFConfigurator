@@ -1,5 +1,6 @@
 package net.veminal.pdf.ui.table;
 
+import net.veminal.pdf.utils.NumbersUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -25,6 +26,6 @@ public final class PageTableBrowser extends AbstractTable {
 
     @Override
     protected List outFilesList(final String target) {
-        return null;
+        return NumbersUtil.toStringPage(target);
     }
 }

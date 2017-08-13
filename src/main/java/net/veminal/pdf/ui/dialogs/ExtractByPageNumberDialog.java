@@ -146,6 +146,9 @@ public final class ExtractByPageNumberDialog extends Dialog {
                 final String file = open.getPath();
                 if (file != null) {
                     filePathText.setText(file);
+                    Runnable pagesNumberListLoad = () ->
+                            pageTable.items(filePathText.getText());
+                    pagesNumberListLoad.run();
                 }
             }
         });
