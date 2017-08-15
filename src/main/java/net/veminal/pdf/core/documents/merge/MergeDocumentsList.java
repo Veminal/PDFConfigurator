@@ -36,18 +36,18 @@ public final class MergeDocumentsList implements IMerge {
     }
 
     @Override
-    public void mergeFileList(final List<String> files, final String target) {
+    public void mergeFileList(final List<String> files) {
         logger.info("MERGE DOCUMENTS LIST");
         try {
             final int firstPage = 1;
             PdfDocument documentTarget = new PdfDocument(
-                    new PdfWriter(target + name + ".pdf"));
+                    new PdfWriter(name + ".pdf"));
             for (String path : files) {
                 PdfDocument documentMain = new PdfDocument(new PdfReader(path));
                 documentMain.copyPagesTo(firstPage,
                         documentMain.getNumberOfPages(), documentTarget);
                 documentMain.close();
-                logger.info(path + " -COPIED");
+                logger.info(path + " - COPIED");
             }
             documentTarget.close();
             files.clear();

@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,15 +88,6 @@ public abstract class AbstractTable {
     }
 
     /**
-     * Item check.
-     *
-     * @return check item
-     */
-    public boolean isItemCheck() {
-        return item.getChecked();
-    }
-
-    /**
      * Set check items.
      */
     public void setItemsChecked() {
@@ -113,5 +105,21 @@ public abstract class AbstractTable {
         for (TableItem i : items) {
             i.setChecked(false);
         }
+    }
+
+    /**
+     * Get items text list.
+     *
+     * @return documents list
+     */
+    public List<String> getItemsText() {
+        TableItem[] items = fileTable.getItems();
+        List<String> docList = new ArrayList<>();
+        for (TableItem i : items) {
+            if (i.getChecked()) {
+                docList.add(i.getText());
+            }
+        }
+        return docList;
     }
 }

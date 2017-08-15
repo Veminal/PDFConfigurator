@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.core.annotations.MergeFileTable;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.core.documents.merge.IMerge;
+import net.veminal.pdf.core.documents.merge.MergeDocumentsList;
 import net.veminal.pdf.ui.table.AbstractTable;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -18,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -49,6 +52,10 @@ public final class MergeDialog extends Dialog {
      * Select all button.
      */
     private Button selectAllBtn;
+    /**
+     * Merge button.
+     */
+    private Button btnMerge;
 
     /**
      * Constructor of class.
@@ -141,6 +148,7 @@ public final class MergeDialog extends Dialog {
                     showFiles.run();
                 }
                 selectAllBtn.setEnabled(true);
+                btnMerge.setEnabled(true);
             }
         });
     }
@@ -151,16 +159,30 @@ public final class MergeDialog extends Dialog {
      * @param parent the Composite
      */
     private void createButtonMerge(final Composite parent) {
-        Button btnMerge = new Button(parent, SWT.PUSH);
+        btnMerge = new Button(parent, SWT.PUSH);
         config.readPath(path);
         btnMerge.setText((String) config.parse("merge.button"));
         Image image = new Image(Display.getCurrent(), "images/merge.png");
         btnMerge.setImage(image);
+        btnMerge.setEnabled(false);
         btnMerge.setLayoutData(new GridData(GridData.END));
         btnMerge.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(final SelectionEvent e) {
-                super.widgetSelected(e);
+                FileDialog dialog = new FileDialog(
+                        Display.getCurrent().getActiveShell(), SWT.SAVE);
+                String target = dialog.open();
+               // String name = dialog.getFileName();
+                if (target != null) {
+                    Runnable mergeDocRun = () -> {
+                        IMerge mergeDocs =
+                                new MergeDocumentsList(target);
+                        mergeDocs.mergeFileList(fileTable.getItemsText());
+                        btnMerge.setEnabled(false);
+                    };
+                    mergeDocRun.run();
+                    btnMerge.setEnabled(true);
+                }
             }
         });
     }

@@ -13,7 +13,8 @@ public class MergeDocumentsListTest {
 
     @Before
     public void setUp() {
-        mergeList = new MergeDocumentsList("Merge");
+        final String target = "C:\\Users\\user\\Desktop\\1";
+        mergeList = new MergeDocumentsList(target);
         listPath = new ArrayList<>();
     }
 
@@ -21,8 +22,7 @@ public class MergeDocumentsListTest {
     public void testMerge() {
         listPath.add("C:\\Users\\user\\Desktop\\books\\UposOs.pdf");
         listPath.add("C:\\Users\\user\\Desktop\\books\\Textmetuk_OS_1.pdf");
-        final String target = "C:\\Users\\user\\Desktop\\";
-        mergeList.mergeFileList(listPath, target);
+        mergeList.mergeFileList(listPath);
         assert true;
     }
 }

@@ -12,8 +12,7 @@ public interface IMerge {
     /**
      * Merge file list.
      *
-     * @param files         the T
-     * @param target the T
+     * @param files the T
      */
-    void mergeFileList(List<String> files, String target);
+    void mergeFileList(List<String> files);
 }
