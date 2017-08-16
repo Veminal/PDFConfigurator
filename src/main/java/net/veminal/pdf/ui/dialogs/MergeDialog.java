@@ -144,7 +144,6 @@ public final class MergeDialog extends Dialog {
                 if (directory != null) {
                     textDirectory.setText(directory + "\\");
                     Runnable showFiles = () -> {
-                        fileTable.updateTable();
                         fileTable.items(textDirectory.getText());
                     };
                     showFiles.run();
@@ -174,7 +173,6 @@ public final class MergeDialog extends Dialog {
                 FileDialog dialog = new FileDialog(
                         Display.getCurrent().getActiveShell(), SWT.SAVE);
                 String target = dialog.open();
-               // String name = dialog.getFileName();
                 if (target != null) {
                     Runnable mergeDocRun = () -> {
                         IMerge mergeDocs =

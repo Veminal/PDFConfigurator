@@ -14,7 +14,8 @@ public class SplitByPageTest {
     public void splitTest() {
         final String input = "C:\\users\\user\\desktop\\test.pdf";
         final String output = "C:\\users\\user\\desktop\\test\\";
-        ISplit split = new SplitByPage(input, output);
+        final String name = "Example";
+        ISplit split = new SplitByPage(input, output, name);
         split.extract();
         assert true;
     }

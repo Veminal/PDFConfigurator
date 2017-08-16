@@ -81,4 +81,13 @@ public final class FilesUtil {
         listFiles.sort(Comparator.comparingInt(String::length));
         return listFiles;
     }
+
+    /**
+     * Get default name.
+     *
+     * @return name
+     */
+    public static String getDefaultName() {
+        return "__Page";
+    }
 }

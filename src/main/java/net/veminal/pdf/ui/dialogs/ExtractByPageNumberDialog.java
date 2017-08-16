@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import net.veminal.pdf.configuration.read.ReadConfig;
 import net.veminal.pdf.core.annotations.PageTable;
 import net.veminal.pdf.core.annotations.StringReader;
+import net.veminal.pdf.core.documents.split.ExtractPageByNumber;
+import net.veminal.pdf.core.documents.split.ISplit;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.utils.FilesUtil;
 import net.veminal.pdf.utils.OpenPDFUtil;
@@ -20,12 +22,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Extract by page number dialog.
@@ -185,5 +191,30 @@ public final class ExtractByPageNumberDialog extends Dialog {
         data.grabExcessHorizontalSpace = true;
         data.horizontalAlignment = GridData.END;
         extractButton.setLayoutData(data);
+        extractButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+                DirectoryDialog dialog = new DirectoryDialog(
+                        Display.getCurrent().getActiveShell());
+                final String target = dialog.open() + "\\";
+                Runnable copyPage = () -> {
+                    List<String> pagesNum = pageTable.getItemsText();
+                    final String fileName = filePathText.getText();
+                    File file = new File(fileName);
+                    final String fileNotExt = file.getName();
+                    for (String page : pagesNum) {
+                        final int number = Integer.parseInt(page);
+                        ISplit exPage = new ExtractPageByNumber(
+                                fileName, number, target,
+                                fileNotExt.replaceAll(".pdf", "")
+                                        + FilesUtil.getDefaultName() + number);
+                        exPage.extract();
+                    }
+                    extractButton.setEnabled(false);
+                };
+                copyPage.run();
+                extractButton.setEnabled(true);
+            }
+        });
     }
 }

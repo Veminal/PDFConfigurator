@@ -5,6 +5,7 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.utils.PageRange;
 import com.itextpdf.kernel.utils.PdfSplitter;
+import net.veminal.pdf.utils.FilesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,16 +33,23 @@ public final class SplitByPage implements ISplit {
      * Target path.
      */
     private final String target;
+    /**
+     * File target name.
+     */
+    private final String fileTargetName;
 
     /**
      * Constructor of class.
      *
      * @param file          the String
      * @param targetCatalog the String
+     * @param fileTarget    the String
      */
-    public SplitByPage(final String file, final String targetCatalog) {
+    public SplitByPage(final String file, final String targetCatalog,
+                       final String fileTarget) {
         this.filename = file;
         this.target = targetCatalog;
+        fileTargetName = fileTarget;
     }
 
     @Override
@@ -53,11 +61,13 @@ public final class SplitByPage implements ISplit {
             List<PdfDocument> splitDocuments = new PdfSplitter(document) {
                 private final int n = 1;
                 private int partNumber = n;
+
                 @Override
                 protected PdfWriter getNextPdfWriter(final PageRange d) {
                     try {
                         logger.info("New page - " + partNumber + ".pdf");
                         return new PdfWriter(target
+                                + fileTargetName + FilesUtil.getDefaultName()
                                 + String.valueOf(partNumber++) + ".pdf");
                     } catch (FileNotFoundException e) {
                         logger.error(e.getMessage());

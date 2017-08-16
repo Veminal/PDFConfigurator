@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import java.io.File;
+
 /**
  * Split dialog window.
  *
@@ -209,10 +211,13 @@ public final class SplitDialog extends Dialog {
                 final String filename = textFile.getText();
                 final String target = textTargetDirectory.getText();
                 if (filename != null && target != null) {
+                    File file = new File(filename);
+                    final String fileTarget = file.getName();
                     Runnable splitThread = () -> {
                         fileTable.updateTable();
                         btnCheck.setEnabled(false);
-                        ISplit splitByPage = new SplitByPage(filename, target);
+                        ISplit splitByPage = new SplitByPage(filename, target,
+                                fileTarget.replaceAll(".pdf", ""));
                         splitByPage.extract();
                         fileTable.items(target);
                     };
