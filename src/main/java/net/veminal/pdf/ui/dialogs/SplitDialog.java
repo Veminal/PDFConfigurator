@@ -210,6 +210,7 @@ public final class SplitDialog extends Dialog {
                 final String target = textTargetDirectory.getText();
                 if (filename != null && target != null) {
                     Runnable splitThread = () -> {
+                        fileTable.updateTable();
                         btnCheck.setEnabled(false);
                         ISplit splitByPage = new SplitByPage(filename, target);
                         splitByPage.extract();

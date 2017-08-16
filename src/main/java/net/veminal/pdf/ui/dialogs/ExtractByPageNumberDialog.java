@@ -9,6 +9,7 @@ import net.veminal.pdf.utils.FilesUtil;
 import net.veminal.pdf.utils.OpenPDFUtil;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,6 +24,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Extract by page number dialog.
@@ -31,6 +34,11 @@ import org.eclipse.swt.widgets.Text;
  * @version 1.0
  */
 public final class ExtractByPageNumberDialog extends Dialog {
+    /**
+     * Logger.
+     */
+    private Logger logger =
+            LoggerFactory.getLogger(ExtractByPageNumberDialog.class);
     /**
      * Read config.
      */
@@ -51,7 +59,7 @@ public final class ExtractByPageNumberDialog extends Dialog {
     /**
      * text from page.
      */
-    private Text pageText;
+    private Browser pageText;
 
     /**
      * Constructor of class.
@@ -107,12 +115,15 @@ public final class ExtractByPageNumberDialog extends Dialog {
      * @param parent the Composite
      */
     private void createWizard(final Composite parent) {
+        final int listWeight = 1;
+        final int textWeight = 4;
         SashForm splitter = new SashForm(parent, SWT.HORIZONTAL);
         splitter.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
         pageTable.createContents(splitter);
-        pageText = new Text(splitter, SWT.BORDER);
-        pageText.setEnabled(false);
+        pageText = new Browser(splitter, SWT.BORDER);
+        pageText.setEnabled(true);
         pageTable.enabled(true);
+        splitter.setWeights(new int[]{listWeight, textWeight});
     }
 
     /**
@@ -146,9 +157,14 @@ public final class ExtractByPageNumberDialog extends Dialog {
                 final String file = open.getPath();
                 if (file != null) {
                     filePathText.setText(file);
-                    Runnable pagesNumberListLoad = () ->
-                            pageTable.items(filePathText.getText());
+                    Runnable pagesNumberListLoad = () -> {
+                        pageTable.updateTable();
+                        pageTable.items(filePathText.getText());
+                        pageText.setUrl(filePathText.getText());
+                    };
                     pagesNumberListLoad.run();
+                    logger.info(pageText.getBrowserType());
+                    logger.info(pageText.getUrl());
                 }
             }
         });

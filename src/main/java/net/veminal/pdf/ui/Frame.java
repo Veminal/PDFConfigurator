@@ -202,10 +202,10 @@ public final class Frame extends ApplicationWindow {
         fileList.createContents(splitter);
         fileList.addContextMenu(tablePopup.initial());
         textTab.createContents(splitter);
-        final int treeWeight = 1;
+        final int listWeight = 1;
         final int textWeight = 4;
         Image icon = new Image(Display.getCurrent(), "icon.ico");
-        splitter.setWeights(new int[]{treeWeight, textWeight});
+        splitter.setWeights(new int[]{listWeight, textWeight});
         readConfig.readPath(path);
         shell.setText((String) readConfig.parse("frame.title"));
         shell.setImage(icon);

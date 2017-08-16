@@ -122,4 +122,14 @@ public abstract class AbstractTable {
         }
         return docList;
     }
+
+    /**
+     * Update table.
+     */
+    public void updateTable() {
+        TableItem[] items = fileTable.getItems();
+        for (TableItem i : items) {
+                i.dispose();
+        }
+    }
 }
