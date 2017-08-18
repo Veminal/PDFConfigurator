@@ -19,12 +19,13 @@ public final class AboutDialogShow implements ShowDialog {
     @Override
     public void create() {
         final String path = FilesUtil.getDictionary();
+        final String aboutPath = FilesUtil.getAbout();
         Injector injectObject = Guice.createInjector(
                 new ConfigurationModule());
         ReadConfig read = injectObject.getInstance(
                 ReadDataFields.class);
         AboutDialog dialog = new AboutDialog(Display.getCurrent()
-                .getActiveShell(), read, path);
+                .getActiveShell(), read, path, aboutPath);
         dialog.open();
     }
 }

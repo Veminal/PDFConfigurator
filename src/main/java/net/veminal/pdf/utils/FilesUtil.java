@@ -37,12 +37,21 @@ public final class FilesUtil {
     }
 
     /**
-     * get default file.
+     * Get default file name.
      *
      * @return default file name
      */
     public static String getDefault() {
         return "default.json";
+    }
+
+    /**
+     * Get about file name.
+     *
+     * @return about file name
+     */
+    public static String getAbout() {
+        return "about.json";
     }
 
     /**
