@@ -61,7 +61,6 @@ public final class SplitByPage implements ISplit {
             List<PdfDocument> splitDocuments = new PdfSplitter(document) {
                 private final int n = 1;
                 private int partNumber = n;
-
                 @Override
                 protected PdfWriter getNextPdfWriter(final PageRange d) {
                     try {

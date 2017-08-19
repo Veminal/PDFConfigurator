@@ -143,9 +143,8 @@ public final class MergeDialog extends Dialog {
                 final String directory = dialog.open();
                 if (directory != null) {
                     textDirectory.setText(directory + "\\");
-                    Runnable showFiles = () -> {
-                        fileTable.items(textDirectory.getText());
-                    };
+                    Runnable showFiles = () ->
+                            fileTable.items(textDirectory.getText());
                     showFiles.run();
                 }
                 selectAllBtn.setEnabled(true);
