@@ -30,7 +30,6 @@ public abstract class AbstractTab {
      * Create tab item.
      *
      * @param t the CTab
-     * @param i the int
      */
-    public abstract void tabItem(CTabFolder t, int i);
+    public abstract void tabItem(CTabFolder t);
 }

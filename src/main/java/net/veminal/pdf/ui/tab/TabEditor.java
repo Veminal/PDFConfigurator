@@ -9,7 +9,13 @@ import org.eclipse.swt.custom.CTabFolder;
  * @version 1.0
  */
 public final class TabEditor extends AbstractTab {
+    /**
+     * CTabFolder.
+     */
+    private CTabFolder folder;
+
     @Override
-    public void tabItem(final CTabFolder t, final int i) {
+    public void tabItem(final CTabFolder t) {
+        folder = t;
     }
 }
