@@ -101,6 +101,14 @@
             <type>pom</type>
         </dependency>
 
+        <!--Java native access-->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!--SLF4J-->
         <dependency>
             <groupId>org.slf4j</groupId>

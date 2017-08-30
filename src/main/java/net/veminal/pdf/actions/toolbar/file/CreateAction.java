@@ -13,6 +13,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
  * @version 1.0
  */
 public final class CreateAction implements IEvent {
+
     @Override
     @NotUsed
     public Action initializing(final ReadConfig menuItemsName) {

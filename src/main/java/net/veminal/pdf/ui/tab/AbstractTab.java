@@ -1,8 +1,6 @@
 package net.veminal.pdf.ui.tab;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 import javax.annotation.PostConstruct;
@@ -15,16 +13,27 @@ import javax.annotation.PostConstruct;
  */
 public abstract class AbstractTab {
     /**
-     * CTab initializing.
+     * CTab object.
+     */
+    private CTabFolder tab;
+
+    /**
+     * Setup CTab.
      *
      * @param parent the Composite
      */
     @PostConstruct
     public void createContents(final Composite parent) {
-        CTabFolder tabFolder = new CTabFolder(parent, SWT.BORDER);
-        tabFolder.setLayoutData(new GridData(
-                SWT.FILL, SWT.FILL, true, true));
+        tab = configTabFolder(parent);
     }
+
+    /**
+     * Configuration setup.
+     *
+     * @param parent the Composite
+     * @return tab folder
+     */
+    protected abstract CTabFolder configTabFolder(Composite parent);
 
     /**
      * Create tab item.

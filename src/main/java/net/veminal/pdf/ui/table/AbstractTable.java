@@ -28,7 +28,7 @@ public abstract class AbstractTable {
     private TableItem item;
 
     /**
-     * Build table.
+     * Setup table.
      *
      * @param parent the Composite
      */
@@ -129,7 +129,7 @@ public abstract class AbstractTable {
     public void updateTable() {
         TableItem[] items = fileTable.getItems();
         for (TableItem i : items) {
-                i.dispose();
+            i.dispose();
         }
     }
 }

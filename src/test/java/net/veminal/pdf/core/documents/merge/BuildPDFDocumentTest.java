@@ -18,7 +18,7 @@ public class BuildPDFDocumentTest {
     @Test
     public void buildPDF() {
         docs.add("C:\\main.cpp");
-        docs.add("C:\\Users\\user\\Desktop\\pom.xml");
+        docs.add("C:\\Users\\user\\Desktop\\pdf-conf\\app.json");
         Build build = new BuildPDFDocument(
                 DirectoryFilesUtil.fileList(docs));
         final String path = "C:\\Users\\user\\Desktop\\test.pdf";
