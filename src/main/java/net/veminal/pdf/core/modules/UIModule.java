@@ -6,7 +6,12 @@ import net.veminal.pdf.core.annotations.MergeFileTable;
 import net.veminal.pdf.core.annotations.PageTable;
 import net.veminal.pdf.core.annotations.SplitFileTable;
 import net.veminal.pdf.ui.tab.AbstractTab;
-import net.veminal.pdf.ui.table.*;
+import net.veminal.pdf.ui.tab.TabEditor;
+import net.veminal.pdf.ui.table.AbstractTable;
+import net.veminal.pdf.ui.table.FileTableBrowser;
+import net.veminal.pdf.ui.table.MergeTable;
+import net.veminal.pdf.ui.table.PageTableBrowser;
+import net.veminal.pdf.ui.table.SplitFileTableBrowser;
 
 /**
  * UI module.

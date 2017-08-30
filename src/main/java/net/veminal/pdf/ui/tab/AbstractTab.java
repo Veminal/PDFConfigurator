@@ -1,6 +1,7 @@
 package net.veminal.pdf.ui.tab;
 
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Composite;
 
 import javax.annotation.PostConstruct;
@@ -38,7 +39,26 @@ public abstract class AbstractTab {
     /**
      * Create tab item.
      *
-     * @param t the CTab
+     * @param parent the Composite
+     * @return tab item
      */
-    public abstract void tabItem(CTabFolder t);
+    protected abstract CTabItem configTabItem(Composite parent);
+
+    /**
+     * Set tab item.
+     *
+     * @param parent the Composite
+     */
+    public void setTabItem(final Composite parent) {
+        configTabItem(parent);
+    }
+
+    /**
+     * Set tab folder enabled.
+     *
+     * @param variant the boolean
+     */
+    public void enabled(final boolean variant) {
+        tab.setEnabled(variant);
+    }
 }

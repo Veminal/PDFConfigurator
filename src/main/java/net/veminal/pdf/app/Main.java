@@ -21,6 +21,7 @@ import net.veminal.pdf.core.modules.ConfigurationModule;
 import net.veminal.pdf.core.modules.ToolbarModule;
 import net.veminal.pdf.ui.Frame;
 import net.veminal.pdf.ui.tab.AbstractTab;
+import net.veminal.pdf.ui.tab.TabEditor;
 import net.veminal.pdf.ui.table.AbstractTable;
 import net.veminal.pdf.ui.table.FileTableBrowser;
 import net.veminal.pdf.utils.FilesUtil;
