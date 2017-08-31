@@ -46,11 +46,9 @@ public abstract class AbstractTab {
 
     /**
      * Set tab item.
-     *
-     * @param parent the Composite
      */
-    public void setTabItem(final Composite parent) {
-        configTabItem(parent);
+    public void setTabItem() {
+        configTabItem(tab);
     }
 
     /**

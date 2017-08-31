@@ -12,6 +12,8 @@ import net.veminal.pdf.ui.table.FileTableBrowser;
 import net.veminal.pdf.ui.table.MergeTable;
 import net.veminal.pdf.ui.table.PageTableBrowser;
 import net.veminal.pdf.ui.table.SplitFileTableBrowser;
+import net.veminal.pdf.ui.text.AbstractText;
+import net.veminal.pdf.ui.text.DocumentEditTextField;
 
 /**
  * UI module.
@@ -31,5 +33,6 @@ public final class UIModule extends AbstractModule {
         bind(AbstractTable.class).annotatedWith(MergeFileTable.class)
                 .to(MergeTable.class);
         bind(AbstractTab.class).to(TabEditor.class);
+        bind(AbstractText.class).to(DocumentEditTextField.class);
     }
 }
