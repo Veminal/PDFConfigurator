@@ -52,5 +52,6 @@
   "open.button": "Open file",
   "title.merge.dialog": "Merge PDF",
   "merge.button": "Merge",
-  "open.directory.button": "Open Directory"
+  "open.directory.button": "Open Directory",
+  "title.settings.dialog": "Settings"
 }
