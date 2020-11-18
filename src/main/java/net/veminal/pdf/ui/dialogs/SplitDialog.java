@@ -202,7 +202,7 @@ public final class SplitDialog extends Dialog {
         splitButton.setLayoutData(new GridData(GridData.BEGINNING));
         readConfig.readPath(path);
         splitButton.setText((String) readConfig.parse("split.button"));
-        Image image = new Image(Display.getCurrent(), "images/split_page.png");
+        Image image = new Image(Display.getCurrent(), "PDFConfigurator/images/split_page.png");
         splitButton.setImage(image);
         splitButton.addSelectionListener(new SelectionAdapter() {
             @Override

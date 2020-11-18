@@ -24,7 +24,7 @@ public final class FilesUtil {
      * @return dictionary file name
      */
     public static String getDictionary() {
-        return "dictionary.json";
+        return "PDFConfigurator/dictionary.json";
     }
 
     /**
@@ -42,7 +42,7 @@ public final class FilesUtil {
      * @return default file name
      */
     public static String getDefault() {
-        return "default.json";
+        return "PDFConfigurator/default.json";
     }
 
     /**
@@ -51,7 +51,7 @@ public final class FilesUtil {
      * @return about file name
      */
     public static String getAbout() {
-        return "about.json";
+        return "PDFConfigurator/about.json";
     }
 
     /**
@@ -60,7 +60,7 @@ public final class FilesUtil {
      * @return app file name
      */
     public static String getApp() {
-        return "app.json";
+        return "PDFConfigurator/app.json";
     }
 
     /**
@@ -69,7 +69,7 @@ public final class FilesUtil {
      * @return images file name
      */
     public static String getImages() {
-        return "images.json";
+        return "PDFConfigurator/images.json";
     }
 
     /**

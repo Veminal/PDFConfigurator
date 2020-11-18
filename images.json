@@ -1,20 +1,20 @@
 {
   "path": [
-    "images/new.png",
-    "images/open.png",
-    "images/save.png",
-    "images/print.png",
-    "images/del.png",
-    "images/cut.png",
-    "images/copy.png",
-    "images/paste.png",
-    "images/font.png",
-    "images/cut_number.png",
-    "images/fragment_select.png",
-    "images/split_page.png",
-    "images/merge.png",
-    "images/build.png",
-    "images/inject.png",
-    "images/settings.png"
+    "PDFConfigurator/images/new.png",
+    "PDFConfigurator/images/open.png",
+    "PDFConfigurator/images/save.png",
+    "PDFConfigurator/images/print.png",
+    "PDFConfigurator/images/del.png",
+    "PDFConfigurator/images/cut.png",
+    "PDFConfigurator/images/copy.png",
+    "PDFConfigurator/images/paste.png",
+    "PDFConfigurator/images/font.png",
+    "PDFConfigurator/images/cut_number.png",
+    "PDFConfigurator/images/fragment_select.png",
+    "PDFConfigurator/images/split_page.png",
+    "PDFConfigurator/images/merge.png",
+    "PDFConfigurator/images/build.png",
+    "PDFConfigurator/images/inject.png",
+    "PDFConfigurator/images/settings.png"
   ]
 }

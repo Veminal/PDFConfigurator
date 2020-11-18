@@ -147,7 +147,7 @@ public final class ExtractByPageNumberDialog extends Dialog {
         data.grabExcessHorizontalSpace = true;
         data.horizontalAlignment = GridData.FILL;
         config.readPath(path);
-        Image image = new Image(Display.getCurrent(), "images/open.png");
+        Image image = new Image(Display.getCurrent(), "PDFConfigurator/images/open.png");
         btnPdfOpenButton.setText((String) config.parse("open.button"));
         btnPdfOpenButton.setImage(image);
         filePathText.setLayoutData(data);
@@ -184,7 +184,7 @@ public final class ExtractByPageNumberDialog extends Dialog {
     private void createButtonExtract(final Composite parent) {
         Button extractButton = new Button(parent, SWT.PUSH);
         config.readPath(path);
-        Image image = new Image(Display.getCurrent(), "images/cut.png");
+        Image image = new Image(Display.getCurrent(), "PDFConfigurator/images/cut.png");
         extractButton.setText((String) config.parse("button.extract"));
         extractButton.setImage(image);
         GridData data = new GridData();

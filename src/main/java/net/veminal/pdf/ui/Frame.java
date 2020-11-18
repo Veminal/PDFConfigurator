@@ -204,7 +204,7 @@ public final class Frame extends ApplicationWindow {
         textTab.createContents(splitter);
         final int listWeight = 1;
         final int textWeight = 4;
-        Image icon = new Image(Display.getCurrent(), "icon.ico");
+        Image icon = new Image(Display.getCurrent(), "PDFConfigurator/icon.ico");
         splitter.setWeights(new int[]{listWeight, textWeight});
         readConfig.readPath(path);
         shell.setText((String) readConfig.parse("frame.title"));

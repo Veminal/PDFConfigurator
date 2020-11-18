@@ -130,7 +130,7 @@ public final class MergeDialog extends Dialog {
         data.horizontalAlignment = GridData.FILL;
         Button btnTarget = new Button(parent, SWT.PUSH);
         config.readPath(path);
-        Image image = new Image(Display.getCurrent(), "images/open.png");
+        Image image = new Image(Display.getCurrent(), "PDFConfigurator/images/open.png");
         btnTarget.setText((String) config.parse("open.directory.button"));
         btnTarget.setImage(image);
         textDirectory.setLayoutData(data);
@@ -162,7 +162,7 @@ public final class MergeDialog extends Dialog {
         btnMerge = new Button(parent, SWT.PUSH);
         config.readPath(path);
         btnMerge.setText((String) config.parse("merge.button"));
-        Image image = new Image(Display.getCurrent(), "images/merge.png");
+        Image image = new Image(Display.getCurrent(), "PDFConfigurator/images/merge.png");
         btnMerge.setImage(image);
         btnMerge.setEnabled(false);
         btnMerge.setLayoutData(new GridData(GridData.END));
